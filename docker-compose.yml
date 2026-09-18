@@ -1,0 +1,46 @@
+# Uso do dia a dia (banco no Docker, app rodando na sua maquina):
+#   docker compose up -d
+#   ./mvnw spring-boot:run        (Windows: mvnw.cmd spring-boot:run)
+#
+# Credenciais abaixo sao APENAS para desenvolvimento local.
+services:
+  db:
+    build: ./docker/mariadb
+    image: formulario-mariadb
+    container_name: formulario-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: formulario
+      MARIADB_USER: formulario
+      MARIADB_PASSWORD: formulario
+      TZ: America/Sao_Paulo
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+
+  app:
+    profiles: ["app"]
+    build: .
+    image: formulario-app
+    container_name: formulario-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/formulario
+      SPRING_DATASOURCE_USERNAME: formulario
+      SPRING_DATASOURCE_PASSWORD: formulario
+      TZ: America/Sao_Paulo
+    ports:
+      - "8080:8080"
+
+volumes:
+  db_data:
