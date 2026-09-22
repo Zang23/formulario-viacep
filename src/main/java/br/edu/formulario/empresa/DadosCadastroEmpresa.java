@@ -6,13 +6,13 @@ public record DadosCadastroEmpresa(
     @NotBlank
     String cnpj,
     String nome,
-    String areaAtuacao,
+    String area,
     String cidade,
     String cep,
     String email,
     String telefone,
     String departamento,
     String linkedin,
-    String cargo) {
+    String site) {
 
 }
