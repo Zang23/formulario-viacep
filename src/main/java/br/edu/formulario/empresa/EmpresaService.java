@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmpresaService {
@@ -14,11 +15,13 @@ public class EmpresaService {
         return empresaRepository.findAll();
     }
 
+    @Transactional
     public Empresa cadastrarEmpresa(DadosCadastroEmpresa dados) {
         Empresa empresa = new Empresa(dados);
         return empresaRepository.save(empresa);
     }
     
+    @Transactional
     public void atualizarEmpresa(DadosAtualizacaoEmpresa dados) {
         Empresa empresa = empresaRepository.getReferenceById(dados.cnpj());
         empresa.atualizarInformacoes(dados);;
@@ -41,6 +44,7 @@ public class EmpresaService {
                 .orElseThrow(() -> new RuntimeException("Empresa não encontrada com o CNPJ: " + cnpj));
     }
 
+    @Transactional
     public void deletarEmpresa(String cnpj) {
         empresaRepository.deleteById(cnpj);
     }

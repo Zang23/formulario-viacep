@@ -38,4 +38,35 @@ public class Estagiario{
     @JoinColumn(name = "contrato_id", nullable = false, unique = true)
     private Contrato contrato;
 
+    public Estagiario(DadosCadastroEstagiario dados) {
+        this.cpf = dados.cpf();
+        this.nome = dados.nome();
+        this.telefone = dados.telefone();
+        this.email = dados.email();
+        this.curso = dados.curso();
+        this.periodo = dados.periodo();
+        this.semestre = dados.semestre();
+    }
+
+    public void atualizarInformacoes(DadosAtualizacaoEstagiario dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+        if (dados.email() != null) {
+            this.email = dados.email();
+        }
+        if (dados.curso() != null) {
+            this.curso = dados.curso();
+        }
+        if (dados.periodo() != null) {
+            this.periodo = dados.periodo();
+        }
+        if (dados.semestre() > 0) {
+            this.semestre = dados.semestre();
+        }
+    }
+
 }
