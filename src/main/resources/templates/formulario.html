@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<head th:replace="~{fragmentos/head :: head('Formulario')}"></head>
+
+<body>
+	<header th:replace="~{fragmentos/header :: header(activePage='formulario')}"></header>
+
+	<div class="divBackground">
+		<div class="IForm container">
+			<form>
+				<!-- ETAPA 1 -->
+				<div class="etapa ativa" id="etapa1">
+					<h2>Dados do estágiario</h2>
+
+					<label class="IForm label">Insira o nome do estágiario:</label>
+					<input type="text" id="IdNomeEstagiario" class="Iform text">
+
+					<label class="IForm label">Insira o telefone do estágiario:</label>
+					<input type="text" id="IdTelefoneEstagiario" class="Iform text">
+
+					<label class="IForm label">Insira o email do estágiario:</label>
+					<input type="email" id="IdEmailEstagiario" class="Iform text">
+
+					<label class="IForm label">Insira o curso e periodo do estágiario:</label>
+
+					<div class="DivOpcoes">
+						<select id="IdCursoEstagiario" class="Iform option">
+							<option value="" disabled selected>Selecione uma opção</option>
+							<option value="1">Comercio exterior</option>
+							<option value="2">Anásise e desenvolvimento de sistemas</option>
+							<option value="3">Desenvolvimento de software multiplataforma</option>
+							<option value="4">Recursos humanos</option>
+							<option value="5">Polímeros</option>
+						</select>
+
+						<select id="IdPeriodoEstagiario" class="Iform option">
+							<option value="" disabled selected>Selecione uma opção</option>
+							<option value="1">Matutino</option>
+							<option value="2">Vespertino</option>
+							<option value="3">Noturno</option>
+						</select>
+					</div>
+
+					<div class="botoes">
+						<p class="FNavButton" id="btnProximo">
+							Próximo
+						</p>
+					</div>
+				</div>
+
+
+				<!-- ETAPA 2 -->
+				<div class="etapa" id="etapa2">
+					<h2>Dados da empresa</h2>
+
+					<label class="IForm label">Insira o nome da empresa:</label>
+					<input type="text" id="IdNomeEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira a área de atuação da empresa:</label>
+					<input type="text" id="IdAreaEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira o CNPJ da empresa:</label>
+					<input type="text" id="IdCnpjEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira a cidade da empresa:</label>
+					<input type="text" id="IdCidadeEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira o CEP da empresa:</label>
+					<input type="text" id="IdCepEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira o email da empresa:</label>
+					<input type="email" id="IdEmailEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira o site da empresa:</label>
+					<input type="url" id="IdSiteEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira o telefone da empresa:</label>
+					<input type="text" id="IdTelefoneEmpresa" class="Iform text">
+
+					<label class="IForm label">Insira o linkedin da empresa:</label>
+					<input type="url" id="IdLinkedinEmpresa" class="Iform text">
+
+					<div class="botoes">
+						<p class="FNavButton" id="btnVoltar">
+							Voltar
+						</p>
+
+						<p class="FNavButton" id="btnProximo2">
+							Próximo
+						</p>
+					</div>
+				</div>
+
+
+				<!-- ETAPA 3 -->
+				<div class="etapa" id="etapa3">
+					<h2>Dados do estágio</h2>
+
+					<label>Horário de entrada:</label>
+					<input type="time" id="IdHorarioEntrada" class="Iform text">
+
+					<label>Horário de saída:</label>
+					<input type="time" id="IdHorarioSaida" class="Iform text">
+
+					<label>Carga horária:</label>
+					<input type="text" id="IdCargaHoraria" class="Iform text">
+
+					<label class="IForm label">
+						Insira o departamento que o estagiário irá trabalhar na empresa
+					</label>
+					<input type="text" id="IdDepartamento" class="Iform text">
+
+					<label class="IForm label">
+						Selecione um supervisor ou insira um novo
+					</label>
+
+					<div class="DivOpcoes">
+						<select id="IdSupervisor" class="Iform option supervisor">
+							<option value="" disabled selected>Selecione uma opção</option>
+						</select>
+
+						<input type="text" id="IdNomeSupervisor" class="Iform text supervisor" placeholder="nome">
+
+						<input type="text" id="IdCargoSupervisor" class="Iform text supervisor" placeholder="cargo">
+					</div>
+
+					<div id="divBotoes" class="botoes">
+						<p class="FNavButton" id="btnVoltar2">
+							Voltar
+						</p>
+					</div>
+
+					<button type="submit" class="Iform finalizaForm">
+						Finalizar
+					</button>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+	<script>
+		const etapa1 = document.getElementById("etapa1");
+		const etapa2 = document.getElementById("etapa2");
+		const etapa3 = document.getElementById("etapa3");
+
+		const btnProximo = document.getElementById("btnProximo");
+		const btnVoltar = document.getElementById("btnVoltar");
+
+		const btnProximo2 = document.getElementById("btnProximo2");
+		const btnVoltar2 = document.getElementById("btnVoltar2");
+
+
+		// =========================
+		// VALIDAÇÃO
+		// =========================
+
+		function validarEtapa(etapa) {
+
+		    const campos = etapa.querySelectorAll("input, select");
+
+		    let valido = true;
+
+		    campos.forEach(function (campo) {
+
+		        if (campo.value.trim() === "") {
+		            campo.style.borderColor = "#ff3535";
+		            valido = false;
+		        } else {
+		            campo.style.borderColor = "#737373";
+		        }
+
+		    });
+
+		    return valido;
+		}
+
+
+		// =========================
+		// ETAPA 1 → ETAPA 2
+		// =========================
+
+		btnProximo.addEventListener("click", function () {
+
+		    if (!validarEtapa(etapa1)) {
+		        return;
+		    }
+
+		    etapa1.classList.remove("ativa");
+		    etapa2.classList.add("ativa");
+		});
+
+
+		// =========================
+		// ETAPA 2 → ETAPA 1
+		// =========================
+
+		btnVoltar.addEventListener("click", function () {
+
+		    etapa2.classList.remove("ativa");
+		    etapa1.classList.add("ativa");
+		});
+
+
+		// =========================
+		// ETAPA 2 → ETAPA 3
+		// =========================
+
+		btnProximo2.addEventListener("click", function () {
+
+		    if (!validarEtapa(etapa2)) {
+		        return;
+		    }
+
+		    etapa2.classList.remove("ativa");
+		    etapa3.classList.add("ativa");
+		});
+
+
+		// =========================
+		// ETAPA 3 → ETAPA 2
+		// =========================
+
+		btnVoltar2.addEventListener("click", function () {
+
+		    etapa3.classList.remove("ativa");
+		    etapa2.classList.add("ativa");
+		});
+	</script>
+
+
+</body>
+
+</html>

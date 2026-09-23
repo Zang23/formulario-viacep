@@ -1,0 +1,84 @@
+.navbar {
+    position: fixed;
+    top: 20px;
+    transform: translateX(-95%);
+	width: max-content;
+    height: 64px;
+    padding: 0px 22px 0px 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(25, 25, 25, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+
+    box-sizing: border-box;
+    z-index: 1000;
+	transition: 2s;
+}
+
+.navLogo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.logoMark {
+    width: 10px;
+    height: 10px;
+
+    background: #e53935;
+    border-radius: 50%;
+}
+
+.navLinks {
+    display: flex;
+	justify-content: left;
+    align-items: center;
+    gap: 6px;
+	width: 100%;
+	margin: 0px 0px 0px 20px;
+}
+
+.navLinks a {
+    padding: 9px 13px;
+
+    color: #888;
+    text-decoration: none;
+
+    font-size: 14px;
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+.navbar:hover{
+		transform: translateX(-20%);
+}
+.navLinks a:hover,
+.navLinks a.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.navButton {
+    padding: 9px 17px;
+
+    color: white;
+    background: #e53935;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.navButton:hover {
+    background: #f04440;
+}
