@@ -1,19 +1,24 @@
 <!-- templates/fragmentos/header.html -->
-<header th:fragment="header(activePage)">
-	<nav class="navbar">
-		<div class="navLogo">
-			<span class="logoMark"></span>
-			<span>MinhaApp</span>
-		</div>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<body>
 
-		<div class="navLinks">
-			<a href="#">Início</a>
-			<a href="#">Listar</a>
-			<a href="#" class="active">Novo</a>
-			<a href="#">Sobre</a>
-		</div>
+    <header th:fragment="header(activePage)">
+        <nav class="navbar">
+            <div class="navLogo">
+                <span class="logoMark"></span>
+                <span>MinhaApp</span>
+            </div>
 
-	</nav>
+            <div class="navLinks">
+                <!-- Exemplo de como usar a variável activePage que você passou -->
+                <a href="#" th:classappend="${activePage == 'inicio'} ? 'active'">Início</a>
+                <a href="#" th:classappend="${activePage == 'listar'} ? 'active'">Listar</a>
+                <a href="#" th:classappend="${activePage == 'formulario'} ? 'active'">Novo</a>
+                <a href="#" th:classappend="${activePage == 'sobre'} ? 'active'">Sobre</a>
+            </div>
+        </nav>
+    </header>
 
-
-</header>
+</body>
+</html>
