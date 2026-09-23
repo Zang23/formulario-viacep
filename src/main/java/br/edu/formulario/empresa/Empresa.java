@@ -3,12 +3,10 @@ package br.edu.formulario.empresa;
 import java.util.List;
 
 import br.edu.formulario.contrato.Contrato;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,12 +26,15 @@ public class Empresa {
     private String cnpj;
     private String nome;
 
-    private String telefone;
-    private String email;
     private String area;
+    private String setor;
     private String cidade;
     private String cep;
+    private String email;
     private String site;
+    private String telefone;
+    private String nomeContato;
+    private String cargoContato;
     private String departamento;
     private String linkedin;
 
