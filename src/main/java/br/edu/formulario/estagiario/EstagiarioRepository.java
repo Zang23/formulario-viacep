@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EstagiarioRepository extends JpaRepository<Estagiario, String>{
 
     List<Estagiario> findByContratoEmpresaCnpj(String cnpj);
-
 }
