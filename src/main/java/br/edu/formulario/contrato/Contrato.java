@@ -1,7 +1,6 @@
 package br.edu.formulario.contrato;
 
 import java.sql.Date;
-import java.util.List;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -9,7 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import br.edu.formulario.empresa.Empresa;
@@ -43,14 +42,8 @@ public class Contrato {
     @JoinColumn(name = "supervisor_id", nullable = false)
     Supervisor supervisor;
 
-    @OneToMany(mappedBy = "contrato")
-    private List<Estagiario> estagiarios;
-
-    //@ForeignKey
-    //private String empresaCnpj;
-
-    //@ForeignKey
-    //private Long supervisorIdSupervisor
+    @OneToOne(mappedBy = "contrato")
+    private Estagiario estagiario;
 
     private Date inicio;
     private Date termino;

@@ -28,12 +28,17 @@ public class Empresa {
     private String cnpj;
 
     private String nome;
-    private String telefone;
-    private String email;
-    private String area;
+    private String setor;
+
     private String cidade;
     private String cep;
+
+    private String email;
     private String site;
+
+    private String telefone;
+    private String nomeContato;
+    private String cargoContato;
     private String departamento;
     private String linkedin;
 
