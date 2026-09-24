@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos/head :: head('Formulario')}"></head>
+<head th:replace="~{fragmentos/head :: head('Formulário')}"></head>
 
 <body>
-	<header th:replace="~{fragmentos/header :: header(activePage='formulario')}"></header>
+	<header th:replace="~{fragmentos/header :: header('formulario')}"></header>
 
 	<div class="divBackground">
 		<div class="IForm container">
@@ -157,22 +158,22 @@
 
 		function validarEtapa(etapa) {
 
-		    const campos = etapa.querySelectorAll("input, select");
+			const campos = etapa.querySelectorAll("input, select");
 
-		    let valido = true;
+			let valido = true;
 
-		    campos.forEach(function (campo) {
+			campos.forEach(function (campo) {
 
-		        if (campo.value.trim() === "") {
-		            campo.style.borderColor = "#ff3535";
-		            valido = false;
-		        } else {
-		            campo.style.borderColor = "#737373";
-		        }
+				if (campo.value.trim() === "") {
+					campo.style.borderColor = "#ff3535";
+					valido = false;
+				} else {
+					campo.style.borderColor = "#737373";
+				}
 
-		    });
+			});
 
-		    return valido;
+			return valido;
 		}
 
 
@@ -182,12 +183,12 @@
 
 		btnProximo.addEventListener("click", function () {
 
-		    if (!validarEtapa(etapa1)) {
-		        return;
-		    }
+			if (!validarEtapa(etapa1)) {
+				return;
+			}
 
-		    etapa1.classList.remove("ativa");
-		    etapa2.classList.add("ativa");
+			etapa1.classList.remove("ativa");
+			etapa2.classList.add("ativa");
 		});
 
 
@@ -197,8 +198,8 @@
 
 		btnVoltar.addEventListener("click", function () {
 
-		    etapa2.classList.remove("ativa");
-		    etapa1.classList.add("ativa");
+			etapa2.classList.remove("ativa");
+			etapa1.classList.add("ativa");
 		});
 
 
@@ -208,12 +209,12 @@
 
 		btnProximo2.addEventListener("click", function () {
 
-		    if (!validarEtapa(etapa2)) {
-		        return;
-		    }
+			if (!validarEtapa(etapa2)) {
+				return;
+			}
 
-		    etapa2.classList.remove("ativa");
-		    etapa3.classList.add("ativa");
+			etapa2.classList.remove("ativa");
+			etapa3.classList.add("ativa");
 		});
 
 
@@ -223,8 +224,8 @@
 
 		btnVoltar2.addEventListener("click", function () {
 
-		    etapa3.classList.remove("ativa");
-		    etapa2.classList.add("ativa");
+			etapa3.classList.remove("ativa");
+			etapa2.classList.add("ativa");
 		});
 	</script>
 
