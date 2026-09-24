@@ -3,15 +3,15 @@
 ========================= */
 
 body {
-    margin: 0;
-    min-height: 100vh;
+	margin: 0;
+	min-height: 100vh;
 
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: #fff;
+	font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	color: #fff;
 
-    background:
-        radial-gradient(circle at 50% 0%, rgba(255, 60, 60, 0.18), transparent 40%),
-        linear-gradient(145deg, #0b0b0b, #171717);
+	background:
+		radial-gradient(circle at 50% 0%, rgba(255, 60, 60, 0.18), transparent 40%),
+		linear-gradient(145deg, #0b0b0b, #171717);
 }
 
 
@@ -20,14 +20,14 @@ body {
 ========================= */
 
 .divBackground {
-    width: 100%;
-    min-height: 100vh;
+	width: 100%;
+	min-height: 100vh;
 
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 
-    padding-top: 50px;
+	padding-top: 104px;
 }
 
 
@@ -37,30 +37,37 @@ body {
 ========================= */
 
 .container {
-    background-color: #232323;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-.IForm.container {
-    width: auto;
-	height: auto;
-    max-width: 400px;
-    padding: 40px 20px 10px 20px;
+	background-color: #232323;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	box-sizing: border-box;
 }
 
+.IForm.container {
+	width: auto;
+	height: auto;
+	max-width: 400px;
+	padding: 40px 20px 10px 20px;
+}
+
+.Dashboard.container {
+	width: auto;
+	height: auto;
+	max-width: 800px;
+	padding: 20px 20px 20px 20px;
+}
+
 form {
-    width: 100%;
-    max-width: 400px;
+	width: 100%;
+	max-width: 400px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 
@@ -69,28 +76,28 @@ form {
 ========================= */
 
 .etapa {
-    display: none;
+	display: none;
 }
 
 .etapa.ativa {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
-    animation: entrar 0.4s ease;
+	animation: entrar 0.4s ease;
 }
 
 
 @keyframes entrar {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
+	from {
+		opacity: 0;
+		transform: translateX(50px);
+	}
 
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 
@@ -99,8 +106,8 @@ form {
 ========================= */
 
 .label {
-    margin: 0 20px;
-    color: #ffffff;
+	margin: 0 20px;
+	color: #ffffff;
 }
 
 
@@ -108,30 +115,27 @@ form {
    INPUTS
 ========================= */
 
-.Iform {
-    padding: 8px;
+.input {
+	padding: 8px;
 
-    background-color: #151515;
-    border: 1px solid #737373;
-    border-radius: 4px;
-
-    color: #ffffff;
-    outline: none;
+	background-color: #151515;
+	border: 1px solid #737373;
+	border-radius: 4px;
+	margin: 0 20px;
+	color: #ffffff;
+	outline: none;
 }
 
-.Iform:hover {
-    background-color: #303030;
+.input:hover {
+	background-color: #303030;
 }
 
-.Iform:focus {
-    background-color: #202020 !important;
-    border-color: #3539e5;
-    box-shadow: 0 0 0 3px rgba(53, 229, 53, 0.12);
+.input:focus {
+	background-color: #202020 !important;
+	border-color: #3539e5;
+	box-shadow: 0 0 0 3px rgba(53, 229, 53, 0.12);
 }
 
-.text {
-    margin: 0 20px;
-}
 
 
 /* =========================
@@ -139,16 +143,16 @@ form {
 ========================= */
 
 .DivOpcoes {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 .option {
-    width: fit-content;
-    max-width: 160px;
-    margin: 0 5px;
+	width: fit-content;
+	max-width: 160px;
+	margin: 0 5px;
 }
 
 
@@ -157,29 +161,53 @@ form {
 ========================= */
 
 .botoes {
-    display: flex;
-    gap: 10px;
+	display: flex;
+	gap: 10px;
 	margin: 30px 20px 10px 20px;
 	justify-content: space-between;
 }
 
 #etapa1 .botoes {
-    justify-content: flex-end;
+	justify-content: flex-end;
 }
 
-.finalizaForm:hover{
+.finalizaForm:hover {
 	cursor: pointer;
 }
 
-.supervisor{
+.supervisor {
 	width: 100px;
 	margin: 5px;
 }
 
 
-.FNavButton:hover{
+.FNavButton:hover {
 	cursor: pointer;
 	color: #3539e5;
 	text-decoration: underline;
-	
+
+}
+
+
+td {
+	padding: 4px 7px 2px 7px;
+}
+tr td {
+    
+    border-bottom: 3px solid #151515;
+}
+
+tr td:first-child {
+    border-left: 2px solid #151515;
+	border-radius: 0px 0px 0px 8px;
+}
+
+tr td:last-child {
+    
+		border-radius: 0px 4px 4px 0px;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 0px 10px;
 }
