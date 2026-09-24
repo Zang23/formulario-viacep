@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos/head :: head('Index')}"></head>
+
+<body>
+	<header th:replace="~{fragmentos/header :: header(activePage='index')}"></header>
+
+	<div class="divBackground">
+		<div class="Dashboard container">
+			<table>
+				<tr>
+					<th>Estágiario</th>
+					<th>Curso</th>
+					<th>Semestre</th>
+					<th>Empresa</th>
+					<th>Horário</th>
+				</tr>
+				
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>
