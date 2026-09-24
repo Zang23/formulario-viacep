@@ -1,4 +1,13 @@
 /* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================
    BODY
 ========================= */
 
@@ -7,10 +16,15 @@ body {
     min-height: 100vh;
 
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
     color: #fff;
 
     background:
-        radial-gradient(circle at 50% 0%, rgba(255, 60, 60, 0.18), transparent 40%),
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 60, 60, 0.18),
+            transparent 40%
+        ),
         linear-gradient(145deg, #0b0b0b, #171717);
 }
 
@@ -27,40 +41,107 @@ body {
     align-items: flex-start;
     justify-content: center;
 
-    padding-top: 50px;
+    padding-top: 104px;
+    padding-bottom: 104px;
 }
 
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    background-color: #232323;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    box-sizing: border-box;
+}
+
+
+.IForm.container {
+    width: 100%;
+    max-width: 400px;
+
+    padding: 40px 20px 10px 20px;
+
+    /*
+     * Não usar height: fit-content.
+     * A altura será controlada pelo JavaScript
+     * de acordo com a etapa atual.
+     */
+    height: auto;
+
+    align-self: flex-start;
+
+    transition: height 0.4s ease;
+}
 
 
 /* =========================
    FORMULÁRIO
 ========================= */
 
-.container {
-    background-color: #232323;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-.IForm.container {
-    width: auto;
-	height: auto;
-    max-width: 400px;
-    padding: 40px 20px 10px 20px;
-	box-sizing: border-box;
-}
-
 form {
     width: 100%;
     max-width: 400px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: block;
 
     box-sizing: border-box;
+
+    /*
+     * A altura é controlada pelo JavaScript.
+     */
+    height: auto;
+
+    transition: height 0.4s ease;
+}
+
+
+/* =========================
+   CARROSSEL
+========================= */
+
+.carousel {
+    width: 100%;
+
+    /*
+     * ESSENCIAL:
+     * impede que o conteúdo das outras etapas
+     * aumente a altura do formulário.
+     */
+    overflow: hidden;
+
+    position: relative;
+
+    height: auto;
+
+    transition: height 0.4s ease;
+}
+
+
+/* =========================
+   TRACK
+========================= */
+
+.carousel-track {
+    display: flex;
+
+    width: 300%;
+
+    margin: 0;
+    padding: 0;
+
+    align-items: flex-start;
+
+    transition: transform 0.4s ease;
+
+    will-change: transform;
 }
 
 
@@ -69,28 +150,31 @@ form {
 ========================= */
 
 .etapa {
-    display: none;
-}
+    width: 33.333333%;
+    min-width: 33.333333%;
 
-.etapa.ativa {
+    flex: 0 0 33.333333%;
+
     display: flex;
     flex-direction: column;
+
     gap: 10px;
 
-    animation: entrar 0.4s ease;
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
 }
 
 
-@keyframes entrar {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
+/* =========================
+   TÍTULOS
+========================= */
 
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+.etapa h2 {
+    margin: 0 20px 10px 20px;
+
+    color: #fff;
 }
 
 
@@ -100,6 +184,7 @@ form {
 
 .label {
     margin: 0 20px;
+
     color: #ffffff;
 }
 
@@ -108,29 +193,34 @@ form {
    INPUTS
 ========================= */
 
-.Iform {
+.input {
     padding: 8px;
 
     background-color: #151515;
+
     border: 1px solid #737373;
     border-radius: 4px;
 
+    margin: 0 20px;
+
     color: #ffffff;
+
     outline: none;
 }
 
-.Iform:hover {
+
+.input:hover {
     background-color: #303030;
 }
 
-.Iform:focus {
-    background-color: #202020 !important;
-    border-color: #3539e5;
-    box-shadow: 0 0 0 3px rgba(53, 229, 53, 0.12);
-}
 
-.text {
-    margin: 0 20px;
+.input:focus {
+    background-color: #202020 !important;
+
+    border-color: #3539e5;
+
+    box-shadow:
+        0 0 0 3px rgba(53, 229, 53, 0.12);
 }
 
 
@@ -140,14 +230,21 @@ form {
 
 .DivOpcoes {
     display: flex;
+
     flex-direction: row;
+
     align-items: center;
     justify-content: center;
+
+    gap: 0;
 }
+
 
 .option {
     width: fit-content;
+
     max-width: 160px;
+
     margin: 0 5px;
 }
 
@@ -158,28 +255,97 @@ form {
 
 .botoes {
     display: flex;
+
     gap: 10px;
-	margin: 30px 20px 10px 20px;
-	justify-content: space-between;
-}
 
-#etapa1 .botoes {
-    justify-content: flex-end;
-}
+    margin: 30px 20px 10px 20px;
 
-.finalizaForm:hover{
-	cursor: pointer;
-}
-
-.supervisor{
-	width: 100px;
-	margin: 5px;
+    justify-content: space-between;
 }
 
 
-.FNavButton:hover{
-	cursor: pointer;
-	color: #3539e5;
-	text-decoration: underline;
-	
+.FNavButton {
+    border: none;
+
+    background: none;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: inherit;
+
+    cursor: pointer;
+}
+
+
+.FNavButton:hover {
+    color: #3539e5;
+
+    text-decoration: underline;
+}
+
+
+.finalizaForm {
+    cursor: pointer;
+}
+
+
+/* =========================
+   SUPERVISOR
+========================= */
+
+.supervisor {
+    width: 100px;
+
+    margin: 5px;
+}
+
+
+/* =========================
+   TABELA
+========================= */
+
+td {
+    padding: 4px 7px 2px 7px;
+}
+
+
+tr td {
+    border-bottom: 3px solid #151515;
+}
+
+
+tr td:first-child {
+    border-left: 2px solid #151515;
+
+    border-radius: 0 0 0 8px;
+}
+
+
+tr td:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+
+table {
+    border-collapse: separate;
+
+    border-spacing: 0 10px;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 600px) {
+
+    .divBackground {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .IForm.container {
+        max-width: 400px;
+    }
 }

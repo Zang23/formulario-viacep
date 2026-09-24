@@ -4,229 +4,332 @@
 <head th:replace="~{fragmentos/head :: head('Formulário')}"></head>
 
 <body>
-	<header th:replace="~{fragmentos/header :: header('formulario')}"></header>
 
-	<div class="divBackground">
-		<div class="IForm container">
-			<form>
-				<!-- ETAPA 1 -->
-				<div class="etapa ativa" id="etapa1">
-					<h2>Dados do estágiario</h2>
+    <header th:replace="~{fragmentos/header :: header('formulario')}"></header>
 
-					<label class="IForm label">Insira o nome do estágiario:</label>
-					<input type="text" id="IdNomeEstagiario" class="Iform text">
+    <div class="divBackground">
 
-					<label class="IForm label">Insira o telefone do estágiario:</label>
-					<input type="text" id="IdTelefoneEstagiario" class="Iform text">
+        <div class="IForm container">
 
-					<label class="IForm label">Insira o email do estágiario:</label>
-					<input type="email" id="IdEmailEstagiario" class="Iform text">
+            <form th:action="@{/formulario/salvar}"
+                  th:object="${form}"
+                  method="post"
+                  class="formulario">
 
-					<label class="IForm label">Insira o curso e periodo do estágiario:</label>
+                <div class="carousel">
 
-					<div class="DivOpcoes">
-						<select id="IdCursoEstagiario" class="Iform option">
-							<option value="" disabled selected>Selecione uma opção</option>
-							<option value="1">Comercio exterior</option>
-							<option value="2">Anásise e desenvolvimento de sistemas</option>
-							<option value="3">Desenvolvimento de software multiplataforma</option>
-							<option value="4">Recursos humanos</option>
-							<option value="5">Polímeros</option>
-						</select>
+                    <div class="carousel-track" id="carouselTrack">
 
-						<select id="IdPeriodoEstagiario" class="Iform option">
-							<option value="" disabled selected>Selecione uma opção</option>
-							<option value="1">Matutino</option>
-							<option value="2">Vespertino</option>
-							<option value="3">Noturno</option>
-						</select>
-					</div>
+                        <!-- =========================
+                             ETAPA 1
+                        ========================== -->
 
-					<div class="botoes">
-						<p class="FNavButton" id="btnProximo">
-							Próximo
-						</p>
-					</div>
-				</div>
+                        <section class="etapa">
 
+                            <h2>Dados do estagiário</h2>
 
-				<!-- ETAPA 2 -->
-				<div class="etapa" id="etapa2">
-					<h2>Dados da empresa</h2>
+                            <label class="IForm label">Insira o nome do estagiário:</label>
+                            <input type="text" th:field="*{NomeEstagiario}" class="IForm input text">
+							
+							<label class="IForm label">Insira o cpf do estagiário:</label>
+							<input type="text" th:field="*{CpfEstagiario}" class="IForm input text">
 
-					<label class="IForm label">Insira o nome da empresa:</label>
-					<input type="text" id="IdNomeEmpresa" class="Iform text">
+                            <label class="IForm label">Insira o telefone do estagiário:</label>
+                            <input type="text" th:field="*{TelefoneEstagiario}" class="IForm input text">
 
-					<label class="IForm label">Insira a área de atuação da empresa:</label>
-					<input type="text" id="IdAreaEmpresa" class="Iform text">
+                            <label class="IForm label">Insira o email do estagiário:</label>
+                            <input type="email" th:field="*{EmailEstagiario}" class="IForm input text">
 
-					<label class="IForm label">Insira o CNPJ da empresa:</label>
-					<input type="text" id="IdCnpjEmpresa" class="Iform text">
+                            <label class="IForm label">Insira o curso e período do estagiário:</label>
 
-					<label class="IForm label">Insira a cidade da empresa:</label>
-					<input type="text" id="IdCidadeEmpresa" class="Iform text">
+                            <div class="DivOpcoes">
 
-					<label class="IForm label">Insira o CEP da empresa:</label>
-					<input type="text" id="IdCepEmpresa" class="Iform text">
+                                <select th:field="*{CursoEstagiario}" class="IForm input option">
+                                    <option value="" disabled>Selecione uma opção</option>
+                                    <option value="Comercio exterior">Comércio exterior</option>
+                                    <option value="Análise e desenvolvimento de sistemas">Análise e desenvolvimento de sistemas</option>
+                                    <option value="Desenvolvimento de software multiplataforma">Desenvolvimento de software multiplataforma</option>
+                                    <option value="Recursos humanos">Recursos humanos</option>
+                                    <option value="Polímeros">Polímeros</option>
+                                </select>
 
-					<label class="IForm label">Insira o email da empresa:</label>
-					<input type="email" id="IdEmailEmpresa" class="Iform text">
+                                <select th:field="*{PeriodoEstagiario}" class="IForm input option">
+                                    <option value="" disabled>Selecione uma opção</option>
+                                    <option value="Matutino">Matutino</option>
+                                    <option value="Vespertino">Vespertino</option>
+                                    <option value="Noturno">Noturno</option>
+                                </select>
 
-					<label class="IForm label">Insira o site da empresa:</label>
-					<input type="url" id="IdSiteEmpresa" class="Iform text">
+                            </div>
 
-					<label class="IForm label">Insira o telefone da empresa:</label>
-					<input type="text" id="IdTelefoneEmpresa" class="Iform text">
+                            <div class="botoes">
 
-					<label class="IForm label">Insira o linkedin da empresa:</label>
-					<input type="url" id="IdLinkedinEmpresa" class="Iform text">
+                                <button type="button"
+                                        class="FNavButton"
+                                        id="btnProximo">
+                                    Próximo
+                                </button>
 
-					<div class="botoes">
-						<p class="FNavButton" id="btnVoltar">
-							Voltar
-						</p>
+                            </div>
 
-						<p class="FNavButton" id="btnProximo2">
-							Próximo
-						</p>
-					</div>
-				</div>
+                        </section>
 
 
-				<!-- ETAPA 3 -->
-				<div class="etapa" id="etapa3">
-					<h2>Dados do estágio</h2>
+                        <!-- =========================
+                             ETAPA 2
+                        ========================== -->
 
-					<label>Horário de entrada:</label>
-					<input type="time" id="IdHorarioEntrada" class="Iform text">
+                        <section class="etapa">
 
-					<label>Horário de saída:</label>
-					<input type="time" id="IdHorarioSaida" class="Iform text">
+                            <h2>Dados da empresa</h2>
 
-					<label>Carga horária:</label>
-					<input type="text" id="IdCargaHoraria" class="Iform text">
+                            <label class="IForm label">Insira o nome da empresa:</label>
+                            <input type="text" th:field="*{NomeEmpresa}" class="IForm input text">
 
-					<label class="IForm label">
-						Insira o departamento que o estagiário irá trabalhar na empresa
-					</label>
-					<input type="text" id="IdDepartamento" class="Iform text">
+                            <label class="IForm label">Insira a área de atuação da empresa:</label>
+                            <input type="text" th:field="*{AreaEmpresa}" class="IForm input text">
 
-					<label class="IForm label">
-						Selecione um supervisor ou insira um novo
-					</label>
+                            <label class="IForm label">Insira o CNPJ da empresa:</label>
+                            <input type="text" th:field="*{CnpjEmpresa}" class="IForm input text">
 
-					<div class="DivOpcoes">
-						<select id="IdSupervisor" class="Iform option supervisor">
-							<option value="" disabled selected>Selecione uma opção</option>
-						</select>
+                            <label class="IForm label">Insira a cidade da empresa:</label>
+                            <input type="text" th:field="*{CidadeEmpresa}" class="IForm input text">
 
-						<input type="text" id="IdNomeSupervisor" class="Iform text supervisor" placeholder="nome">
+                            <label class="IForm label">Insira o CEP da empresa:</label>
+                            <input type="text" th:field="*{CepEmpresa}" class="IForm input text">
 
-						<input type="text" id="IdCargoSupervisor" class="Iform text supervisor" placeholder="cargo">
-					</div>
+                            <label class="IForm label">Insira o email da empresa:</label>
+                            <input type="email" th:field="*{EmailEmpresa}" class="IForm input text">
 
-					<div id="divBotoes" class="botoes">
-						<p class="FNavButton" id="btnVoltar2">
-							Voltar
-						</p>
-					</div>
+                            <label class="IForm label">Insira o site da empresa:</label>
+                            <input type="url" th:field="*{SiteEmpresa}" class="IForm input text">
 
-					<button type="submit" class="Iform finalizaForm">
-						Finalizar
-					</button>
-				</div>
+                            <label class="IForm label">Insira o telefone da empresa:</label>
+                            <input type="text" th:field="*{TelefoneEmpresa}" class="IForm input text">
 
-			</form>
+                            <label class="IForm label">Insira o linkedin da empresa:</label>
+                            <input type="url" th:field="*{LinkedinEmpresa}" class="IForm input text">
 
-		</div>
-	</div>
+                            <div class="botoes">
+
+                                <button type="button"
+                                        class="FNavButton"
+                                        id="btnVoltar">
+                                    Voltar
+                                </button>
+
+                                <button type="button"
+                                        class="FNavButton"
+                                        id="btnProximo2">
+                                    Próximo
+                                </button>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- =========================
+                             ETAPA 3
+                        ========================== -->
+
+                        <section class="etapa">
+
+                            <h2>Dados do estágio</h2>
+
+                            <label>Horário de entrada:</label>
+                            <input type="time" th:field="*{HorarioEntrada}" class="IForm input text">
+
+                            <label>Horário de saída:</label>
+                            <input type="time" th:field="*{HorarioSaida}" class="IForm input text">
+
+                            <label>Carga horária:</label>
+                            <input type="text" th:field="*{CargaHoraria}" class="IForm input text">
+
+                            <label class="IForm label">Insira o departamento que o estagiário irá trabalhar na empresa</label>
+
+                            <input type="text" th:field="*{Departamento}" class="IForm input text">
+
+                            <label class="IForm label">Selecione um supervisor ou insira um novo</label>
+
+                            <div class="DivOpcoes">
+
+                                <select th:field="*{Supervisor}"
+                                        class="IForm input option supervisor">
+                                    <option value="">Selecione uma opção</option>
+                                </select>
+
+                                <input type="text"
+                                       th:field="*{NomeSupervisor}"
+                                       class="IForm input text supervisor"
+                                       placeholder="nome">
+
+                                <input type="text"
+                                       th:field="*{CargoSupervisor}"
+                                       class="IForm input text supervisor"
+                                       placeholder="cargo">
+
+                            </div>
+
+                            <div class="botoes">
+
+                                <button type="button"
+                                        class="FNavButton"
+                                        id="btnVoltar2">
+                                    Voltar
+                                </button>
+
+                                <button type="submit"
+                                        class="IForm input finalizaForm">
+                                    Finalizar
+                                </button>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
 	<script>
-		const etapa1 = document.getElementById("etapa1");
-		const etapa2 = document.getElementById("etapa2");
-		const etapa3 = document.getElementById("etapa3");
+	    const track = document.getElementById("carouselTrack");
 
-		const btnProximo = document.getElementById("btnProximo");
-		const btnVoltar = document.getElementById("btnVoltar");
+	    const btnProximo = document.getElementById("btnProximo");
+	    const btnVoltar = document.getElementById("btnVoltar");
 
-		const btnProximo2 = document.getElementById("btnProximo2");
-		const btnVoltar2 = document.getElementById("btnVoltar2");
+	    const btnProximo2 = document.getElementById("btnProximo2");
+	    const btnVoltar2 = document.getElementById("btnVoltar2");
 
+	    const etapas = document.querySelectorAll(".etapa");
+	    const carousel = document.querySelector(".carousel");
+	    const form = document.querySelector(".formulario");
+	    const container = document.querySelector(".IForm.container");
 
-		// =========================
-		// VALIDAÇÃO
-		// =========================
+	    let etapaAtual = 0;
 
-		function validarEtapa(etapa) {
-
-			const campos = etapa.querySelectorAll("input, select");
-
-			let valido = true;
-
-			campos.forEach(function (campo) {
-
-				if (campo.value.trim() === "") {
-					campo.style.borderColor = "#ff3535";
-					valido = false;
-				} else {
-					campo.style.borderColor = "#737373";
-				}
-
-			});
-
-			return valido;
-		}
+	    const totalEtapas = etapas.length;
 
 
-		// =========================
-		// ETAPA 1 → ETAPA 2
-		// =========================
+	    /*
+	     * Ajusta a altura do carousel para
+	     * a altura EXATA da etapa atual.
+	     */
+	    function ajustarAlturaCarrossel(numero) {
 
-		btnProximo.addEventListener("click", function () {
+	        const etapa = etapas[numero];
 
-			if (!validarEtapa(etapa1)) {
-				return;
-			}
+	        if (!etapa) {
+	            return;
+	        }
 
-			etapa1.classList.remove("ativa");
-			etapa2.classList.add("ativa");
-		});
+	        /*
+	         * scrollHeight pega a altura real do conteúdo,
+	         * mesmo quando a etapa está fora da área visível.
+	         */
+	        const altura = etapa.scrollHeight;
 
+	        carousel.style.height = `${altura}px`;
 
-		// =========================
-		// ETAPA 2 → ETAPA 1
-		// =========================
+	        form.style.height = `${altura}px`;
 
-		btnVoltar.addEventListener("click", function () {
-
-			etapa2.classList.remove("ativa");
-			etapa1.classList.add("ativa");
-		});
-
-
-		// =========================
-		// ETAPA 2 → ETAPA 3
-		// =========================
-
-		btnProximo2.addEventListener("click", function () {
-
-			if (!validarEtapa(etapa2)) {
-				return;
-			}
-
-			etapa2.classList.remove("ativa");
-			etapa3.classList.add("ativa");
-		});
+	        /*
+	         * 50px = espaço vertical adicional
+	         * do container.
+	         */
+	        container.style.height = `${altura + 50}px`;
+	    }
 
 
-		// =========================
-		// ETAPA 3 → ETAPA 2
-		// =========================
+	    /*
+	     * Move o carousel para a etapa desejada.
+	     */
+	    function moverParaEtapa(numero) {
 
-		btnVoltar2.addEventListener("click", function () {
+	        if (numero < 0 || numero >= totalEtapas) {
+	            return;
+	        }
 
-			etapa3.classList.remove("ativa");
-			etapa2.classList.add("ativa");
-		});
+	        etapaAtual = numero;
+
+	        /*
+	         * Como o track possui 300% de largura
+	         * e cada etapa possui 33.333%, cada
+	         * movimento corresponde a 33.333%.
+	         */
+	        const deslocamento =
+	            numero * (100 / totalEtapas);
+
+	        track.style.transform =
+	            `translateX(-${deslocamento}%)`;
+
+	        ajustarAlturaCarrossel(numero);
+	    }
+
+
+	    /*
+	     * ETAPA 1 → ETAPA 2
+	     */
+	    btnProximo.addEventListener("click", function () {
+	        moverParaEtapa(1);
+	    });
+
+
+	    /*
+	     * ETAPA 2 → ETAPA 1
+	     */
+	    btnVoltar.addEventListener("click", function () {
+	        moverParaEtapa(0);
+	    });
+
+
+	    /*
+	     * ETAPA 2 → ETAPA 3
+	     */
+	    btnProximo2.addEventListener("click", function () {
+	        moverParaEtapa(2);
+	    });
+
+
+	    /*
+	     * ETAPA 3 → ETAPA 2
+	     */
+	    btnVoltar2.addEventListener("click", function () {
+	        moverParaEtapa(1);
+	    });
+
+
+	    /*
+	     * Calcula a altura inicial depois que
+	     * todos os elementos foram carregados.
+	     */
+	    window.addEventListener("load", function () {
+
+	        requestAnimationFrame(function () {
+	            ajustarAlturaCarrossel(0);
+	        });
+
+	    });
+
+
+	    /*
+	     * Recalcula a altura quando a janela
+	     * mudar de tamanho.
+	     */
+	    window.addEventListener("resize", function () {
+
+	        requestAnimationFrame(function () {
+	            ajustarAlturaCarrossel(etapaAtual);
+	        });
+
+	    });
 	</script>
 
 
