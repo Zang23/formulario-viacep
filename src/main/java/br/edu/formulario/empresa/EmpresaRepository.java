@@ -24,7 +24,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa, String> {
     List<Empresa> findByCidade(@Param("cidade") String cidade);
 
     //busca por area de atuação
-    @Query("SELECT e FROM Empresa e WHERE e.areaAtuacao = :areaAtuacao")
-    List<Empresa> findByAreaAtuacao(@Param("areaAtuacao") String areaAtuacao);
+    @Query("SELECT e FROM Empresa e WHERE e.area = :area")
+    List<Empresa> findByArea(@Param("area") String area);
 
 }

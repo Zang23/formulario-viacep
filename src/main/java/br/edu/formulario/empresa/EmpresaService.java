@@ -31,8 +31,8 @@ public class EmpresaService {
         return empresaRepository.findByCidade(cidade);
     }
 
-    public List<Empresa> buscarPorAreaAtuacao(String areaAtuacao) {
-        return empresaRepository.findByAreaAtuacao(areaAtuacao);
+    public List<Empresa> buscarPorAreaAtuacao(String area) {
+        return empresaRepository.findByArea(area);
     }  
 
     public boolean verificarCnpjExistente(String cnpj) {

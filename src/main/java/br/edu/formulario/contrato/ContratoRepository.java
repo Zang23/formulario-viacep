@@ -8,7 +8,7 @@ public interface ContratoRepository extends JpaRepository<Contrato, Long> {
     //Encontrar contratos por CNPJ da empresa
     List<Contrato> findByEmpresaCnpj(String cnpj);
     //Encontrar contratos por ID do supervisor
-    List<Contrato> findBySupervisorIdSupervisor(Long idSupervisor);
+    List<Contrato> findBySupervisor_Id(Long id);
 
 
 }

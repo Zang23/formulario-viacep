@@ -1,5 +1,6 @@
 package br.edu.formulario.contrato;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import br.edu.formulario.empresa.Empresa;
@@ -28,6 +29,10 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "idContrato")
 public class Contrato {
 
+	
+
+	
+	
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long idContrato;
@@ -44,22 +49,32 @@ public class Contrato {
     private Estagiario estagiario;
 
     // Alterei de Date para LocalDate para melhor manipulação de datas
-    private LocalDate inicio; 
-    private LocalDate termino;
+    private Date inicio; 
+    private Date termino;
     private int cargaHoraria;
     private String area;
     private String funcao;
+    
+	public Contrato(DadosCadastroContrato dados) {
+		this.idContrato = dados.getIdContrato();
+		
+		this.empresa = new Empresa();
+		this.empresa.setCnpj(dados.getEmpresaCnpj());
 
-    public Contrato(DadosCadastroContrato dados, Empresa empresa, Supervisor supervisor) {
-        this.empresa = empresa;
-        this.supervisor = supervisor;
-        this.inicio = dados.inicio();
-        this.termino = dados.termino();
-        this.cargaHoraria = dados.cargaHoraria();
-        this.area = dados.area();
-        this.funcao = dados.funcao();
-    }
+		this.supervisor = new Supervisor();
+		this.supervisor.setId(dados.getSupervisorId());
 
+		this.estagiario = new Estagiario();
+		this.estagiario.setCpf(dados.getEstagiarioId());
+
+		this.inicio = dados.getInicio();
+		this.termino = dados.getTermino();
+		this.cargaHoraria = dados.getCargaHoraria();
+		this.area = dados.getArea();
+		this.funcao = dados.getFuncao();
+	
+	}
+	
     public void atualizarInformacoes(DadosAtualizacaoContrato dados) {
         if (dados.inicio() != null) {
             this.inicio = dados.inicio();
