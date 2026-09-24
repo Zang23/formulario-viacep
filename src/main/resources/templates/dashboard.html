@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos/head :: head('Index')}"></head>
+<head th:replace="~{fragmentos/head :: head('Dashboard')}"></head>
 
 <body>
-	<header th:replace="~{fragmentos/header :: header(activePage='index')}"></header>
 
-	<div class="divBackground">
-		<div class="Dashboard container">
-			<table>
-				<tr>
-					<th>Estágiario</th>
-					<th>Curso</th>
-					<th>Semestre</th>
-					<th>Empresa</th>
-					<th>Horário</th>
-				</tr>
-				
-			</table>
-		</div>
-	</div>
+    <header th:replace="~{fragmentos/header :: header(activePage='dashboard')}"></header>
+
+    <div class="divBackground">
+
+        <div class="Dashboard container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Curso</th>
+                        <th>Empresa</th>
+                        <th>Departamento</th>
+                        <th>Supervisor</th>
+                        <th>Período</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="estagiario : ${estagiarios}">
+
+                        <td th:text="${estagiario.nomeEstagiario}">
+                            Nome
+                        </td>
+
+                        <td th:text="${estagiario.emailEstagiario}">
+                            Email
+                        </td>
+
+                        <td th:text="${estagiario.telefoneEstagiario}">
+                            Telefone
+                        </td>
+
+                        <td th:text="${estagiario.curso}">
+                            Curso
+                        </td>
+
+                        <td th:text="${estagiario.nomeEmpresa}">
+                            Empresa
+                        </td>
+
+                        <td th:text="${estagiario.area}">
+                            Departamento
+                        </td>
+
+                        <td th:text="${estagiario.nomeSupervisor}">
+                            Supervisor
+                        </td>
+
+                        <td th:text="${estagiario.periodo}">
+                            Período
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </body>
 
 </html>
