@@ -9,14 +9,16 @@
 		<nav class="navbar">
 			<div class="navLogo">
 				<span class="logoMark"></span>
-				<span>MinhaApp</span>
+				<span>Viacep</span>
 			</div>
 
 			<div class="navLinks">
 				<!-- Exemplo de como usar a variável activePage que você passou -->
 				<a th:href="@{/}" th:classappend="${activePage == 'inicio'} ? 'active'">Início</a>
 				<a th:href="@{/dashboard}" th:classappend="${activePage == 'listar'} ? 'active'">Listar</a>
-				<a th:href="@{/formulario}" th:classappend="${activePage == 'formulario'} ? 'active'">Novo</a>
+				<a th:href="@{/formularioemp}" th:classappend="${activePage == 'formularioemp'} ? 'active'">Nova Empresa</a>
+				<a th:href="@{/formulariocon}" th:classappend="${activePage == 'formulariocon'} ? 'active'">Novo Contrato</a>
+				<a th:href="@{/formularioest}" th:classappend="${activePage == 'formularioest'} ? 'active'">Novo Estagiário</a>
 				<a th:href="@{/sobre}" th:classappend="${activePage == 'sobre'} ? 'active'">Sobre</a>
 			</div>
 		</nav>

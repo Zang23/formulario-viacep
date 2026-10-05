@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos/head :: head('FormulárioEst')}"></head>
+
+<body>
+
+	<header th:replace="~{fragmentos/header :: header('formularioest')}"></header>
+
+	<div class="divBackground">
+
+		<div class="IForm container">
+
+			<form th:action="@{/formularioest/salvar}" th:object="${form}" method="post" class="formulario">
+
+				<div class="carousel">
+
+					<div class="carousel-track" id="carouselTrack">
+
+						<section class="etapa">
+
+							<h2>Dados do estagiário</h2>
+
+							<label class="IForm label">Insira o ra do estagiário:</label>
+							<input type="text" th:field="*{ra}" class="IForm input text">
+
+							<label class="IForm label">Insira o nome do estagiário:</label>
+							<input type="text" th:field="*{nome}" class="IForm input text">
+
+							<label class="IForm label">Insira a escolaridade do estagiário:</label>
+							<input type="text" th:field="*{escolaridade}" class="IForm input text">
+
+							<label class="IForm label">Insira o telefone do estagiário:</label>
+							<input type="text" th:field="*{telefone}" class="IForm input text">
+
+							<label class="IForm label">Insira o email do estagiário:</label>
+							<input type="email" th:field="*{email}" class="IForm input text">
+
+							<label class="IForm label">Selecione o semestre, curso e período do estagiário:</label>
+
+							<div class="DivOpcoes">
+
+								<select th:field="*{semestre}" class="IForm input option">
+									<option value="1" disabled>Selecione uma opção</option>
+									<option value="1">1º</option>
+									<option value="2">2º</option>
+									<option value="3">3º</option>
+									<option value="4">4º</option>
+									<option value="5">5º</option>
+									<option value="6">6º</option>
+								</select>
+
+								<select th:field="*{curso}" class="IForm input option">
+									<option value="" disabled>Selecione uma opção</option>
+									<option value="Comercio exterior">Comércio exterior</option>
+									<option value="Análise e desenvolvimento de sistemas">Análise e desenvolvimento de
+										sistemas</option>
+									<option value="Desenvolvimento de software multiplataforma">Desenvolvimento de
+										software multiplataforma</option>
+									<option value="Recursos humanos">Recursos humanos</option>
+									<option value="Polímeros">Polímeros</option>
+								</select>
+
+								<select th:field="*{periodo}" class="IForm input option">
+									<option value="" disabled>Selecione uma opção</option>
+									<option value="Matutino">Matutino</option>
+									<option value="Vespertino">Vespertino</option>
+									<option value="Noturno">Noturno</option>
+								</select>
+
+							</div>
+
+							<label class="IForm label">Como o estagiário descobriu o vestibular?:</label>
+							<input type="text" th:field="*{descobriuVestibular}" class="IForm input text">
+
+							<label class="IForm label"> selecione o genero do estagiário:</label>
+							<select th:field="*{genero}" class="IForm input option">
+								<option value="" disabled>Selecione uma opção</option>
+								<option value="F">Feminino</option>
+								<option value="M">Masculino</option>
+								<option value="O">Outro</option>
+							</select>
+
+							<label class="IForm label"> selecione a etnia do estagiário:</label>
+							<select th:field="*{etnia}" class="IForm input option">
+								<option value="" disabled>Selecione uma opção</option>
+								<option value="Asiatico">Asiatico</option>
+								<option value="Branco">Branco</option>
+								<option value="Indigena">Índigena</option>
+								<option value="Pardo">Pardo</option>
+								<option value="Negro">Negro</option>
+								<option value="Outro">Outro</option>
+							</select>
+
+							<label class="IForm label">Insira a renda familiar do estagiário:</label>
+							<input type="text" th:field="*{rendaFamiliar}" class="IForm input text">
+
+							<label class="IForm label">
+								O estagiário é PCD (Pessoa com deficiência)?:
+								<input type="checkbox" th:field="*{pcd}" class="IForm input checkbox">
+							</label>
+							
+
+							<!--
+
+							<label class="IForm label">Insira a cidade do estagiário:</label>
+							<input type="text" th:field="*{CidadeEndereco}" class="IForm input text">
+
+							<label class="IForm label">Insira o CEP do estagiário:</label>
+							<input type="text" th:field="*{CepEndereco}" class="IForm input text">
+
+							<label class="IForm label">Insira o nome da rua do estagiário:</label>
+							<input type="text" th:field="*{RuaEndereco}" class="IForm input text">
+
+							<label class="IForm label">Insira o número da rua do estagiário:</label>
+							<input type="text" th:field="*{NumEndereco}" class="IForm input text">
+
+							<label class="IForm label">Insira o bairro do estagiário:</label>
+							<input type="text" th:field="*{BairroEndereco}" class="IForm input text">
+
+							<label class="IForm label">Insira o UF do estagiário:</label>
+							<input type="text" th:field="*{UFEmpresa}" class="IForm input text">
+														-->
+
+							<div class="botoes">
+
+								<button type="submit" class="IForm input finalizaForm">
+									Finalizar
+								</button>
+
+							</div>
+
+						</section>
+
+
+
+
+					</div>
+
+				</div>
+
+			</form>
+
+		</div>
+
+	</div>
+
+
+	<script>
+
+	</script>
+
+
+</body>
+
+</html>

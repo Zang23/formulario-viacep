@@ -201,7 +201,7 @@ form {
     border: 1px solid #737373;
     border-radius: 4px;
 
-    margin: 0 20px;
+    margin: 0 5px;
 
     color: #ffffff;
 
@@ -222,7 +222,14 @@ form {
     box-shadow:
         0 0 0 3px rgba(53, 229, 53, 0.12);
 }
+.checkbox:hover{
+	cursor: pointer;
+}
 
+.checkbox{
+	color: #151515;
+	background-color: none;
+}
 
 /* =========================
    SELECTS
@@ -241,11 +248,8 @@ form {
 
 
 .option {
-    width: fit-content;
-
-    max-width: 160px;
-
-    margin: 0 5px;
+    flex: 1;
+	min-width: 0;
 }
 
 

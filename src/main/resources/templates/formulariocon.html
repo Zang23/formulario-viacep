@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos/head :: head('FormulárioCon')}"></head>
+
+<body>
+
+    <header th:replace="~{fragmentos/header :: header('formulariocon')}"></header>
+
+    <div class="divBackground">
+
+        <div class="IForm container">
+
+            <form th:action="@{/formulariocon/salvar}"
+                  th:object="${form}"
+                  method="post"
+                  class="formulario">
+
+                <div class="carousel">
+
+                    <div class="carousel-track" id="carouselTrack">
+
+                        
+
+                        <section class="etapa">
+
+                            <h2>Dados do contrato</h2>
+							
+							<label class="IForm label">Insira o CNPJ da empresa</label>
+							<input type="text" th:field="*{CNPJ}" class="IForm input text">
+							
+							<label class="IForm label">Insira o RA do estagiário</label>
+							<input type="text" th:field="*{CPF}" class="IForm input text">
+
+                            <label>Horário de entrada:</label>
+                            <input type="time" th:field="*{HorarioEntrada}" class="IForm input text">
+
+                            <label>Horário de saída:</label>
+                            <input type="time" th:field="*{HorarioSaida}" class="IForm input text">
+
+                            <label>Carga horária:</label>
+                            <input type="text" th:field="*{CargaHoraria}" class="IForm input text">
+
+                            <label class="IForm label">Insira o departamento que o estagiário irá trabalhar na empresa</label>
+
+                            <input type="text" th:field="*{Departamento}" class="IForm input text">
+
+                            <label class="IForm label">Selecione um supervisor ou insira um novo</label>
+
+                            <div class="DivOpcoes">
+
+                                <select th:field="*{Supervisor}"
+                                        class="IForm input option supervisor">
+                                    <option value="">Selecione uma opção</option>
+                                </select>
+
+                                <input type="text"
+                                       th:field="*{NomeSupervisor}"
+                                       class="IForm input text supervisor"
+                                       placeholder="nome">
+
+                                <input type="text"
+                                       th:field="*{CargoSupervisor}"
+                                       class="IForm input text supervisor"
+                                       placeholder="cargo">
+
+                            </div>
+
+                            <div class="botoes">
+
+                                <button type="submit"
+                                        class="IForm input finalizaForm">
+                                    Finalizar
+                                </button>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+	<script>
+	  
+	</script>
+
+
+</body>
+
+</html>
