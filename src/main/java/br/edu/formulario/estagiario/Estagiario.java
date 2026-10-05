@@ -27,12 +27,19 @@ public class Estagiario{
     @Id
     private String cpf;
 
+    private String ra;
     private String nome;
+    private String escolaridade;
     private String telefone;
     private String email;
     private String curso;
     private String periodo;
     private int semestre;
+    private String descobriuVestibular;
+    private String genero;
+    private String etnia;
+    private String rendaFamiliar;
+    private boolean pcd;
 
     @OneToOne
     @JoinColumn(name = "contrato_id", nullable = false, unique = true)
