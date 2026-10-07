@@ -21,22 +21,22 @@
 
 							<h2>Dados do estagiário</h2>
 
-							<label class="IForm label">Insira o ra do estagiário:</label>
+							<label class="IForm label">Insira o ra:</label>
 							<input type="text" th:field="*{ra}" class="IForm input text">
 
-							<label class="IForm label">Insira o nome do estagiário:</label>
+							<label class="IForm label">Insira o nome:</label>
 							<input type="text" th:field="*{nome}" class="IForm input text">
 
-							<label class="IForm label">Insira a escolaridade do estagiário:</label>
+							<label class="IForm label">Insira a escolaridade:</label>
 							<input type="text" th:field="*{escolaridade}" class="IForm input text">
 
-							<label class="IForm label">Insira o telefone do estagiário:</label>
+							<label class="IForm label">Insira o telefone:</label>
 							<input type="text" th:field="*{telefone}" class="IForm input text">
 
-							<label class="IForm label">Insira o email do estagiário:</label>
+							<label class="IForm label">Insira o email:</label>
 							<input type="email" th:field="*{email}" class="IForm input text">
 
-							<label class="IForm label">Selecione o semestre, curso e período do estagiário:</label>
+							<label class="IForm label">Selecione semestre, curso e período:</label>
 
 							<div class="DivOpcoes">
 
@@ -70,10 +70,7 @@
 
 							</div>
 
-							<label class="IForm label">Como o estagiário descobriu o vestibular?:</label>
-							<input type="text" th:field="*{descobriuVestibular}" class="IForm input text">
-
-							<label class="IForm label"> selecione o genero do estagiário:</label>
+							<label class="IForm label"> selecione o genero:</label>
 							<select th:field="*{genero}" class="IForm input option">
 								<option value="" disabled>Selecione uma opção</option>
 								<option value="F">Feminino</option>
@@ -81,7 +78,7 @@
 								<option value="O">Outro</option>
 							</select>
 
-							<label class="IForm label"> selecione a etnia do estagiário:</label>
+							<label class="IForm label"> selecione a etnia:</label>
 							<select th:field="*{etnia}" class="IForm input option">
 								<option value="" disabled>Selecione uma opção</option>
 								<option value="Asiatico">Asiatico</option>
@@ -92,35 +89,52 @@
 								<option value="Outro">Outro</option>
 							</select>
 
-							<label class="IForm label">Insira a renda familiar do estagiário:</label>
+							<label class="IForm label">Insira a renda familiar:</label>
 							<input type="text" th:field="*{rendaFamiliar}" class="IForm input text">
 
 							<label class="IForm label">
-								O estagiário é PCD (Pessoa com deficiência)?:
+								É PCD (Pessoa com deficiência)?:
 								<input type="checkbox" th:field="*{pcd}" class="IForm input checkbox">
 							</label>
 							
 
-							<!--
+							<h4>Endereço</h4>
 
 							<label class="IForm label">Insira a cidade do estagiário:</label>
-							<input type="text" th:field="*{CidadeEndereco}" class="IForm input text">
+							<input type="text" class="IForm input text">
 
-							<label class="IForm label">Insira o CEP do estagiário:</label>
-							<input type="text" th:field="*{CepEndereco}" class="IForm input text">
+							<label class="IForm label">Insira o CEP:</label>
+							<input type="text" class="IForm input text">
 
-							<label class="IForm label">Insira o nome da rua do estagiário:</label>
-							<input type="text" th:field="*{RuaEndereco}" class="IForm input text">
+							<label class="IForm label">Insira o logradouro:</label>
+							<input type="text" class="IForm input text">
 
-							<label class="IForm label">Insira o número da rua do estagiário:</label>
-							<input type="text" th:field="*{NumEndereco}" class="IForm input text">
+							<label class="IForm label">Insira o número da rua:</label>
+							<input type="text" class="IForm input text">
 
-							<label class="IForm label">Insira o bairro do estagiário:</label>
-							<input type="text" th:field="*{BairroEndereco}" class="IForm input text">
+							<label class="IForm label">Insira o bairro:</label>
+							<input type="text" class="IForm input text">
 
-							<label class="IForm label">Insira o UF do estagiário:</label>
-							<input type="text" th:field="*{UFEmpresa}" class="IForm input text">
-														-->
+							<label class="IForm label">Insira o UF:</label>
+							<input type="text" class="IForm input text">
+
+							<h4>Dados da escola</h4>
+
+							<label class="IForm label">Insira o nome da escola:</label>
+							<input type="text" class="IForm input text">
+
+							<label class="IForm label">Insira a distância da escola em relação a FATEC (km):</label>
+							<input type="text" class="IForm input text">
+
+							<label class="IForm label">
+							    O estagiário fez técnico?
+							    <input type="checkbox" class="IForm input checkbox">
+							</label>
+
+							<label class="IForm label">
+							    Trabalha na área?
+							    <input type="checkbox" class="IForm input checkbox">
+							</label>
 
 							<div class="botoes">
 
