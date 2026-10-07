@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.edu.formulario.FormularioDTO;
-import br.edu.formulario.FormularioService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -30,10 +28,10 @@ public class FormularioEstagiarioController {
     }
 
 
-    @PostMapping("/salvar")
-    public String salvar(@ModelAttribute("form") FormularioDTO form) {
+   // @PostMapping("/salvar")
+   // public String salvar(@ModelAttribute("form") FormularioDTO form) {
 
 
-        return "redirect:/dashboard";
-    }
+  //      return "redirect:/dashboard";
+   // }
 }
