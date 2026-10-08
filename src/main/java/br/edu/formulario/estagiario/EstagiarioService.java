@@ -17,7 +17,7 @@ public class EstagiarioService {
 
     @Transactional
     public Estagiario cadastrarEstagiario(DadosCadastroEstagiario dados) {
-        Estagiario estagiario = new Estagiario();
+        Estagiario estagiario = new Estagiario(dados);
         return estagiarioRepository.save(estagiario);
     }
 
@@ -27,7 +27,7 @@ public class EstagiarioService {
         estagiario.atualizarInformacoes(dados);
     }
 
-    public Estagiario findByRa(int ra) {
+    public Estagiario findByRa(Long ra) {
         return estagiarioRepository.findById(ra)
                 .orElseThrow(() -> new RuntimeException("Estagiário não encontrado com o RA: " + ra));
     }
@@ -37,7 +37,7 @@ public class EstagiarioService {
     }
 
     @Transactional
-    public void deletarEstagiario(int ra) {
+    public void deletarEstagiario(Long ra) {
         estagiarioRepository.deleteById(ra);
     }
 }

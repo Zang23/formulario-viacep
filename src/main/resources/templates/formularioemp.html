@@ -5,91 +5,90 @@
 
 <body>
 
-    <header th:replace="~{fragmentos/header :: header('formularioemp')}"></header>
+	<header th:replace="~{fragmentos/header :: header('formularioemp')}"></header>
 
-    <div class="divBackground">
+	<div class="divBackground">
 
-        <div class="IForm container">
+		<div class="IForm container">
 
-            <form th:action="@{/formularioemp/salvar}"
-                  th:object="${form}"
-                  method="post"
-                  class="formulario">
+			<form action="/formularioemp/salvar" method="post" class="formulario">
 
-                <div class="carousel">
+				<div class="carousel">
 
-                    <div class="carousel-track" id="carouselTrack">                  
+					<div class="carousel-track" id="carouselTrack">
 
-                      
-                        <section class="etapa">
+						<section class="etapa">
 
-                            <h2>Dados da empresa</h2>
-							
-							<label class="IForm label">Insira o CNPJ da empresa:</label>
-							<input type="text" th:field="*{CnpjEmpresa}" class="IForm input text">
+							<h2>Dados da empresa</h2>
 
-                            <label class="IForm label">Insira o nome da empresa:</label>
-                            <input type="text" th:field="*{NomeEmpresa}" class="IForm input text">
+							<label class="IForm label">Insira o CNPJ:</label>
+							<input type="text" class="IForm input text">
 
-                            <label class="IForm label">Insira a área de atuação da empresa:</label>
-                            <input type="text" th:field="*{AreaEmpresa}" class="IForm input text">
-							
-							<label class="IForm label">Insira o telefone da empresa:</label>
-							<input type="text" th:field="*{TelefoneEmpresa}" class="IForm input text">
-							
-							<label class="IForm label">Insira o email da empresa:</label>
-							<input type="email" th:field="*{EmailEmpresa}" class="IForm input text">
+							<label class="IForm label">Insira o nome:</label>
+							<input type="text" class="IForm input text">
 
-                            <label class="IForm label">Insira o site da empresa:</label>
-                            <input type="url" th:field="*{SiteEmpresa}" class="IForm input text">
+							<label class="IForm label">Insira a razão social:</label>
+							<input type="text" class="IForm input text">
 
-                            <label class="IForm label">Insira o linkedin da empresa:</label>
-                            <input type="url" th:field="*{LinkedinEmpresa}" class="IForm input text">
-							
-							<label class="IForm label">Insira a cidade da empresa:</label>
-							<input type="text" th:field="*{CidadeEndereco}" class="IForm input text">
+							<label class="IForm label">Insira o segmento de mercado:</label>
+							<input type="text" class="IForm input text">
 
-							<label class="IForm label">Insira o CEP da empresa:</label>
-							<input type="text" th:field="*{CepEndereco}" class="IForm input text">
-							
-							<label class="IForm label">Insira o nome da rua da empresa:</label>
-							<input type="text" th:field="*{RuaEndereco}" class="IForm input text">
-							
-							<label class="IForm label">Insira o número da rua da empresa:</label>
-							<input type="text" th:field="*{NumEndereco}" class="IForm input text">
-							
-							<label class="IForm label">Insira o bairro da empresa:</label>
-							<input type="text" th:field="*{BairroEndereco}" class="IForm input text">
-							
-							<label class="IForm label">Insira o UF da empresa:</label>
-							<input type="text" th:field="*{UFEmpresa}" class="IForm input text">
+							<label class="IForm label">Insira o telefone:</label>
+							<input type="text" class="IForm input text">
 
-                            <div class="botoes">
+							<label class="IForm label">Insira o email:</label>
+							<input type="email" class="IForm input text">
 
-								<button type="submit"
-								        class="IForm input finalizaForm">
-								    Finalizar
+							<label class="IForm label">Insira o site:</label>
+							<input type="url" class="IForm input text">
+
+							<label class="IForm label">Insira o linkedin:</label>
+							<input type="url" class="IForm input text">
+
+							<h4>Endereço</h4>
+
+							<label class="IForm label">Insira a cidade:</label>
+							<input type="text" class="IForm input text">
+
+							<label class="IForm label">Insira o CEP:</label>
+							<input type="text" class="IForm input text">
+
+							<label class="IForm label">Insira o nome da rua:</label>
+							<input type="text" class="IForm input text">
+
+							<label class="IForm label">Insira o número da rua:</label>
+							<input type="text" class="IForm input text">
+
+							<label class="IForm label">Insira o bairro:</label>
+							<input type="text" class="IForm input text">
+
+							<label class="IForm label">Insira o UF:</label>
+							<input type="text" class="IForm input text">
+
+							<div class="botoes">
+
+								<button type="submit" class="IForm input finalizaForm">
+									Finalizar
 								</button>
 
-                            </div>
+							</div>
 
-                        </section>
+						</section>
 
+					</div>
 
-                    </div>
+				</div>
 
-                </div>
+			</form>
 
-            </form>
+		</div>
 
-        </div>
-
-    </div>
+	</div>
 
 
 	<script>
 
-	   
+
 	</script>
 
 

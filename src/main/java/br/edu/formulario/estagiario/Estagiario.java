@@ -1,11 +1,10 @@
 package br.edu.formulario.estagiario;
 
-
+import br.edu.formulario.endereco.Endereco;
+import br.edu.formulario.escola.Escola;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-import br.edu.formulario.contrato.Contrato;
-
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -25,7 +24,7 @@ import lombok.Setter;
 public class Estagiario{
 
     @Id
-    private int ra;
+    private Long ra;
     private String nome;
     private String escolaridade;
     private String telefone;
@@ -33,22 +32,25 @@ public class Estagiario{
     private int semestre;
     private String periodo;
     private String curso;
-    private char genero;
+    private String genero;
     private String etnia;
     private double rendaFamiliar;
     private boolean pcd;
     private boolean trabalhaNaArea;
 
-    @OneToOne
-    @JoinColumn(name = "contrato_id", nullable = false, unique = true)
-    private Contrato contrato;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
-    //O construtor usa os dados da DTO para criar um novo estagiário
-    public Estagiario() {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "escola_id")
+    private Escola escola;
+
+    public Estagiario(DadosCadastroEstagiario dados) {
         this.ra = dados.ra();
         this.nome = dados.nome();
         this.escolaridade = dados.escolaridade();
-        this.telefone = dados.telefone();
+        this.telefone = dados.telefone() == null ? null : dados.telefone().replaceAll("\\D", "");
         this.email = dados.email();
         this.semestre = dados.semestre();
         this.periodo = dados.periodo();
@@ -58,6 +60,24 @@ public class Estagiario{
         this.rendaFamiliar = dados.rendaFamiliar();
         this.pcd = dados.pcd();
         this.trabalhaNaArea = dados.trabalhaNaArea();
+
+        Endereco end = new Endereco();
+        end.setCep(dados.cep());
+        end.setLogradouro(dados.logradouro());
+        end.setBairro(dados.bairro());
+        end.setNumPorta(dados.numPorta());
+        end.setUf(dados.uf());
+        end.setLocalidade(dados.localidade());
+        end.setComplemento(dados.complemento());
+        this.endereco = end;
+
+        Escola esc = new Escola();
+        esc.setNome(dados.escolaNome());
+        if (dados.escolaDistancia() != null) {
+            esc.setDistancia(dados.escolaDistancia());
+        }
+        esc.setEnsinoTecnico(dados.ensinoTecnico());
+        this.escola = esc;
     }
 
     public void atualizarInformacoes(DadosAtualizacaoEstagiario dados) {
@@ -82,7 +102,7 @@ public class Estagiario{
         if (dados.curso() != null) {
             this.curso = dados.curso();
         }
-        if (dados.genero() != ' ') { 
+        if (dados.genero() != null && !dados.genero().isBlank()) {
             this.genero = dados.genero();
         }
         if (dados.etnia() != null) {

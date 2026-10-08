@@ -11,77 +11,70 @@
 
         <div class="IForm container">
 
-            <form th:action="@{/formulariocon/salvar}"
-                  th:object="${form}"
-                  method="post"
-                  class="formulario">
+			<form action="/formulariocon/salvar"
+			      method="post"
+			      class="formulario">
 
-                <div class="carousel">
+			    <div class="carousel">
 
-                    <div class="carousel-track" id="carouselTrack">
+			        <div class="carousel-track" id="carouselTrack">
 
-                        
+			            <section class="etapa">
 
-                        <section class="etapa">
+			                <h2>Dados do contrato</h2>
 
-                            <h2>Dados do contrato</h2>
-							
-							<label class="IForm label">Insira o CNPJ da empresa</label>
-							<input type="text" th:field="*{CNPJ}" class="IForm input text">
-							
-							<label class="IForm label">Insira o RA do estagiário</label>
-							<input type="text" th:field="*{CPF}" class="IForm input text">
+			                <label class="IForm label">Insira o CNPJ da empresa</label>
+			                <input type="text" class="IForm input text">
 
-                            <label>Horário de entrada:</label>
-                            <input type="time" th:field="*{HorarioEntrada}" class="IForm input text">
+			                <label class="IForm label">Insira o RA do estagiário</label>
+			                <input type="text" class="IForm input text">
 
-                            <label>Horário de saída:</label>
-                            <input type="time" th:field="*{HorarioSaida}" class="IForm input text">
+			                <label>Horário de entrada:</label>
+			                <input type="time" class="IForm input text">
 
-                            <label>Carga horária:</label>
-                            <input type="text" th:field="*{CargaHoraria}" class="IForm input text">
+			                <label>Horário de saída:</label>
+			                <input type="time" class="IForm input text">
 
-                            <label class="IForm label">Insira o departamento que o estagiário irá trabalhar na empresa</label>
+			                <label>Carga horária:</label>
+			                <input type="text" class="IForm input text">
 
-                            <input type="text" th:field="*{Departamento}" class="IForm input text">
+			                <label>Banco de horas:</label>
+			                <input type="text" class="IForm input text">
 
-                            <label class="IForm label">Selecione um supervisor ou insira um novo</label>
+			                <label>Insira a area do estágio</label>
+			                <input type="text" class="IForm input text">
 
-                            <div class="DivOpcoes">
+			                <label>Insira a função do estagiário</label>
+			                <input type="text" class="IForm input text">
 
-                                <select th:field="*{Supervisor}"
-                                        class="IForm input option supervisor">
-                                    <option value="">Selecione uma opção</option>
-                                </select>
 
-                                <input type="text"
-                                       th:field="*{NomeSupervisor}"
-                                       class="IForm input text supervisor"
-                                       placeholder="nome">
+			                <label class="IForm label">
+			                    Descreva o tipo de trabalho que o estagiário irá desempenhar na empresa
+			                </label>
 
-                                <input type="text"
-                                       th:field="*{CargoSupervisor}"
-                                       class="IForm input text supervisor"
-                                       placeholder="cargo">
+			                <input type="text" class="IForm input text">
 
-                            </div>
+			                <label class="IForm label">Insira o CPF do supervisor</label>
 
-                            <div class="botoes">
+			                <input type="text"
+			                       class="IForm input text">
 
-                                <button type="submit"
-                                        class="IForm input finalizaForm">
-                                    Finalizar
-                                </button>
+			                <div class="botoes">
 
-                            </div>
+			                    <button type="submit"
+			                            class="IForm input finalizaForm">
+			                        Finalizar
+			                    </button>
 
-                        </section>
+			                </div>
 
-                    </div>
+			            </section>
 
-                </div>
+			        </div>
 
-            </form>
+			    </div>
+
+			</form>
 
         </div>
 

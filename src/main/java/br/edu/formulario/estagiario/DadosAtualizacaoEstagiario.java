@@ -3,6 +3,8 @@ package br.edu.formulario.estagiario;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoEstagiario(
+    @NotNull 
+    Long ra,
     String nome,
     String escolaridade,
     String telefone,
@@ -10,11 +12,24 @@ public record DadosAtualizacaoEstagiario(
     int semestre,
     String periodo,
     String curso,
-    char genero,
+    String genero,
     String etnia,
     double rendaFamiliar,
     boolean pcd,
-    boolean trabalhaNaArea  
+    boolean trabalhaNaArea,
+    // endereco
+    String cep,
+    String logradouro,
+    String bairro,
+    String numPorta,
+    String uf,
+    String localidade,
+    String complemento,
+
+    // escola
+    String escolaNome,
+    Integer escolaDistancia,
+    boolean ensinoTecnico
 ) {
 
 }

@@ -33,7 +33,7 @@ public class DashboardService {
 
                         contrato.getArea(),
 
-                        contrato.getSupervisor().getNome(),
+                        null,
 
                         contrato.getInicio(),
                         contrato.getTermino()

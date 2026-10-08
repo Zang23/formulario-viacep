@@ -1,12 +1,14 @@
 package br.edu.formulario.contrato;
 
 import java.sql.Date;
+import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoContrato(
+    @NotNull 
     Long idContrato,
     String empresaCnpj,
-    String supervisorId,
-    String estagiarioId,
+    String supervisorCpf,
+    Long estagiarioId,
     Date inicio,
     Date termino,
     int cargaHoraria,
