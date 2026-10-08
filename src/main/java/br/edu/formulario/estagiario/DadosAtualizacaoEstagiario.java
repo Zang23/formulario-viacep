@@ -1,16 +1,20 @@
 package br.edu.formulario.estagiario;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoEstagiario(
-    @NotBlank 
-    String cpf,
     String nome,
+    String escolaridade,
     String telefone,
     String email,
-    String curso,
+    int semestre,
     String periodo,
-    int semestre
+    String curso,
+    char genero,
+    String etnia,
+    double rendaFamiliar,
+    boolean pcd,
+    boolean trabalhaNaArea  
 ) {
 
 }

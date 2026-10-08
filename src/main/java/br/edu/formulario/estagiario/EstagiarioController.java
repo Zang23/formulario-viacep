@@ -21,13 +21,13 @@ public class EstagiarioController {
     @Autowired 
     private EstagiarioService estagiarioService;
 
-    @GetMapping("/formulario/{cpf}")
-    public String carregarFormulario(@PathVariable("cpf") String cpf,
-            HttpSession session,
-            RedirectAttributes redirectAttributes,
-            Model model) {
+    @GetMapping("/formulario/{ra}")
+    public String carregarFormulario(@PathVariable("ra") int ra,
+                HttpSession session,
+                RedirectAttributes redirectAttributes,
+                Model model) {
         try {
-            Estagiario estagiario = estagiarioService.findByCpf(cpf);
+            Estagiario estagiario = estagiarioService.findByRa(ra);
             model.addAttribute("dados", estagiario); 
             return "estagiario/formulario";
         } catch (Exception e) {
@@ -51,9 +51,9 @@ public class EstagiarioController {
 
     @PostMapping("/salvar")
     public String salvarEstagiario(@Valid @ModelAttribute("dados") DadosCadastroEstagiario dados,
-            BindingResult result,
-            HttpSession session,
-            RedirectAttributes redirectAttributes) {
+                                   BindingResult result,
+                                   HttpSession session,
+                                   RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "estagiario/formulario";
         }

@@ -1,13 +1,13 @@
 package br.edu.formulario.estagiario;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EstagiarioService {
+
     @Autowired 
     private EstagiarioRepository estagiarioRepository;
 
@@ -17,19 +17,19 @@ public class EstagiarioService {
 
     @Transactional
     public Estagiario cadastrarEstagiario(DadosCadastroEstagiario dados) {
-        Estagiario estagiario = new Estagiario(dados);
+        Estagiario estagiario = new Estagiario();
         return estagiarioRepository.save(estagiario);
     }
 
     @Transactional
     public void atualizarEstagiario(DadosAtualizacaoEstagiario dados) {
-        Estagiario estagiario = estagiarioRepository.getReferenceById(dados.cpf());
+        Estagiario estagiario = estagiarioRepository.getReferenceById(dados.ra());
         estagiario.atualizarInformacoes(dados);
     }
 
-    public Estagiario findByCpf(String cpf){
-        return estagiarioRepository.findById(cpf)
-                .orElseThrow(() -> new RuntimeException("Estagiário não encontradp com o CPF: " + cpf));
+    public Estagiario findByRa(int ra) {
+        return estagiarioRepository.findById(ra)
+                .orElseThrow(() -> new RuntimeException("Estagiário não encontrado com o RA: " + ra));
     }
 
     public List<Estagiario> buscarPorCnpjEmpresa(String cnpj) {
@@ -37,8 +37,7 @@ public class EstagiarioService {
     }
 
     @Transactional
-    public void deletarEstagiario(String cpf) {
-        estagiarioRepository.deleteById(cpf);
+    public void deletarEstagiario(int ra) {
+        estagiarioRepository.deleteById(ra);
     }
-    
 }
