@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
-
-import br.edu.formulario.supervisor.SupervisorService;
+import br.edu.formulario.empresa.EmpresaRepository;
 
 @Controller
 @RequestMapping("/contrato")
@@ -22,23 +21,15 @@ public class ContratoController {
     @Autowired
     private ContratoService contratoService;
 
-    @Autowired
-    private SupervisorService supervisorService;
-
-    @GetMapping("/formulario")
-    public String novoContrato(Model model) {
-
-        model.addAttribute("dadosFormulario", new DadosCadastroContrato());
-
-        model.addAttribute(
-            "supervisores",
-            supervisorService.listarSupervisor()
-        );
-
-        return "contrato/formulario";
+    @GetMapping
+    public String novoFormulario(Model model) {
+        if (!model.containsAttribute("dadosFormulario")) {
+            model.addAttribute("dadosFormulario", new DadosCadastroContrato());
+        }
+        return "formulariocon";
     }
 
-    @GetMapping("/formulario/{id}")
+    @GetMapping("/{id}")
     public String carregarFormulario(
             @PathVariable Long id,
             RedirectAttributes redirectAttributes,
@@ -46,28 +37,18 @@ public class ContratoController {
 
         try {
             Contrato contrato = contratoService.findById(id);
-
             model.addAttribute("dadosFormulario", contrato);
-
-            model.addAttribute(
-                "supervisores",
-                supervisorService.listarSupervisor()
-            );
-
-            return "contrato/formulario";
-
+            return "formulariocon";
         } catch (Exception e) {
-
             redirectAttributes.addFlashAttribute(
-                "errorMessage",
+                "errorMessage", 
                 "Erro ao carregar o formulário: " + e.getMessage()
             );
-
-            return "redirect:/contrato";
+            return "redirect:/formulariocon";
         }
     }
 
-    @GetMapping
+    /*@GetMapping
     public String listarContratos(Model model) {
 
         model.addAttribute("activePage", "contratos");
@@ -78,27 +59,20 @@ public class ContratoController {
         );
 
         return "contrato/lista";
-    }
+    }*/
 
-    @PostMapping("/cadastrar")
-    public String cadastrarContrato(
+    @PostMapping("/salvar")
+    public String salvarContrato(
             @Valid @ModelAttribute("dadosFormulario") DadosCadastroContrato dados,
             BindingResult result,
             RedirectAttributes redirectAttributes,
             Model model) {
 
         if (result.hasErrors()) {
-
-            model.addAttribute(
-                "supervisores",
-                supervisorService.listarSupervisor()
-            );
-
-            return "contrato/formulario";
+            return "formulariocon";
         }
 
         try {
-
             contratoService.cadastrarContrato(dados);
 
             redirectAttributes.addFlashAttribute(
@@ -106,21 +80,14 @@ public class ContratoController {
                 "Contrato cadastrado com sucesso!"
             );
 
-            return "redirect:/contrato";
+            return "redirect:/formulariocon";
 
         } catch (Exception e) {
-
             model.addAttribute(
                 "errorMessage",
                 "Erro ao salvar contrato: " + e.getMessage()
             );
-
-            model.addAttribute(
-                "supervisores",
-                supervisorService.listarSupervisor()
-            );
-
-            return "contrato/formulario";
+            return "formulariocon";
         }
     }
 }
