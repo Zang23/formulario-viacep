@@ -257,6 +257,25 @@ form {
    BOTÕES
 ========================= */
 
+
+.campoCep {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.campoCep input {
+    flex: 1;
+    min-width: 0;
+}
+
+.campoCep button {
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+
 .botoes {
     display: flex;
 

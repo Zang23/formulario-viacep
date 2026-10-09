@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/formularioest")
+@RequestMapping("/estagiario/formulario")
 public class EstagiarioController {
 
     @Autowired 
@@ -23,7 +23,7 @@ public class EstagiarioController {
     @GetMapping
     public String novoEstagiario(Model model) {
         model.addAttribute("dados", DadosCadastroEstagiario.vazio());
-        return "formularioest";
+        return "estagiario/formulario";
     }
 
     /*@GetMapping("/{ra}")
@@ -53,16 +53,26 @@ public class EstagiarioController {
                                    BindingResult result,
                                    HttpSession session,
                                    RedirectAttributes redirectAttributes) {
+        
+        System.out.println("Controller de salvar foi acionado");
+        System.out.println("Erros de validação: " + result.getAllErrors());
+        System.out.println("RA recebido: " + dados.ra());
+        System.out.println("Nome recebido: " + dados.nome());
         if (result.hasErrors()) {
-            return "formularioest";
+            System.out.println("Erro ao preencher campos do formulario");
+            return "estagiario/formulario";
+            
         }
+
         try {
             estagiarioService.cadastrarEstagiario(dados);
             redirectAttributes.addFlashAttribute("message", "Estagiário salvo com sucesso!");
-            return "redirect:/formularioest";
+            System.out.println("tudo passou");
+            return "redirect:/estagiario/formulario";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erro ao salvar dados do estagiário: " + e.getMessage());
-            return "formularioest";
+            System.out.println("erro no trycatch");
+            return "estagiario/formulario";
         }
     }   
 }
