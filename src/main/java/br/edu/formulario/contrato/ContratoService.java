@@ -1,65 +1,64 @@
 package br.edu.formulario.contrato;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.formulario.empresa.EmpresaRepository;
-import br.edu.formulario.supervisor.SupervisorRepository;
-import br.edu.formulario.supervisor.Supervisor;
 import br.edu.formulario.empresa.Empresa;
-import jakarta.persistence.EntityNotFoundException;
+import br.edu.formulario.empresa.EmpresaRepository;
+import br.edu.formulario.estagiario.Estagiario;
+import br.edu.formulario.estagiario.EstagiarioRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 public class ContratoService {
-	@Autowired
-	private ContratoRepository contratoRepository;
 
-	@Autowired
-	private EmpresaRepository empresaRepository;
+    @Autowired
+    private ContratoRepository contratoRepository;
 
-	@Autowired
-	private SupervisorRepository supervisorRepository;
+    @Autowired
+    private EmpresaRepository empresaRepository;
 
-	public List<Contrato> listarContratos() {
-		return contratoRepository.findAll();
-	}
+    @Autowired
+    private EstagiarioRepository estagiarioRepository;
 
-	Contrato findById(Long id) {
-		return contratoRepository.findById(id).orElseThrow();
-	}
+    public List<Contrato> listarContratos() {
+        return contratoRepository.findAll();
+    }
 
-	@Transactional
-	public Contrato cadastrarContrato(DadosCadastroContrato dados) {
-		Empresa empresa = empresaRepository.findById(dados.getEmpresaCnpj())
-				.orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada"));
+    public Contrato findById(Long id) {
+        return contratoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Contrato não encontrado com o ID: " + id));
+    }
 
-		Supervisor supervisor = supervisorRepository.findById(dados.getSupervisorId())
-				.orElseThrow(() -> new IllegalArgumentException("Supervisor não encontrado"));
+    @Transactional
+    public Contrato cadastrarContrato(DadosCadastroContrato dados) {
+        Empresa empresa = empresaRepository.findById(dados.empresaCnpj())
+                .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada com CNPJ: " + dados.empresaCnpj()));
 
-		Contrato contrato = new Contrato(dados);
-		return contratoRepository.save(contrato);
-	}
+        Estagiario estagiario = estagiarioRepository.findById(dados.estagiarioId())
+                .orElseThrow(() -> new IllegalArgumentException("Estagiário não encontrado com o RA: " + dados.estagiarioId()));
 
-	@Transactional
-	public void atualizarContrato(DadosAtualizacaoContrato dados) {
-		Contrato contrato = contratoRepository.getReferenceById(dados.idContrato());
-		contrato.atualizarInformacoes(dados);
-	}
+        Contrato contrato = new Contrato(dados);
+        contrato.setEmpresa(empresa);
+        contrato.setEstagiario(estagiario);
 
-	@Transactional
-	public void deletarContrato(Long idContrato) {
-		contratoRepository.deleteById(idContrato);
-	}
+        return contratoRepository.save(contrato);
+    }
 
-	public List<Contrato> buscarPorCnpjEmpresa(String cnpj) {
-		return contratoRepository.findByEmpresaCnpj(cnpj);
-	}
+    @Transactional
+    public void atualizarContrato(DadosAtualizacaoContrato dados) {
+        Contrato contrato = contratoRepository.getReferenceById(dados.idContrato());
+        contrato.atualizarInformacoes(dados);
+    }
 
-	public List<Contrato> buscarPorIdSupervisor(Long idSupervisor) {
-		return contratoRepository.findBySupervisor_Id(idSupervisor);
-	}
+    @Transactional
+    public void deletarContrato(Long idContrato) {
+        contratoRepository.deleteById(idContrato);
+    }
+
+    public List<Contrato> buscarPorCnpjEmpresa(String cnpj) {
+        return contratoRepository.findByEmpresaCnpj(cnpj);
+    }
 }

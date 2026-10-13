@@ -1,11 +1,10 @@
 package br.edu.formulario.estagiario;
 
-
+import br.edu.formulario.endereco.Endereco;
+import br.edu.formulario.escola.Escola;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-import br.edu.formulario.contrato.Contrato;
-
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -21,43 +20,72 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "cpf")
+@EqualsAndHashCode(of = "ra")
 public class Estagiario{
 
     @Id
-    private String cpf;
-
-    private String ra;
+    private Long ra;
     private String nome;
     private String escolaridade;
     private String telefone;
     private String email;
-    private String curso;
-    private String periodo;
     private int semestre;
-    private String descobriuVestibular;
+    private String periodo;
+    private String curso;
     private String genero;
     private String etnia;
-    private String rendaFamiliar;
+    private double rendaFamiliar;
     private boolean pcd;
+    private boolean trabalhaNaArea;
 
-    @OneToOne
-    @JoinColumn(name = "contrato_id", nullable = false, unique = true)
-    private Contrato contrato;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "escola_id")
+    private Escola escola;
 
     public Estagiario(DadosCadastroEstagiario dados) {
-        this.cpf = dados.cpf();
+        this.ra = dados.ra();
         this.nome = dados.nome();
-        this.telefone = dados.telefone();
+        this.escolaridade = dados.escolaridade();
+        this.telefone = dados.telefone() == null ? null : dados.telefone().replaceAll("\\D", "");
         this.email = dados.email();
-        this.curso = dados.curso();
-        this.periodo = dados.periodo();
         this.semestre = dados.semestre();
+        this.periodo = dados.periodo();
+        this.curso = dados.curso();
+        this.genero = dados.genero();
+        this.etnia = dados.etnia();
+        this.rendaFamiliar = dados.rendaFamiliar();
+        this.pcd = dados.pcd();
+        this.trabalhaNaArea = dados.trabalhaNaArea();
+
+        Endereco end = new Endereco();
+        end.setCep(dados.cep());
+        end.setLogradouro(dados.logradouro());
+        end.setBairro(dados.bairro());
+        end.setNumPorta(dados.numPorta());
+        end.setUf(dados.uf());
+        end.setLocalidade(dados.localidade());
+        end.setComplemento(dados.complemento());
+        this.endereco = end;
+
+        Escola esc = new Escola();
+        esc.setNome(dados.escolaNome());
+        if (dados.escolaDistancia() != null) {
+            esc.setDistancia(dados.escolaDistancia());
+        }
+        esc.setEnsinoTecnico(dados.ensinoTecnico());
+        this.escola = esc;
     }
 
     public void atualizarInformacoes(DadosAtualizacaoEstagiario dados) {
         if (dados.nome() != null) {
-            this.nome = dados.nome();
+        this.nome = dados.nome();
+        }
+        if (dados.escolaridade() != null) {
+            this.escolaridade = dados.escolaridade();
         }
         if (dados.telefone() != null) {
             this.telefone = dados.telefone();
@@ -65,15 +93,27 @@ public class Estagiario{
         if (dados.email() != null) {
             this.email = dados.email();
         }
-        if (dados.curso() != null) {
-            this.curso = dados.curso();
+        if (dados.semestre() > 0) {
+            this.semestre = dados.semestre();
         }
         if (dados.periodo() != null) {
             this.periodo = dados.periodo();
         }
-        if (dados.semestre() > 0) {
-            this.semestre = dados.semestre();
+        if (dados.curso() != null) {
+            this.curso = dados.curso();
         }
+        if (dados.genero() != null && !dados.genero().isBlank()) {
+            this.genero = dados.genero();
+        }
+        if (dados.etnia() != null) {
+            this.etnia = dados.etnia();
+        }
+        if (dados.rendaFamiliar() > 0) {
+            this.rendaFamiliar = dados.rendaFamiliar();
+        }
+        
+        this.pcd = dados.pcd();
+        this.trabalhaNaArea = dados.trabalhaNaArea();
     }
 
 }

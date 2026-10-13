@@ -1,13 +1,13 @@
 package br.edu.formulario.estagiario;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EstagiarioService {
+
     @Autowired 
     private EstagiarioRepository estagiarioRepository;
 
@@ -23,13 +23,13 @@ public class EstagiarioService {
 
     @Transactional
     public void atualizarEstagiario(DadosAtualizacaoEstagiario dados) {
-        Estagiario estagiario = estagiarioRepository.getReferenceById(dados.cpf());
+        Estagiario estagiario = estagiarioRepository.getReferenceById(dados.ra());
         estagiario.atualizarInformacoes(dados);
     }
 
-    public Estagiario findByCpf(String cpf){
-        return estagiarioRepository.findById(cpf)
-                .orElseThrow(() -> new RuntimeException("Estagiário não encontradp com o CPF: " + cpf));
+    public Estagiario findByRa(Long ra) {
+        return estagiarioRepository.findById(ra)
+                .orElseThrow(() -> new RuntimeException("Estagiário não encontrado com o RA: " + ra));
     }
 
     public List<Estagiario> buscarPorCnpjEmpresa(String cnpj) {
@@ -37,8 +37,7 @@ public class EstagiarioService {
     }
 
     @Transactional
-    public void deletarEstagiario(String cpf) {
-        estagiarioRepository.deleteById(cpf);
+    public void deletarEstagiario(Long ra) {
+        estagiarioRepository.deleteById(ra);
     }
-    
 }

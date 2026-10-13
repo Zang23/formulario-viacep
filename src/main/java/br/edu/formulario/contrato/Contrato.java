@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import br.edu.formulario.empresa.Empresa;
 import br.edu.formulario.estagiario.Estagiario;
-import br.edu.formulario.supervisor.Supervisor;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,26 +28,18 @@ import lombok.Setter;
 @EqualsAndHashCode(of = "idContrato")
 public class Contrato {
 
-	
-
-	
-	
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long idContrato;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_cnpj", nullable = false)
+    @JoinColumn(name = "empresaCnpj", nullable = false)
     Empresa empresa;
 
     @ManyToOne
-    @JoinColumn(name = "supervisor_id", nullable = false)
-    Supervisor supervisor;
-
-    @OneToOne(mappedBy = "contrato")
+    @JoinColumn(name = "estagiariora")
     private Estagiario estagiario;
-
-    // Alterei de Date para LocalDate para melhor manipulação de datas
+    
     private Date inicio; 
     private Date termino;
     private int cargaHoraria;
@@ -56,24 +47,13 @@ public class Contrato {
     private String funcao;
     
 	public Contrato(DadosCadastroContrato dados) {
-		this.idContrato = dados.getIdContrato();
-		
-		this.empresa = new Empresa();
-		this.empresa.setCnpj(dados.getEmpresaCnpj());
-
-		this.supervisor = new Supervisor();
-		this.supervisor.setId(dados.getSupervisorId());
-
-		this.estagiario = new Estagiario();
-		this.estagiario.setCpf(dados.getEstagiarioId());
-
-		this.inicio = dados.getInicio();
-		this.termino = dados.getTermino();
-		this.cargaHoraria = dados.getCargaHoraria();
-		this.area = dados.getArea();
-		this.funcao = dados.getFuncao();
-	
-	}
+        this.idContrato = dados.idContrato();
+        this.inicio = dados.inicio();
+        this.termino = dados.termino();
+        this.cargaHoraria = dados.cargaHoraria();
+        this.area = dados.area();
+        this.funcao = dados.funcao();
+    }
 	
     public void atualizarInformacoes(DadosAtualizacaoContrato dados) {
         if (dados.inicio() != null) {
