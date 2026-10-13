@@ -7,11 +7,11 @@
 
 	<header th:replace="~{fragmentos/header :: header('formularioest')}"></header>
 
-<div class="divBackground">
-	<div class="IForm container">
-		<form th:action="@{/formularioest/salvar}" th:object="${dados}" method="post" class="formulario">
-			<div class="carousel">
-				<div class="carousel-track" id="carouselTrack">
+	<div class="divBackground">
+		<div class="IForm container">
+			<form th:action="@{/formularioest/salvar}" th:object="${dados}" method="post" class="formulario">
+				<div class="carousel">
+					<div class="carousel-track" id="carouselTrack">
 
 						<section class="etapa">
 							<h2>Dados do estagiário</h2>
@@ -90,85 +90,40 @@
 								<input type="checkbox" th:field="*{pcd}" class="IForm input checkbox">
 							</label>
 
+							<label class="IForm label">
+								Trabalha na área?
+								<input type="checkbox" th:field="*{trabalhaNaArea}" class="IForm input checkbox">
+							</label>
+
 							<div class="botoes">
 								<button type="button" class="IForm input proximo">Próximo</button>
 							</div>
 						</section>
-                            <label class="IForm label">Insira a cidade do estagiário:</label>
-                            <input type="text" th:field="*{localidade}" class="IForm input text">
-                            
-                            <label class="IForm label">Insira o CEP:</label>
-                            <input type="text" th:field="*{cep}" class="IForm input text">
-                            
-                            <label class="IForm label">Insira o logradouro:</label>
-                            <input type="text" th:field="*{logradouro}" class="IForm input text">
-                            
-                            <label class="IForm label">Insira o número da rua:</label>
-                            <input type="text" th:field="*{numPorta}" class="IForm input text">
-                            
-                            <label class="IForm label">Insira o bairro:</label>
-                            <input type="text" th:field="*{bairro}" class="IForm input text">
-                            
-                            <label class="IForm label">Insira o UF:</label>
-                            <input type="text" th:field="*{uf}" class="IForm input text">
-
-                            <h4>Dados da escola</h4>
 
 						<section class="etapa">
 							<h2>Endereço</h2>
-                            <label class="IForm label">Insira o nome da escola:</label>
-                            <input type="text" th:field="*{escolaNome}" class="IForm input text">
-                            
-                            <label class="IForm label">Insira a distância da escola em relação a FATEC (km):</label>
-                            <input type="text" th:field="*{escolaDistancia}" class="IForm input text">
-                            
-                            <label class="IForm label">
-                                O estagiário fez técnico?
-                                <input type="checkbox" th:field="*{ensinoTecnico}" class="IForm input checkbox">
-                            </label>
-                            
-                            <label class="IForm label">
-                                Trabalha na área?
-                                <input type="checkbox" th:field="*{trabalhaNaArea}" class="IForm input checkbox">
-                            </label>
 
-<<<<<<<
 							<label class="IForm label">Insira a cidade do estagiário:</label>
-							<input type="text" class="IForm input text">
+							<input type="text" th:field="*{localidade}" class="IForm input text">
+
 							<label class="IForm label">Insira o CEP:</label>
 							<div class="DivOpcoes">
-								<input type="text" class="IForm input text">
+								<input type="text" th:field="*{cep}" class="IForm input text">
 								<button type="button" class="IForm input">Buscar</button>
 							</div>
-=======
-							<div class="botoes">
->>>>>>>
-
-<<<<<<<
+							
 							<label class="IForm label">Insira o logradouro:</label>
-							<input type="text" class="IForm input text">
-=======
-								<button type="submit" class="IForm input finalizaForm">
-									Finalizar
-								</button>
-
-							</div>
-
-						</section>
-
-
-					<section class="etapa">
-						<h2>Endereço</h2>
->>>>>>>
+							<input type="text" th:field="*{logradouro}" class="IForm input text">
 
 							<label class="IForm label">Insira o número da rua:</label>
-							<input type="text" class="IForm input text">
+							<input type="text" th:field="*{numPorta}" class="IForm input text">
 
 							<label class="IForm label">Insira o bairro:</label>
-							<input type="text" class="IForm input text">
+							<input type="text" th:field="*{bairro}" class="IForm input text">
 
 							<label class="IForm label">Insira o UF:</label>
-							<input type="text" class="IForm input text">
+							<input type="text" th:field="*{uf}" class="IForm input text">
+
 
 							<div class="botoes">
 								<button type="button" class="IForm input voltar">Voltar</button>
@@ -181,19 +136,14 @@
 							<h2>Dados da escola</h2>
 
 							<label class="IForm label">Insira o nome da escola:</label>
-							<input type="text" class="IForm input text">
+							<input type="text" th:field="*{escolaNome}" class="IForm input text">
 
 							<label class="IForm label">Insira a distância da escola em relação a FATEC (km):</label>
-							<input type="text" class="IForm input text">
-
+							<input type="text" th:field="*{escolaDistancia}" class="IForm input text">
+							
 							<label class="IForm label">
 								O estagiário fez técnico?
-								<input type="checkbox" class="IForm input checkbox">
-							</label>
-
-							<label class="IForm label">
-								Trabalha na área?
-								<input type="checkbox" class="IForm input checkbox">
+								<input type="checkbox" th:field="*{ensinoTecnico}" class="IForm input checkbox">
 							</label>
 
 							<div class="botoes">
