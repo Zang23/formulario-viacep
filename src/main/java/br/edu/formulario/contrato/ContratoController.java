@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 import br.edu.formulario.empresa.EmpresaRepository;
 
 @Controller
-@RequestMapping("/contrato")
+@RequestMapping("/formulariocon")
 public class ContratoController {
 
     @Autowired
