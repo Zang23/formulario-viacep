@@ -1,7 +1,6 @@
 package br.edu.formulario.contrato;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 import br.edu.formulario.empresa.Empresa;
 import br.edu.formulario.estagiario.Estagiario;
@@ -11,9 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +21,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "idContrato")
 public class Contrato {
 
@@ -73,4 +69,12 @@ public class Contrato {
         }
     }
 
+    void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    void setEstagiario(Estagiario estagiario) {
+        this.estagiario = estagiario;
+    }
+    
 }

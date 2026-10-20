@@ -16,22 +16,23 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/empresa")
+@RequestMapping({"/empresa", "/formularioemp"}) // Mapeia /empresa e /formularioemp para aceitar a URL do front!
 public class EmpresaController {
+
     @Autowired
     private EmpresaService empresaService;
 
     @GetMapping("/formulario/{cnpj}")
     public String carregarFormulario(@PathVariable("cnpj") String cnpj,
-        HttpSession session,
-        RedirectAttributes redirectAttributes,
-        Model model) {
+            HttpSession session,
+            RedirectAttributes redirectAttributes,
+            Model model) {
         
-        try{
+        try {
             Empresa empresa = empresaService.findByCnpj(cnpj);
             model.addAttribute("empresa", empresa);
             return "empresa/formulario";
-        }catch (Exception e) {
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erro ao carregar o formulário: " + e.getMessage());
             return "redirect:/empresa";
         }
@@ -39,7 +40,6 @@ public class EmpresaController {
 
     @GetMapping("/formulario")
     public String novaEmpresa(Model model) {
-        model.addAttribute("empresa", new Empresa());
         return "empresa/formulario";
     }
 
@@ -51,13 +51,16 @@ public class EmpresaController {
     }
 
     @PostMapping("/salvar")
-    public String salvarEmpresa(@Valid @ModelAttribute("dados") DadosCadastroEmpresa dados,
+    public String salvarEmpresa(@Valid @ModelAttribute DadosCadastroEmpresa dados,
             BindingResult result,
-            HttpSession session,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            Model model) {
+
         if (result.hasErrors()) {
+            model.addAttribute("errorMessage", "Preencha todos os campos obrigatórios corretamente!");
             return "empresa/formulario";
         }
+
         try {
             empresaService.cadastrarEmpresa(dados);
             redirectAttributes.addFlashAttribute("message", "Empresa salva com sucesso!");
@@ -69,9 +72,9 @@ public class EmpresaController {
     }   
 
     @PostMapping("/atualizar")
-    public String atualizarEmpresa(@Valid @ModelAttribute("dados") DadosAtualizacaoEmpresa dados,
+    public String atualizarEmpresa(
+            @Valid @ModelAttribute DadosAtualizacaoEmpresa dados,
             BindingResult result,
-            HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
@@ -90,8 +93,6 @@ public class EmpresaController {
     @GetMapping("/delete/{cnpj}")
     @Transactional
     public String deletarEmpresa(@PathVariable("cnpj") String cnpj,
-            Model model,
-            HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         try {
