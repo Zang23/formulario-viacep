@@ -103,14 +103,19 @@
 						<section class="etapa">
 							<h2>Endereço</h2>
 
-							<label class="IForm label">Insira a cidade do estagiário:</label>
-							<input type="text" th:field="*{localidade}" class="IForm input text">
-
 							<label class="IForm label">Insira o CEP:</label>
 							<div class="DivOpcoes">
 								<input type="text" th:field="*{cep}" class="IForm input text">
-								<button type="button" class="IForm input">Buscar</button>
+								<button
+							        type="button"
+									id="buscarCep"
+									class="IForm input">
+									Buscar
+								</button>
 							</div>
+
+							<label class="IForm label">Insira a cidade do estagiário:</label>
+							<input type="text" th:field="*{localidade}" class="IForm input text">
 
 							<label class="IForm label">Insira o logradouro:</label>
 							<input type="text" th:field="*{logradouro}" class="IForm input text">
@@ -187,6 +192,48 @@
 		});
 
 		mostrarEtapa();
+
+		document.getElementById("buscarCep")
+        .addEventListener("click", async function () {
+
+            const cep = document.getElementById("cep").value
+                .replace(/\D/g, "");
+
+            if (cep.length !== 8) {
+                alert("Digite um CEP válido com 8 números.");
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`/viacep/${cep}`);
+
+                if (!resposta.ok) {
+                    const mensagem = await resposta.text();
+                    alert(mensagem);
+                    return;
+                }
+
+                const endereco = await resposta.json();
+
+                document.getElementById("localidade").value =
+                    endereco.localidade ?? "";
+
+                document.getElementById("logradouro").value =
+                    endereco.logradouro ?? "";
+
+                document.getElementById("bairro").value =
+                    endereco.bairro ?? "";
+
+                document.getElementById("uf").value =
+                    endereco.uf ?? "";
+
+            } catch (erro) {
+                alert("Não foi possível consultar o CEP.");
+                console.error(erro);
+            }
+        });
+
+
 	</script>
 
 </body>
