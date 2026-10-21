@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos/head :: head('FormulárioEmp')}"></head>
+<head th:replace="~{fragmentos/head :: head('Formulário Empresa')}"></head>
 
 <body>
 
-	<header th:replace="~{fragmentos/header :: header('formularioemp')}"></header>
+	<header th:replace="~{fragmentos/header :: header('/empresa/formulario')}"></header>
 
 	<div class="divBackground">
 
 		<div class="IForm container">
 
-			<form action="/formularioemp/salvar" method="post" class="formulario">
+			<form action="/empresa/salvar" method="post" class="formulario">
 
 				<div class="carousel">
 
@@ -31,7 +31,7 @@
 							<input type="text" name="razaoSocial" class="IForm input text">
 
 							<label class="IForm label">Insira o segmento de mercado:</label>
-							<input type="text" name="SegmentoMercado" class="IForm input text">
+							<input type="text" name="segmentoMercado" class="IForm input text">
 
 							<label class="IForm label">Insira o telefone:</label>
 							<input type="text" name="telefone" class="IForm input text">

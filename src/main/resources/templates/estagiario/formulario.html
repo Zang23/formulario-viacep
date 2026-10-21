@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos/head :: head('FormulárioEst')}"></head>
+<head th:replace="~{fragmentos/head :: head('Formulário Estágiario')}"></head>
 
 <body>
 
-	<header th:replace="~{fragmentos/header :: header('formularioest')}"></header>
+	<header th:replace="~{fragmentos/header :: header('/estagiario/formulario')}"></header>
 
 	<div class="divBackground">
 		<div class="IForm container">
-			<form th:action="@{/formularioest/salvar}" th:object="${dados}" method="post" class="formulario">
+			<form th:action="@{/estagiario/formulario/salvar}" th:object="${dados}" method="post" class="formulario">
 				<div class="carousel">
 					<div class="carousel-track" id="carouselTrack">
 
@@ -111,7 +111,7 @@
 								<input type="text" th:field="*{cep}" class="IForm input text">
 								<button type="button" class="IForm input">Buscar</button>
 							</div>
-							
+
 							<label class="IForm label">Insira o logradouro:</label>
 							<input type="text" th:field="*{logradouro}" class="IForm input text">
 
@@ -140,7 +140,7 @@
 
 							<label class="IForm label">Insira a distância da escola em relação a FATEC (km):</label>
 							<input type="text" th:field="*{escolaDistancia}" class="IForm input text">
-							
+
 							<label class="IForm label">
 								O estagiário fez técnico?
 								<input type="checkbox" th:field="*{ensinoTecnico}" class="IForm input checkbox">

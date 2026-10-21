@@ -31,15 +31,15 @@ public class Empresa {
 
     private String nome;
     private String razaoSocial;
-    private String SegmentoMercado;
-    
+    private String segmentoMercado;
+
     private String email;
     private String site;
 
     private String telefone;
     private String departamento;
     private String linkedin;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
@@ -51,13 +51,13 @@ public class Empresa {
         this.cnpj = dados.cnpj();
         this.nome = dados.nome();
         this.razaoSocial = dados.razaoSocial();
-        this.SegmentoMercado = dados.SegmentoMercado();
+        this.segmentoMercado = dados.SegmentoMercado();
         this.email = dados.email();
         this.telefone = dados.telefone() == null ? null : dados.telefone().replaceAll("\\D", "");
         this.departamento = dados.departamento();
         this.linkedin = dados.linkedin();
         this.site = dados.site();
-        
+
         Endereco end = new Endereco();
         end.setCep(dados.cep());
         end.setLogradouro(dados.logradouro());
@@ -68,11 +68,11 @@ public class Empresa {
         end.setComplemento(dados.complemento());
         this.endereco = end;
     }
-    
+
     public void atualizarInformacoes(DadosAtualizacaoEmpresa dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
-        }                               
+        }
         if (dados.email() != null) {
             this.email = dados.email();
         }

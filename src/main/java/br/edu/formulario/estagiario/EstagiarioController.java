@@ -14,16 +14,16 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/formularioest")
+@RequestMapping("/estagiario/formulario")
 public class EstagiarioController {
 
-    @Autowired 
+    @Autowired
     private EstagiarioService estagiarioService;
 
     @GetMapping
     public String novoEstagiario(Model model) {
         model.addAttribute("dados", DadosCadastroEstagiario.vazio());
-        return "formularioest";
+        return "/estagiario/formulario";
     }
 
     /*@GetMapping("/{ra}")
@@ -33,7 +33,7 @@ public class EstagiarioController {
                 Model model) {
         try {
             Estagiario estagiario = estagiarioService.findByRa(ra);
-            model.addAttribute("dados", estagiario); 
+            model.addAttribute("dados", estagiario);
             return "formularioest/formulario";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erro ao carregar o formulário: " + e.getMessage());
@@ -54,15 +54,15 @@ public class EstagiarioController {
                                    HttpSession session,
                                    RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return "formularioest";
+            return "/estagiario/formulario";
         }
         try {
             estagiarioService.cadastrarEstagiario(dados);
             redirectAttributes.addFlashAttribute("message", "Estagiário salvo com sucesso!");
-            return "redirect:/formularioest";
+            return "redirect:/estagiario/formulario";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erro ao salvar dados do estagiário: " + e.getMessage());
-            return "formularioest";
+            return "/estagiario/formulario";
         }
-    }   
+    }
 }

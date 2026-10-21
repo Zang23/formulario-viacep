@@ -15,11 +15,11 @@
 				<a th:href="@{/}" th:classappend="${activePage == 'inicio'} ? 'active'">Início</a>
 				<a th:href="@{/dashboard}" th:classappend="${activePage == 'listar'} ? 'active'">Listar</a>
 				<div class="navDropdown">
-					<button class="dropdownButton" th:classappend="${activePage == 'formularioemp' or activePage == 'formulariocon' or activePage == 'formularioest'} ? 'active'">Novo <span class="dropdownArrow">▾</span></button>
+					<button class="dropdownButton" th:classappend="${activePage == '/empresa/formulario' or activePage == '/contrato/formulario' or activePage == '/estagiario/formulario'} ? 'active'">Novo <span class="dropdownArrow">▾</span></button>
 					<div class="dropdownMenu">
-						<a th:href="@{/formularioemp}" th:classappend="${activePage == 'formularioemp'} ? 'active'">Nova Empresa</a>
-						<a th:href="@{/formulariocon}" th:classappend="${activePage == 'formulariocon'} ? 'active'">Novo Contrato</a>
-						<a th:href="@{/formularioest}" th:classappend="${activePage == 'formularioest'} ? 'active'">Novo Estagiário</a>
+						<a th:href="@{/empresa/formulario}" th:classappend="${activePage == 'empresa/formulario'} ? 'active'">Nova Empresa</a>
+						<a th:href="@{/contrato/formulario}" th:classappend="${activePage == 'contrato/formulario'} ? 'active'">Novo Contrato</a>
+						<a th:href="@{/estagiario/formulario}" th:classappend="${activePage == 'estagiario/formulario'} ? 'active'">Novo Estagiário</a>
 					</div>
 				</div>
 			</div>
