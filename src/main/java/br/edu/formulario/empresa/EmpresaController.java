@@ -16,71 +16,76 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/empresa")
+@RequestMapping({"/empresa"}) // Mapeia /empresa e /formularioemp para aceitar a URL do front!
 public class EmpresaController {
+
     @Autowired
     private EmpresaService empresaService;
 
-    @GetMapping("/formulario/{cnpj}")
-    public String carregarFormulario(@PathVariable("cnpj") String cnpj,
-        HttpSession session,
-        RedirectAttributes redirectAttributes,
-        Model model) {
-        
-        try{
-            Empresa empresa = empresaService.findByCnpj(cnpj);
-            model.addAttribute("empresa", empresa);
-            return "empresa/formulario";
-        }catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Erro ao carregar o formulário: " + e.getMessage());
-            return "redirect:/empresa";
-        }
-    }
-
     @GetMapping("/formulario")
     public String novaEmpresa(Model model) {
-        model.addAttribute("empresa", new Empresa());
-        return "empresa/formulario";
+        return "/empresa/formulario";
     }
 
-    @GetMapping 
-    public String listarEmpresas(Model model, HttpSession session) {
-        model.addAttribute("activePage", "empresas");
-        model.addAttribute("empresas", empresaService.listarEmpresas());
-        return "empresa/lista";
+    @GetMapping("/formulario/{cnpj}")
+    public String carregarFormulario(@PathVariable("cnpj") String cnpj,
+            HttpSession session,
+            RedirectAttributes redirectAttributes,
+            Model model) {
+
+        try {
+            Empresa empresa = empresaService.findByCnpj(cnpj);
+            model.addAttribute("empresa", empresa);
+            return "/empresa/formulario";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Erro ao carregar o formulário: " + e.getMessage());
+            return "redirect:/empresa/formulario";
+        }
     }
+
+
+//
+//     @GetMapping
+//     public String listarEmpresas(Model model, HttpSession session) {
+//         model.addAttribute("activePage", "empresas");
+//         model.addAttribute("empresas", empresaService.listarEmpresas());
+//         return "/empresa/lista";
+//     }
 
     @PostMapping("/salvar")
-    public String salvarEmpresa(@Valid @ModelAttribute("dados") DadosCadastroEmpresa dados,
+    public String salvarEmpresa(@Valid @ModelAttribute DadosCadastroEmpresa dados,
             BindingResult result,
-            HttpSession session,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            Model model) {
+
         if (result.hasErrors()) {
-            return "empresa/formulario";
+            model.addAttribute("errorMessage", "Preencha todos os campos obrigatórios corretamente!");
+            return "/empresa/formulario";
         }
+
         try {
             empresaService.cadastrarEmpresa(dados);
             redirectAttributes.addFlashAttribute("message", "Empresa salva com sucesso!");
-            return "redirect:/empresa";
+            return "redirect:/empresa/formulario";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Erro ao salvar a empresa: " + e.getMessage());
             return "redirect:/empresa/formulario";
         }
-    }   
+    }
 
     @PostMapping("/atualizar")
-    public String atualizarEmpresa(@Valid @ModelAttribute("dados") DadosAtualizacaoEmpresa dados,
+    public String atualizarEmpresa(
+            @Valid @ModelAttribute DadosAtualizacaoEmpresa dados,
             BindingResult result,
-            HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-            return "empresa/formulario";
+            return "/empresa/formulario";
         }
         try {
             empresaService.atualizarEmpresa(dados);
             redirectAttributes.addFlashAttribute("message", "Empresa atualizada com sucesso!");
-            return "redirect:/empresa";
+            return "redirect:/empresa/formulario";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Erro ao atualizar empresa: " + e.getMessage());
             return "redirect:/empresa/formulario/" + dados.cnpj();
@@ -90,8 +95,6 @@ public class EmpresaController {
     @GetMapping("/delete/{cnpj}")
     @Transactional
     public String deletarEmpresa(@PathVariable("cnpj") String cnpj,
-            Model model,
-            HttpSession session,
             RedirectAttributes redirectAttributes) {
 
         try {

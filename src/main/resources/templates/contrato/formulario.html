@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragmentos/head :: head('FormulárioCon')}"></head>
+<head th:replace="~{fragmentos/head :: head('Formulário Contrato')}"></head>
 
 <body>
 
-    <header th:replace="~{fragmentos/header :: header('formulariocon')}"></header>
+    <header th:replace="~{fragmentos/header :: header('contrato/formulario')}"></header>
 
     <div class="divBackground">
 
         <div class="IForm container">
 
-			<form action="/formulariocon/salvar"
-			      method="post"
-			      class="formulario">
+			<form action="/contrato/formulario/salvar" method="post" class="formulario">
 
 			    <div class="carousel">
 
@@ -51,9 +49,9 @@
 			                <label class="IForm label">
 			                    Descreva o tipo de trabalho que o estagiário irá desempenhar na empresa
 			                </label>
-							
+
 							<textarea class="IForm input text" rows="4" cols="50"></textarea>
-							
+
 							<label class="IForm label">
 								Esse estágio é condizente com o curso do estagiário?
 								<input type="checkbox" class="IForm input checkbox">
@@ -85,7 +83,7 @@
 
 
 	<script>
-	  
+
 	</script>
 
 

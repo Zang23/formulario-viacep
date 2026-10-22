@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 import br.edu.formulario.empresa.EmpresaRepository;
 
 @Controller
-@RequestMapping("/contrato")
+@RequestMapping("/contrato/formulario")
 public class ContratoController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ContratoController {
         if (!model.containsAttribute("dadosFormulario")) {
             model.addAttribute("dadosFormulario", new DadosCadastroContrato());
         }
-        return "formulariocon";
+        return "/contrato/formulario";
     }
 
     @GetMapping("/{id}")
@@ -38,13 +38,14 @@ public class ContratoController {
         try {
             Contrato contrato = contratoService.findById(id);
             model.addAttribute("dadosFormulario", contrato);
-            return "formulariocon";
+            return "/contrato/formulario";
+
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute(
-                "errorMessage", 
+                "errorMessage",
                 "Erro ao carregar o formulário: " + e.getMessage()
             );
-            return "redirect:/formulariocon";
+            return "redirect:/contrato/formulario";
         }
     }
 
@@ -69,7 +70,7 @@ public class ContratoController {
             Model model) {
 
         if (result.hasErrors()) {
-            return "formulariocon";
+            return "/contrato/formulario";
         }
 
         try {
@@ -80,14 +81,14 @@ public class ContratoController {
                 "Contrato cadastrado com sucesso!"
             );
 
-            return "redirect:/formulariocon";
+            return "redirect:/contrato/formulario";
 
         } catch (Exception e) {
             model.addAttribute(
                 "errorMessage",
                 "Erro ao salvar contrato: " + e.getMessage()
             );
-            return "formulariocon";
+            return "contrato/formulario";
         }
     }
 }
