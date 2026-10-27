@@ -1,23 +1,23 @@
 package br.edu.formulario.contrato;
 
-import java.sql.Date;
+import java.time.LocalTime;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroContrato (
-    @NotNull
 	Long idContrato,
     String empresaCnpj,
-    String supervisorCpf,
+    String cpfSupervisor,
     Long estagiarioId,
-    Date inicio,
-    Date termino,
+    LocalTime inicio,
+    LocalTime termino,
     int cargaHoraria,
     String area,
-    String funcao
+    String funcao,
+    boolean bancoHoras,
+    String descricao,
+    boolean estagioArea
 ){
-    public DadosCadastroContrato() {
-        this(null, "", "", null, null, null, 0, "", "");
+    public static DadosCadastroContrato vazio() {
+        return new DadosCadastroContrato(null, "", "", null, null, null, 0, "", "", false, "", false);
     }
 }
-
-

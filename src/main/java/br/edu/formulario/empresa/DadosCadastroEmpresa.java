@@ -13,7 +13,7 @@ public record DadosCadastroEmpresa(
     String telefone,
     String departamento,
     String linkedin,
-    
+
     //endereço
     String cep,
     String logradouro,
@@ -21,7 +21,11 @@ public record DadosCadastroEmpresa(
     String numPorta,
     String uf,
     String localidade,
-    String complemento) {
-
+    String complemento
+) {
+    //Gambiarra feia para ter um construtor vazio
+    public static DadosCadastroEmpresa vazio() {
+        return new DadosCadastroEmpresa("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+    }
 
 }

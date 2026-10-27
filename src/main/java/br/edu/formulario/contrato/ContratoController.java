@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import br.edu.formulario.empresa.EmpresaRepository;
+import br.edu.formulario.contrato.DadosCadastroContrato;
 
 @Controller
 @RequestMapping("/contrato/formulario")
@@ -23,10 +24,8 @@ public class ContratoController {
 
     @GetMapping
     public String novoFormulario(Model model) {
-        if (!model.containsAttribute("dadosFormulario")) {
-            model.addAttribute("dadosFormulario", new DadosCadastroContrato());
-        }
-        return "/contrato/formulario";
+        model.addAttribute("dados", DadosCadastroContrato.vazio());
+        return "contrato/formulario";
     }
 
     @GetMapping("/{id}")
@@ -37,8 +36,11 @@ public class ContratoController {
 
         try {
             Contrato contrato = contratoService.findById(id);
-            model.addAttribute("dadosFormulario", contrato);
-            return "/contrato/formulario";
+
+            // Temporariamente, para exibir o objeto diretamente:
+            model.addAttribute("dados", contrato);
+
+            return "contrato/formulario";
 
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute(
@@ -62,19 +64,37 @@ public class ContratoController {
         return "contrato/lista";
     }*/
 
+
     @PostMapping("/salvar")
     public String salvarContrato(
-            @Valid @ModelAttribute("dadosFormulario") DadosCadastroContrato dados,
+            @Valid @ModelAttribute("dados") DadosCadastroContrato dados,
             BindingResult result,
             RedirectAttributes redirectAttributes,
             Model model) {
 
+        System.out.println("=== RECEBI O POST /salvar ===");
+        System.out.println("Dados recebidos: " + dados);
+
         if (result.hasErrors()) {
-            return "/contrato/formulario";
+            System.out.println("=== ERROS DE VALIDAÇÃO ===");
+
+            result.getFieldErrors().forEach(erro ->
+                System.out.println(
+                    "Campo: " + erro.getField()
+                    + " | Erro: " + erro.getDefaultMessage()
+                    + " | Valor rejeitado: " + erro.getRejectedValue()
+                )
+            );
+
+            return "contrato/formulario";
         }
 
         try {
+            System.out.println("=== PASSEI PELA VALIDAÇÃO ===");
+
             contratoService.cadastrarContrato(dados);
+
+            System.out.println("=== CONTRATO CADASTRADO ===");
 
             redirectAttributes.addFlashAttribute(
                 "message",
@@ -84,11 +104,15 @@ public class ContratoController {
             return "redirect:/contrato/formulario";
 
         } catch (Exception e) {
+            e.printStackTrace();
+
             model.addAttribute(
                 "errorMessage",
                 "Erro ao salvar contrato: " + e.getMessage()
             );
+
             return "contrato/formulario";
         }
     }
+
 }

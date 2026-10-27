@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.edu.formulario.contrato.DadosCadastroContrato;
+import br.edu.formulario.empresa.DadosCadastroEmpresa;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -24,6 +27,7 @@ public class EmpresaController {
 
     @GetMapping("/formulario")
     public String novaEmpresa(Model model) {
+        model.addAttribute("dados", DadosCadastroEmpresa.vazio());
         return "/empresa/formulario";
     }
 
@@ -53,7 +57,7 @@ public class EmpresaController {
 //     }
 
     @PostMapping("/salvar")
-    public String salvarEmpresa(@Valid @ModelAttribute DadosCadastroEmpresa dados,
+    public String salvarEmpresa(@Valid @ModelAttribute("dados") DadosCadastroEmpresa dados,
             BindingResult result,
             RedirectAttributes redirectAttributes,
             Model model) {

@@ -1,6 +1,6 @@
 package br.edu.formulario.contrato;
 
-import java.sql.Date;
+import java.time.LocalTime;
 
 import br.edu.formulario.empresa.Empresa;
 import br.edu.formulario.estagiario.Estagiario;
@@ -35,13 +35,17 @@ public class Contrato {
     @ManyToOne
     @JoinColumn(name = "estagiariora")
     private Estagiario estagiario;
-    
-    private Date inicio; 
-    private Date termino;
+
+    private LocalTime inicio;
+    private LocalTime termino;
     private int cargaHoraria;
     private String area;
     private String funcao;
-    
+    private boolean bancoHoras;
+    private String descricao;
+    private boolean estagioArea;
+    private String cpfSupervisor;
+
 	public Contrato(DadosCadastroContrato dados) {
         this.idContrato = dados.idContrato();
         this.inicio = dados.inicio();
@@ -49,25 +53,29 @@ public class Contrato {
         this.cargaHoraria = dados.cargaHoraria();
         this.area = dados.area();
         this.funcao = dados.funcao();
+        this.bancoHoras = dados.bancoHoras();
+        this.descricao = dados.descricao();
+        this.estagioArea = dados.estagioArea();
+        this.cpfSupervisor = dados.cpfSupervisor();
     }
-	
-    public void atualizarInformacoes(DadosAtualizacaoContrato dados) {
-        if (dados.inicio() != null) {
-            this.inicio = dados.inicio();
-        }
-        if (dados.termino() != null) {
-            this.termino = dados.termino();
-        }
-        if (dados.cargaHoraria() != 0) {
-            this.cargaHoraria = dados.cargaHoraria();
-        }
-        if (dados.area() != null) {
-            this.area = dados.area();
-        }
-        if (dados.funcao() != null) {
-            this.funcao = dados.funcao();
-        }
-    }
+
+    // public void atualizarInformacoes(DadosAtualizacaoContrato dados) {
+    //     if (dados.inicio() != null) {
+    //         this.inicio = dados.inicio();
+    //     }
+    //     if (dados.termino() != null) {
+    //         this.termino = dados.termino();
+    //     }
+    //     if (dados.cargaHoraria() != 0) {
+    //         this.cargaHoraria = dados.cargaHoraria();
+    //     }
+    //     if (dados.area() != null) {
+    //         this.area = dados.area();
+    //     }
+    //     if (dados.funcao() != null) {
+    //         this.funcao = dados.funcao();
+    //     }
+    // }
 
     void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
@@ -76,5 +84,5 @@ public class Contrato {
     void setEstagiario(Estagiario estagiario) {
         this.estagiario = estagiario;
     }
-    
+
 }
