@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Estagiários</title>
+
+    <!-- Mantenha o fragmento de head utilizado nas outras páginas, se houver -->
+    <link rel="stylesheet" th:href="@{/css/estagiario-lista.css}">
+</head>
+
+<body>
+
+    <!-- Mantenha o header compartilhado do seu projeto, se houver -->
+    <header th:replace="~{fragmentos/header :: header('/estagiario')}"></header>
+
+    <main class="pagina-dashboard">
+
+        <section class="dashboard-container">
+
+            <!-- Cabeçalho -->
+            <div class="dashboard-header">
+                <div>
+                    <span class="dashboard-legenda">GERENCIAMENTO</span>
+                    <h1>Estagiários</h1>
+                    <p class="dashboard-subtitulo">
+                        Consulte, filtre e gerencie os estagiários cadastrados.
+                    </p>
+                </div>
+
+                <a th:href="@{/estagiario/formulario}" class="botao botao-principal">
+                    <span class="botao-icone">+</span>
+                    Novo estagiário
+                </a>
+            </div>
+
+            <!-- Indicadores visuais -->
+            <div class="indicadores">
+                <article class="indicador-card">
+                    <div class="indicador-icone">♙</div>
+                    <div>
+                        <span class="indicador-label">Total de estagiários</span>
+                        <strong class="indicador-valor">—</strong>
+                    </div>
+                </article>
+
+                <article class="indicador-card">
+                    <div class="indicador-icone">▤</div>
+                    <div>
+                        <span class="indicador-label">Resultados encontrados</span>
+                        <strong class="indicador-valor">—</strong>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Filtros -->
+            <section class="filtros-container">
+
+                <div class="secao-titulo">
+                    <div>
+                        <h2>Filtros</h2>
+                        <p>Selecione os critérios para localizar estagiários.</p>
+                    </div>
+                    <span class="filtro-icone">⚙</span>
+                </div>
+
+                <form class="filtros-formulario"
+                      th:action="@{/estagiario}"
+                      method="get">
+
+                    <div class="campo campo-nome">
+                        <label for="nome">Nome do estagiário</label>
+                        <input
+                            type="search"
+                            id="nome"
+                            name="nome"
+                            placeholder="Pesquisar por nome..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="genero">Sexo</label>
+                        <select id="genero" name="genero">
+                            <option value="">Todos</option>
+                            <option value="F">Feminino</option>
+                            <option value="M">Masculino</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="area">Área de atuação</label>
+                        <select id="area" name="area">
+                            <option value="">Todas</option>
+                            <option value="TI">Tecnologia da Informação</option>
+                            <option value="RH">Recursos Humanos</option>
+                            <option value="ADM">Administração</option>
+                            <option value="FIN">Financeiro</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="empresa">Empresa</label>
+                        <select id="empresa" name="empresa">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="situacao">Situação do estágio</label>
+                        <select id="situacao" name="situacao">
+                            <option value="">Todas</option>
+                            <option value="ATIVO">Ativo</option>
+                            <option value="ENCERRADO">Encerrado</option>
+                            <option value="PENDENTE">Pendente</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="cidade">Cidade</label>
+                        <input
+                            type="text"
+                            id="cidade"
+                            name="cidade"
+                            placeholder="Pesquisar cidade..."
+                        >
+                    </div>
+
+                    <div class="filtros-acoes">
+                        <button type="submit" class="botao botao-principal">
+                            <span>⌕</span>
+                            Aplicar filtros
+                        </button>
+
+                        <a th:href="@{/estagiario}" class="botao botao-secundario">
+                            Limpar filtros
+                        </a>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Tabela -->
+            <section class="tabela-container">
+
+                <div class="secao-titulo tabela-cabecalho">
+                    <div>
+                        <h2>Lista de estagiários</h2>
+                        <p>Registros correspondentes aos filtros selecionados.</p>
+                    </div>
+
+                    <span class="contador-registros">
+                        Registros: —
+                    </span>
+                </div>
+
+                <div class="tabela-scroll">
+                    <table class="tabela-estagiarios">
+                        <thead>
+                            <tr>
+                                <th>Estagiário</th>
+                                <th>RA</th>
+                                <th>Gênero</th>
+                                <th>Curso</th>
+                                <th>Trabalha na área?</th>
+                                <th>Cidade</th>
+                                <th class="coluna-acoes">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!-- Dados ilustrativos: substituir pela lista real posteriormente -->
+                            <tr>
+                                <td>
+                                    <div class="identidade-estagiario">
+                                        <div class="avatar">AS</div>
+                                        <div>
+                                            <strong>Ana Silva</strong>
+                                            <span>Exemplo ilustrativo</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>123456</td>
+                                <td>Feminino</td>
+                                <td>ADS</td>
+                                <td>
+                                    <span class="status status-positivo">Sim</span>
+                                </td>
+                                <td>São Paulo</td>
+                                <td>
+                                    <div class="acoes">
+                                        <a href="#" class="acao acao-visualizar"
+                                           aria-label="Visualizar estagiário"
+                                           title="Visualizar">◉</a>
+                                        <a href="#" class="acao acao-editar"
+                                           aria-label="Editar estagiário"
+                                           title="Editar">✎</a>
+                                        <button type="button"
+                                                class="acao acao-excluir"
+                                                aria-label="Excluir estagiário"
+                                                title="Excluir">×</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="identidade-estagiario">
+                                        <div class="avatar avatar-roxo">JS</div>
+                                        <div>
+                                            <strong>João Santos</strong>
+                                            <span>Exemplo ilustrativo</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>789012</td>
+                                <td>Masculino</td>
+                                <td>Administração</td>
+                                <td>
+                                    <span class="status status-negativo">Não</span>
+                                </td>
+                                <td>Guarulhos</td>
+                                <td>
+                                    <div class="acoes">
+                                        <a href="#" class="acao acao-visualizar"
+                                           aria-label="Visualizar estagiário"
+                                           title="Visualizar">◉</a>
+                                        <a href="#" class="acao acao-editar"
+                                           aria-label="Editar estagiário"
+                                           title="Editar">✎</a>
+                                        <button type="button"
+                                                class="acao acao-excluir"
+                                                aria-label="Excluir estagiário"
+                                                title="Excluir">×</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="identidade-estagiario">
+                                        <div class="avatar avatar-verde">MC</div>
+                                        <div>
+                                            <strong>Mariana Costa</strong>
+                                            <span>Exemplo ilustrativo</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>345678</td>
+                                <td>Feminino</td>
+                                <td>ADS</td>
+                                <td>
+                                    <span class="status status-positivo">Sim</span>
+                                </td>
+                                <td>São Paulo</td>
+                                <td>
+                                    <div class="acoes">
+                                        <a href="#" class="acao acao-visualizar"
+                                           aria-label="Visualizar estagiário"
+                                           title="Visualizar">◉</a>
+                                        <a href="#" class="acao acao-editar"
+                                           aria-label="Editar estagiário"
+                                           title="Editar">✎</a>
+                                        <button type="button"
+                                                class="acao acao-excluir"
+                                                aria-label="Excluir estagiário"
+                                                title="Excluir">×</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- A lista real será inserida aqui com Thymeleaf -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tabela-rodape">
+                    <span>Exibindo dados fictícios para demonstração visual.</span>
+                </div>
+
+            </section>
+
+            <div class="dashboard-voltar">
+                <a th:href="@{/}" class="link-voltar">← Voltar ao início</a>
+            </div>
+
+        </section>
+    </main>
+
+</body>
+</html>

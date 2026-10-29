@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragmentos/head :: head('Index')}"></head>
-<body>
- <header th:replace="~{fragmentos/header :: header(activePage='index')}"></header>
 
-   <div class="divBackground">
-		<div class="IForm container">
-			
-		</div>
-   </div>
+<head th:replace="~{fragmentos/head :: head('Dashboards')}"></head>
+
+<body>
+
+    <header th:replace="~{fragmentos/header :: header('/')}"></header>
+
+    <div class="divBackground">
+
+        <div class="dashboard-container">
+
+            <h1>Dashboards</h1>
+
+            <p class="dashboard-subtitulo">
+                Escolha qual painel deseja acessar.
+            </p>
+
+            <div class="dashboard-opcoes">
+
+                <a th:href="@{/estagiario/dashboard}" class="dashboard-card">
+                    <span class="icone">👨‍🎓</span>
+                    <h2>Estagiários</h2>
+                    <p>Visualize e gerencie a lista de estagiários.</p>
+                </a>
+
+                <a th:href="@{/empresa/dashboard}" class="dashboard-card">
+                    <span class="icone">🏢</span>
+                    <h2>Empresas</h2>
+                    <p>Consulte as empresas cadastradas.</p>
+                </a>
+
+                <a th:href="@{/contrato/dashboard}" class="dashboard-card">
+                    <span class="icone">📄</span>
+                    <h2>Contratos</h2>
+                    <p>Acesse os contratos registrados.</p>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </body>
 </html>
-

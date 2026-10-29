@@ -353,3 +353,324 @@ table {
         max-width: 400px;
     }
 }
+
+
+/* =========================
+   TOASTS
+========================= */
+
+.toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+
+    width: min(380px, calc(100vw - 32px));
+    min-height: 90px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 18px 38px 22px 16px;
+
+    background: #202020;
+    color: #ffffff;
+
+    border: 1px solid #444;
+    border-left: 5px solid;
+    border-radius: 10px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+    z-index: 9999;
+
+    animation: toast-entrar 0.4s ease forwards;
+
+    overflow: hidden;
+}
+
+/* Sucesso */
+
+.toast-sucesso {
+    border-left-color: #22c55e;
+}
+
+.toast-sucesso .toast-icone {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+}
+
+/* Erro */
+
+.toast-erro {
+    border-left-color: #ef4444;
+}
+
+.toast-erro .toast-icone {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+/* Ícone */
+
+.toast-icone {
+    flex-shrink: 0;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* Conteúdo */
+
+.toast-conteudo {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast-conteudo strong {
+    display: block;
+    margin-bottom: 5px;
+
+    font-size: 15px;
+}
+
+.toast-conteudo p {
+    margin: 0;
+
+    color: #d4d4d4;
+    font-size: 13px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+/* Botão de fechar */
+
+.toast-fechar {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+
+    border: none;
+    background: transparent;
+
+    color: #a3a3a3;
+    font-size: 23px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.toast-fechar:hover {
+    color: #ffffff;
+}
+
+/* Barra de tempo */
+
+.toast-progresso {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: #737373;
+
+    transform-origin: left;
+    animation: toast-tempo 5s linear forwards;
+}
+
+.toast-sucesso .toast-progresso {
+    background: #22c55e;
+}
+
+.toast-erro .toast-progresso {
+    background: #ef4444;
+}
+
+/* Animações */
+
+@keyframes toast-entrar {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toast-sair {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+}
+
+@keyframes toast-tempo {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+    }
+}
+
+/* Saída do toast */
+
+.toast.saindo {
+    animation: toast-sair 0.3s ease forwards;
+}
+
+/* Responsividade */
+
+@media (max-width: 600px) {
+    .toast {
+        top: 12px;
+        right: 12px;
+        width: calc(100vw - 24px);
+    }
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-container {
+    width: 100%;
+    max-width: 950px;
+
+    background: #232323;
+
+    border-radius: 16px;
+
+    padding: 40px;
+
+    text-align: center;
+}
+
+.dashboard-container h1 {
+    margin: 0;
+
+    font-size: 2rem;
+
+    color: #fff;
+}
+
+.dashboard-subtitulo {
+    margin: 12px 0 35px;
+
+    color: #bdbdbd;
+
+    font-size: 1rem;
+}
+
+/* Cards */
+
+.dashboard-opcoes {
+    display: flex;
+
+    gap: 20px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    flex: 1;
+    min-width: 220px;
+    max-width: 260px;
+
+    background: #151515;
+
+    border: 1px solid #3a3a3a;
+
+    border-radius: 14px;
+
+    padding: 30px 20px;
+
+    text-decoration: none;
+
+    color: #fff;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #3539e5;
+
+    background: #202020;
+
+    box-shadow: 0 10px 30px rgba(53, 57, 229, 0.18);
+}
+
+.dashboard-card .icone {
+    font-size: 3rem;
+
+    display: block;
+
+    margin-bottom: 15px;
+}
+
+.dashboard-card h2 {
+    margin: 0 0 10px;
+
+    font-size: 1.3rem;
+}
+
+.dashboard-card p {
+    margin: 0;
+
+    color: #bdbdbd;
+
+    line-height: 1.5;
+
+    font-size: .95rem;
+}
+
+/* Responsivo */
+
+@media (max-width: 768px) {
+
+    .dashboard-container {
+        padding: 30px 20px;
+    }
+
+    .dashboard-opcoes {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .dashboard-card {
+        max-width: 100%;
+        width: 100%;
+    }
+}

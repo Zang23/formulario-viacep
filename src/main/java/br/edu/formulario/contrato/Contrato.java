@@ -59,23 +59,23 @@ public class Contrato {
         this.cpfSupervisor = dados.cpfSupervisor();
     }
 
-    // public void atualizarInformacoes(DadosAtualizacaoContrato dados) {
-    //     if (dados.inicio() != null) {
-    //         this.inicio = dados.inicio();
-    //     }
-    //     if (dados.termino() != null) {
-    //         this.termino = dados.termino();
-    //     }
-    //     if (dados.cargaHoraria() != 0) {
-    //         this.cargaHoraria = dados.cargaHoraria();
-    //     }
-    //     if (dados.area() != null) {
-    //         this.area = dados.area();
-    //     }
-    //     if (dados.funcao() != null) {
-    //         this.funcao = dados.funcao();
-    //     }
-    // }
+    public void atualizarInformacoes(DadosAtualizacaoContrato dados) {
+        if (dados.inicio() != null) {
+            this.inicio = dados.inicio();
+        }
+        if (dados.termino() != null) {
+            this.termino = dados.termino();
+        }
+        if (dados.cargaHoraria() != 0) {
+            this.cargaHoraria = dados.cargaHoraria();
+        }
+        if (dados.area() != null) {
+            this.area = dados.area();
+        }
+        if (dados.funcao() != null) {
+            this.funcao = dados.funcao();
+        }
+    }
 
     void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
