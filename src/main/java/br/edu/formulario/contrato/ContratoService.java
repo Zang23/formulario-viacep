@@ -37,13 +37,18 @@ public class ContratoService {
         Empresa empresa = empresaRepository.findById(dados.empresaCnpj())
                 .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada com CNPJ: " + dados.empresaCnpj()));
 
+        System.out.println("passei da validacao da empresa");
+
         Estagiario estagiario = estagiarioRepository.findById(dados.estagiarioId())
                 .orElseThrow(() -> new IllegalArgumentException("Estagiário não encontrado com o RA: " + dados.estagiarioId()));
+
+        System.out.println("passei da validacao do estagiario");
 
         Contrato contrato = new Contrato(dados);
         contrato.setEmpresa(empresa);
         contrato.setEstagiario(estagiario);
 
+        System.out.println("salvei no banco");
         return contratoRepository.save(contrato);
     }
 

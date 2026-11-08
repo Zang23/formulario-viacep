@@ -9,9 +9,19 @@
 
     <div class="divBackground">
 
+        <div th:if="${errorMessage}" class="mensagem-erro">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <div th:if="${message}" class="mensagem-sucesso">
+            <p th:text="${message}"></p>
+        </div>
+
         <div class="IForm container">
 
-			<form action="/contrato/formulario/salvar" method="post" class="formulario">
+
+
+			<form th:action="@{/contrato/formulario/salvar}" th:object="${dados}" method="post" class="formulario">
 
 			    <div class="carousel">
 
@@ -22,44 +32,46 @@
 			                <h2>Dados do contrato</h2>
 
 			                <label class="IForm label">Insira o CNPJ da empresa</label>
-			                <input type="text" class="IForm input text">
+			                <input type="text" th:field="*{empresaCnpj}" class="IForm input text">
 
 			                <label class="IForm label">Insira o RA do estagiário</label>
-			                <input type="text" class="IForm input text">
+			                <input type="text" th:field="*{estagiarioId}" class="IForm input text">
 
 			                <label class="IForm label">Horário de entrada:</label>
-			                <input type="time" class="IForm input text">
+			                <input type="time" th:field="*{inicio}" class="IForm input text">
 
 			                <label class="IForm label">Horário de saída:</label>
-			                <input type="time" class="IForm input text">
+			                <input type="time" th:field="*{termino}" class="IForm input text">
 
 			                <label class="IForm label">Carga horária:</label>
-			                <input type="text" class="IForm input text">
+			                <input type="text" th:field="*{cargaHoraria}" class="IForm input text">
 
-			                <label class="IForm label">Banco de horas:</label>
-			                <input type="text" class="IForm input text">
+			                <label class="IForm label">
+								Essa vaga contem banco de horas?
+								<input type="checkbox" th:field="*{bancoHoras}" class="IForm input checkbox">
+							</label>
 
 			                <label class="IForm label">Insira a area do estágio</label>
-			                <input type="text" class="IForm input text">
+			                <input type="text" th:field="*{area}" class="IForm input text">
 
 			                <label class="IForm label">Insira a função do estagiário</label>
-			                <input type="text" class="IForm input text">
+			                <input type="text" th:field="*{funcao}" class="IForm input text">
 
 
 			                <label class="IForm label">
 			                    Descreva o tipo de trabalho que o estagiário irá desempenhar na empresa
 			                </label>
 
-							<textarea class="IForm input text" rows="4" cols="50"></textarea>
+							<textarea th:field="*{descricao}" class="IForm input text" rows="4" cols="50"></textarea>
 
 							<label class="IForm label">
 								Esse estágio é condizente com o curso do estagiário?
-								<input type="checkbox" class="IForm input checkbox">
+								<input type="checkbox"  th:field="*{estagioArea}" class="IForm input checkbox">
 							</label>
 
 			                <label class="IForm label">Insira o CPF do supervisor</label>
 
-			                <input type="text" class="IForm input text">
+			                <input type="text"  th:field="*{cpfSupervisor}" class="IForm input text">
 
 			                <div class="botoes">
 
