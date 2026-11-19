@@ -33,11 +33,6 @@ public class ContratoController {
     	return "contrato/lista";
     }
     
-//    @GetMapping("/dashboard")
-//    public String listaEstagiario(){
-//        return "estagiario/lista";
-//    }
-    
     
 
     @GetMapping("/{id}")
