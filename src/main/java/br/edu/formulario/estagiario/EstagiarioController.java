@@ -14,16 +14,21 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/estagiario/formulario")
+@RequestMapping("/estagiario")
 public class EstagiarioController {
 
     @Autowired
     private EstagiarioService estagiarioService;
 
-    @GetMapping
+    @GetMapping("/formulario")
     public String novoEstagiario(Model model) {
         model.addAttribute("dados", DadosCadastroEstagiario.vazio());
         return "/estagiario/formulario";
+    }
+
+    @GetMapping("/dashboard")
+    public String listaEstagiario(){
+        return "estagiario/lista";
     }
 
     /*@GetMapping("/{ra}")

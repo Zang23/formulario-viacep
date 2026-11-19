@@ -5,6 +5,44 @@
 
 <body>
 
+    <!-- Toast de erro -->
+    <div th:if="${errorMessage}"
+         class="toast toast-erro"
+         role="alert">
+
+        <span class="toast-icone">!</span>
+
+        <div class="toast-conteudo">
+            <strong>Erro</strong>
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <button type="button"
+                class="toast-fechar"
+                aria-label="Fechar aviso">&times;</button>
+
+        <div class="toast-progresso"></div>
+    </div>
+
+    <!-- Toast de sucesso -->
+    <div th:if="${message}"
+         class="toast toast-sucesso"
+         role="status">
+
+        <span class="toast-icone">&#10003;</span>
+
+        <div class="toast-conteudo">
+            <strong>Sucesso!</strong>
+            <p th:text="${message}"></p>
+        </div>
+
+        <button type="button"
+                class="toast-fechar"
+                aria-label="Fechar aviso">&times;</button>
+
+        <div class="toast-progresso"></div>
+    </div>
+
 	<header th:replace="~{fragmentos/header :: header('/estagiario/formulario')}"></header>
 
 	<div class="divBackground">
@@ -163,78 +201,8 @@
 		</div>
 	</div>
 
-	<script>
-		const etapas = document.querySelectorAll(".etapa");
-		let etapaAtual = 0;
-
-		function mostrarEtapa() {
-			etapas.forEach((etapa, index) => {
-				etapa.style.display = index === etapaAtual ? "flex" : "none";
-			});
-		}
-
-		document.querySelectorAll(".proximo").forEach(botao => {
-			botao.addEventListener("click", () => {
-				if (etapaAtual < etapas.length - 1) {
-					etapaAtual++;
-					mostrarEtapa();
-				}
-			});
-		});
-
-		document.querySelectorAll(".voltar").forEach(botao => {
-			botao.addEventListener("click", () => {
-				if (etapaAtual > 0) {
-					etapaAtual--;
-					mostrarEtapa();
-				}
-			});
-		});
-
-		mostrarEtapa();
-
-		document.getElementById("buscarCep")
-        .addEventListener("click", async function () {
-
-            const cep = document.getElementById("cep").value
-                .replace(/\D/g, "");
-
-            if (cep.length !== 8) {
-                alert("Digite um CEP válido com 8 números.");
-                return;
-            }
-
-            try {
-                const resposta = await fetch(`/viacep/${cep}`);
-
-                if (!resposta.ok) {
-                    const mensagem = await resposta.text();
-                    alert(mensagem);
-                    return;
-                }
-
-                const endereco = await resposta.json();
-
-                document.getElementById("localidade").value =
-                    endereco.localidade ?? "";
-
-                document.getElementById("logradouro").value =
-                    endereco.logradouro ?? "";
-
-                document.getElementById("bairro").value =
-                    endereco.bairro ?? "";
-
-                document.getElementById("uf").value =
-                    endereco.uf ?? "";
-
-            } catch (erro) {
-                alert("Não foi possível consultar o CEP.");
-                console.error(erro);
-            }
-        });
-
-
-	</script>
+	<script th:src="@{/js/toast.js}" ></script>
+	<script th:src="@{/js/formulario-estagiario.js}" ></script>
 
 </body>
 

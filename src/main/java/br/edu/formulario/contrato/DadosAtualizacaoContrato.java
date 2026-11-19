@@ -1,16 +1,16 @@
 package br.edu.formulario.contrato;
 
-import java.sql.Date;
+import java.time.LocalTime;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoContrato(
-    @NotNull 
+    @NotNull
     Long idContrato,
     String empresaCnpj,
     String supervisorCpf,
     Long estagiarioId,
-    Date inicio,
-    Date termino,
+    LocalTime inicio,
+    LocalTime termino,
     int cargaHoraria,
     String area,
     String funcao) {
