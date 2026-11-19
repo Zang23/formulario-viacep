@@ -27,7 +27,8 @@ public class EstagiarioController {
     }
 
     @GetMapping("/dashboard")
-    public String listaEstagiario(){
+    public String listaEstagiario(Model model){
+    	model.addAttribute("estagiarios", estagiarioService.listarEstagiarios());
         return "estagiario/lista";
     }
 

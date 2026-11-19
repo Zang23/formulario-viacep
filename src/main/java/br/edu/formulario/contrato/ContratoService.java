@@ -55,7 +55,7 @@ public class ContratoService {
     @Transactional
     public void atualizarContrato(DadosAtualizacaoContrato dados) {
         Contrato contrato = contratoRepository.getReferenceById(dados.idContrato());
-        contrato.atualizarInformacoes(dados);
+     //   contrato.atualizarInformacoes(dados);
     }
 
     @Transactional

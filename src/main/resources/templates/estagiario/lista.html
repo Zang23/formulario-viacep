@@ -2,290 +2,232 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Estagiários</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard de Estagiários</title>
 
-    <!-- Mantenha o fragmento de head utilizado nas outras páginas, se houver -->
-    <link rel="stylesheet" th:href="@{/css/estagiario-lista.css}">
+<!-- Mantenha o fragmento de head utilizado nas outras páginas, se houver -->
+<link rel="stylesheet" th:href="@{/css/estagiario-lista.css}">
 </head>
 
 <body>
 
-    <!-- Mantenha o header compartilhado do seu projeto, se houver -->
-    <header th:replace="~{fragmentos/header :: header('/estagiario')}"></header>
+	<!-- Mantenha o header compartilhado do seu projeto, se houver -->
+	<header th:replace="~{fragmentos/header :: header('/estagiario')}"></header>
 
-    <main class="pagina-dashboard">
+	<main class="pagina-dashboard">
 
-        <section class="dashboard-container">
+		<section class="dashboard-container">
 
-            <!-- Cabeçalho -->
-            <div class="dashboard-header">
-                <div>
-                    <span class="dashboard-legenda">GERENCIAMENTO</span>
-                    <h1>Estagiários</h1>
-                    <p class="dashboard-subtitulo">
-                        Consulte, filtre e gerencie os estagiários cadastrados.
-                    </p>
-                </div>
+			<!-- Cabeçalho -->
+			<div class="dashboard-header">
+				<div>
+					<span class="dashboard-legenda">GERENCIAMENTO</span>
+					<h1>Estagiários</h1>
+					<p class="dashboard-subtitulo">Consulte, filtre e gerencie os
+						estagiários cadastrados.</p>
+				</div>
 
-                <a th:href="@{/estagiario/formulario}" class="botao botao-principal">
-                    <span class="botao-icone">+</span>
-                    Novo estagiário
-                </a>
-            </div>
+				<a th:href="@{/estagiario/formulario}" class="botao botao-principal">
+					<span class="botao-icone">+</span> Novo estagiário
+				</a>
+			</div>
 
-            <!-- Indicadores visuais -->
-            <div class="indicadores">
-                <article class="indicador-card">
-                    <div class="indicador-icone">♙</div>
-                    <div>
-                        <span class="indicador-label">Total de estagiários</span>
-                        <strong class="indicador-valor">—</strong>
-                    </div>
-                </article>
+			<!-- Indicadores visuais -->
+			<div class="indicadores">
+				<article class="indicador-card">
+					<div class="indicador-icone">♙</div>
+					<div>
+						<span class="indicador-label">Total de estagiários</span> <strong
+							class="indicador-valor">—</strong>
+					</div>
+				</article>
 
-                <article class="indicador-card">
-                    <div class="indicador-icone">▤</div>
-                    <div>
-                        <span class="indicador-label">Resultados encontrados</span>
-                        <strong class="indicador-valor">—</strong>
-                    </div>
-                </article>
-            </div>
+				<article class="indicador-card">
+					<div class="indicador-icone">▤</div>
+					<div>
+						<span class="indicador-label">Resultados encontrados</span> <strong
+							class="indicador-valor">—</strong>
+					</div>
+				</article>
+			</div>
 
-            <!-- Filtros -->
-            <section class="filtros-container">
+			<!-- Filtros -->
+			<section class="filtros-container">
 
-                <div class="secao-titulo">
-                    <div>
-                        <h2>Filtros</h2>
-                        <p>Selecione os critérios para localizar estagiários.</p>
-                    </div>
-                    <span class="filtro-icone">⚙</span>
-                </div>
+				<div class="secao-titulo">
+					<div>
+						<h2>Filtros</h2>
+						<p>Selecione os critérios para localizar estagiários.</p>
+					</div>
+					<span class="filtro-icone">⚙</span>
+				</div>
 
-                <form class="filtros-formulario"
-                      th:action="@{/estagiario}"
-                      method="get">
+				<form class="filtros-formulario" th:action="@{/estagiario}"
+					method="get">
 
-                    <div class="campo campo-nome">
-                        <label for="nome">Nome do estagiário</label>
-                        <input
-                            type="search"
-                            id="nome"
-                            name="nome"
-                            placeholder="Pesquisar por nome..."
-                        >
-                    </div>
+					<div class="campo campo-nome">
+						<label for="nome">Nome do estagiário</label> <input type="search"
+							id="nome" name="nome" placeholder="Pesquisar por nome...">
+					</div>
 
-                    <div class="campo">
-                        <label for="genero">Sexo</label>
-                        <select id="genero" name="genero">
-                            <option value="">Todos</option>
-                            <option value="F">Feminino</option>
-                            <option value="M">Masculino</option>
-                        </select>
-                    </div>
+					<div class="campo">
+						<label for="genero">Sexo</label> <select id="genero" name="genero">
+							<option value="">Todos</option>
+							<option value="F">Feminino</option>
+							<option value="M">Masculino</option>
+						</select>
+					</div>
 
-                    <div class="campo">
-                        <label for="area">Área de atuação</label>
-                        <select id="area" name="area">
-                            <option value="">Todas</option>
-                            <option value="TI">Tecnologia da Informação</option>
-                            <option value="RH">Recursos Humanos</option>
-                            <option value="ADM">Administração</option>
-                            <option value="FIN">Financeiro</option>
-                        </select>
-                    </div>
+					<div class="campo">
+						<label for="area">Área de atuação</label> <select id="area"
+							name="area">
+							<option value="">Todas</option>
+							<option value="TI">Tecnologia da Informação</option>
+							<option value="RH">Recursos Humanos</option>
+							<option value="ADM">Administração</option>
+							<option value="FIN">Financeiro</option>
+						</select>
+					</div>
 
-                    <div class="campo">
-                        <label for="empresa">Empresa</label>
-                        <select id="empresa" name="empresa">
-                            <option value="">Todas</option>
-                        </select>
-                    </div>
+					<div class="campo">
+						<label for="empresa">Empresa</label> <select id="empresa"
+							name="empresa">
+							<option value="">Todas</option>
+						</select>
+					</div>
 
-                    <div class="campo">
-                        <label for="situacao">Situação do estágio</label>
-                        <select id="situacao" name="situacao">
-                            <option value="">Todas</option>
-                            <option value="ATIVO">Ativo</option>
-                            <option value="ENCERRADO">Encerrado</option>
-                            <option value="PENDENTE">Pendente</option>
-                        </select>
-                    </div>
+					<div class="campo">
+						<label for="situacao">Situação do estágio</label> <select
+							id="situacao" name="situacao">
+							<option value="">Todas</option>
+							<option value="ATIVO">Ativo</option>
+							<option value="ENCERRADO">Encerrado</option>
+							<option value="PENDENTE">Pendente</option>
+						</select>
+					</div>
 
-                    <div class="campo">
-                        <label for="cidade">Cidade</label>
-                        <input
-                            type="text"
-                            id="cidade"
-                            name="cidade"
-                            placeholder="Pesquisar cidade..."
-                        >
-                    </div>
+					<div class="campo">
+						<label for="cidade">Cidade</label> <input type="text" id="cidade"
+							name="cidade" placeholder="Pesquisar cidade...">
+					</div>
 
-                    <div class="filtros-acoes">
-                        <button type="submit" class="botao botao-principal">
-                            <span>⌕</span>
-                            Aplicar filtros
-                        </button>
+					<div class="filtros-acoes">
+						<button type="submit" class="botao botao-principal">
+							<span>⌕</span> Aplicar filtros
+						</button>
 
-                        <a th:href="@{/estagiario}" class="botao botao-secundario">
-                            Limpar filtros
-                        </a>
-                    </div>
+						<a th:href="@{/estagiario}" class="botao botao-secundario">
+							Limpar filtros </a>
+					</div>
 
-                </form>
-            </section>
+				</form>
+			</section>
 
-            <!-- Tabela -->
-            <section class="tabela-container">
+			<!-- Tabela -->
+			<section class="tabela-container">
 
-                <div class="secao-titulo tabela-cabecalho">
-                    <div>
-                        <h2>Lista de estagiários</h2>
-                        <p>Registros correspondentes aos filtros selecionados.</p>
-                    </div>
+				<div class="secao-titulo tabela-cabecalho">
+					<div>
+						<h2>Lista de estagiários</h2>
+						<p>Registros correspondentes aos filtros selecionados.</p>
+					</div>
 
-                    <span class="contador-registros">
-                        Registros: —
-                    </span>
-                </div>
+					<span class="contador-registros"> Registros: — </span>
+				</div>
 
-                <div class="tabela-scroll">
-                    <table class="tabela-estagiarios">
-                        <thead>
-                            <tr>
-                                <th>Estagiário</th>
-                                <th>RA</th>
-                                <th>Gênero</th>
-                                <th>Curso</th>
-                                <th>Trabalha na área?</th>
-                                <th>Cidade</th>
-                                <th class="coluna-acoes">Ações</th>
-                            </tr>
-                        </thead>
+				<div class="tabela-scroll">
+					<table class="tabela-estagiarios">
+						<thead>
+							<tr>
+								<th>Estagiário</th>
+								<th>RA</th>
+								<th>Gênero</th>
+								<th>Curso</th>
+								<th>Trabalha na área?</th>
+								<th>Cidade</th>
+								<th class="coluna-acoes">Ações</th>
+							</tr>
+						</thead>
 
-                        <tbody>
-                            <!-- Dados ilustrativos: substituir pela lista real posteriormente -->
-                            <tr>
-                                <td>
-                                    <div class="identidade-estagiario">
-                                        <div class="avatar">AS</div>
-                                        <div>
-                                            <strong>Ana Silva</strong>
-                                            <span>Exemplo ilustrativo</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>123456</td>
-                                <td>Feminino</td>
-                                <td>ADS</td>
-                                <td>
-                                    <span class="status status-positivo">Sim</span>
-                                </td>
-                                <td>São Paulo</td>
-                                <td>
-                                    <div class="acoes">
-                                        <a href="#" class="acao acao-visualizar"
-                                           aria-label="Visualizar estagiário"
-                                           title="Visualizar">◉</a>
-                                        <a href="#" class="acao acao-editar"
-                                           aria-label="Editar estagiário"
-                                           title="Editar">✎</a>
-                                        <button type="button"
-                                                class="acao acao-excluir"
-                                                aria-label="Excluir estagiário"
-                                                title="Excluir">×</button>
-                                    </div>
-                                </td>
-                            </tr>
+						<tbody>
 
-                            <tr>
-                                <td>
-                                    <div class="identidade-estagiario">
-                                        <div class="avatar avatar-roxo">JS</div>
-                                        <div>
-                                            <strong>João Santos</strong>
-                                            <span>Exemplo ilustrativo</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>789012</td>
-                                <td>Masculino</td>
-                                <td>Administração</td>
-                                <td>
-                                    <span class="status status-negativo">Não</span>
-                                </td>
-                                <td>Guarulhos</td>
-                                <td>
-                                    <div class="acoes">
-                                        <a href="#" class="acao acao-visualizar"
-                                           aria-label="Visualizar estagiário"
-                                           title="Visualizar">◉</a>
-                                        <a href="#" class="acao acao-editar"
-                                           aria-label="Editar estagiário"
-                                           title="Editar">✎</a>
-                                        <button type="button"
-                                                class="acao acao-excluir"
-                                                aria-label="Excluir estagiário"
-                                                title="Excluir">×</button>
-                                    </div>
-                                </td>
-                            </tr>
+							<tr th:each="estagiario : ${estagiarios}">
 
-                            <tr>
-                                <td>
-                                    <div class="identidade-estagiario">
-                                        <div class="avatar avatar-verde">MC</div>
-                                        <div>
-                                            <strong>Mariana Costa</strong>
-                                            <span>Exemplo ilustrativo</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>345678</td>
-                                <td>Feminino</td>
-                                <td>ADS</td>
-                                <td>
-                                    <span class="status status-positivo">Sim</span>
-                                </td>
-                                <td>São Paulo</td>
-                                <td>
-                                    <div class="acoes">
-                                        <a href="#" class="acao acao-visualizar"
-                                           aria-label="Visualizar estagiário"
-                                           title="Visualizar">◉</a>
-                                        <a href="#" class="acao acao-editar"
-                                           aria-label="Editar estagiário"
-                                           title="Editar">✎</a>
-                                        <button type="button"
-                                                class="acao acao-excluir"
-                                                aria-label="Excluir estagiário"
-                                                title="Excluir">×</button>
-                                    </div>
-                                </td>
-                            </tr>
+								<td>
+									<div class="identidade-estagiario">
 
-                            <!-- A lista real será inserida aqui com Thymeleaf -->
-                        </tbody>
-                    </table>
-                </div>
+										<div class="avatar"
+											th:text="${#strings.substring(estagiario.nome, 0, 2).toUpperCase()}">
+											AS</div>
 
-                <div class="tabela-rodape">
-                    <span>Exibindo dados fictícios para demonstração visual.</span>
-                </div>
+										<div>
+											<strong th:text="${estagiario.nome}"> Nome do
+												estagiário </strong> <span>Estagiário cadastrado</span>
+										</div>
 
-            </section>
+									</div>
+								</td>
 
-            <div class="dashboard-voltar">
-                <a th:href="@{/}" class="link-voltar">← Voltar ao início</a>
-            </div>
+								<td th:text="${estagiario.ra}">123456</td>
 
-        </section>
-    </main>
+								<td th:text="${estagiario.genero}">Feminino</td>
+
+								<td th:text="${estagiario.curso}">ADS</td>
+
+								<td><span th:if="${estagiario.trabalhaNaArea}"
+									class="status status-positivo"> Sim </span> <span
+									th:unless="${estagiario.trabalhaNaArea}" class="status status-negativo">
+										Não </span></td>
+
+								<td th:text="${estagiario.endereco.localidade}">São Paulo</td>
+
+								<td>
+									<div class="acoes">
+
+										<a
+											th:href="@{/estagiarios/visualizar/{id}(id=${estagiario.ra})}"
+											class="acao acao-visualizar"
+											aria-label="Visualizar estagiário" title="Visualizar">◉</a> <a
+											th:href="@{/estagiarios/editar/{id}(id=${estagiario.ra})}"
+											class="acao acao-editar" aria-label="Editar estagiário"
+											title="Editar">✎</a>
+
+										<form
+											th:action="@{/estagiarios/excluir/{id}(id=${estagiario.ra})}"
+											method="post">
+
+											<button type="submit" class="acao acao-excluir"
+												aria-label="Excluir estagiário" title="Excluir">×</button>
+
+										</form>
+
+									</div>
+								</td>
+
+							</tr>
+
+							<tr th:if="${#lists.isEmpty(estagiarios)}">
+								<td colspan="7" style="text-align: center;">Nenhum
+									estagiário cadastrado.</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
+				<div class="tabela-rodape">
+					<span>Exibindo dados fictícios para demonstração visual.</span>
+				</div>
+
+			</section>
+
+			<div class="dashboard-voltar">
+				<a th:href="@{/}" class="link-voltar">← Voltar ao início</a>
+			</div>
+
+		</section>
+	</main>
 
 </body>
 </html>
