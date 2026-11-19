@@ -8,6 +8,7 @@
 
 <!-- Mantenha o fragmento de head utilizado nas outras páginas, se houver -->
 <link rel="stylesheet" th:href="@{/css/estagiario-lista.css}">
+<link rel="stylesheet" th:href="@{/css/navbar.css}">
 </head>
 
 <body>
@@ -39,7 +40,7 @@
 					<div class="indicador-icone">♙</div>
 					<div>
 						<span class="indicador-label">Total de estagiários</span> <strong
-							class="indicador-valor">—</strong>
+							class="indicador-valor" th:text="${totalEstagiarios}">—</strong>
 					</div>
 				</article>
 
@@ -47,7 +48,7 @@
 					<div class="indicador-icone">▤</div>
 					<div>
 						<span class="indicador-label">Resultados encontrados</span> <strong
-							class="indicador-valor">—</strong>
+							class="indicador-valor"  th:text="${totalEstagiarios}">—</strong>
 					</div>
 				</article>
 			</div>
@@ -133,7 +134,7 @@
 						<p>Registros correspondentes aos filtros selecionados.</p>
 					</div>
 
-					<span class="contador-registros"> Registros: — </span>
+					<span class="contador-registros"  th:text="'Registros: ' + ${totalEstagiarios} "> Registros: — </span>
 				</div>
 
 				<div class="tabela-scroll">
@@ -186,15 +187,15 @@
 									<div class="acoes">
 
 										<a
-											th:href="@{/estagiarios/visualizar/{id}(id=${estagiario.ra})}"
+											th:href="@{/estagiario/visualizar/{id}(id=${estagiario.ra})}"
 											class="acao acao-visualizar"
 											aria-label="Visualizar estagiário" title="Visualizar">◉</a> <a
-											th:href="@{/estagiarios/editar/{id}(id=${estagiario.ra})}"
+											th:href="@{/estagiario/editar/{id}(id=${estagiario.ra})}"
 											class="acao acao-editar" aria-label="Editar estagiário"
 											title="Editar">✎</a>
 
 										<form
-											th:action="@{/estagiarios/excluir/{id}(id=${estagiario.ra})}"
+											th:action="@{/estagiario/excluir/{id}(id=${estagiario.ra})}"
 											method="post">
 
 											<button type="submit" class="acao acao-excluir"
