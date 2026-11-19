@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Contratos</title>
+
+    <link rel="stylesheet" th:href="@{/css/contrato-lista.css}">
+</head>
+
+<body>
+
+    <header th:replace="~{fragmentos/header :: header('/contrato')}"></header>
+
+    <main class="pagina-dashboard">
+
+        <section class="dashboard-container">
+
+            <!-- Cabeçalho -->
+            <div class="dashboard-header">
+                <div>
+                    <span class="dashboard-legenda">GERENCIAMENTO</span>
+                    <h1>Contratos</h1>
+                    <p class="dashboard-subtitulo">
+                        Consulte, filtre e gerencie os contratos de estágio cadastrados.
+                    </p>
+                </div>
+
+                <a th:href="@{/contrato/formulario}" class="botao botao-principal">
+                    <span class="botao-icone">+</span>
+                    Novo contrato
+                </a>
+            </div>
+
+            <!-- Indicadores -->
+            <div class="indicadores">
+
+                <article class="indicador-card">
+                    <div class="indicador-icone">▤</div>
+                    <div>
+                        <span class="indicador-label">Total de contratos</span>
+                        <strong class="indicador-valor"
+                                th:text="${totalContratos != null ? totalContratos : '—'}">—</strong>
+                    </div>
+                </article>
+
+                <article class="indicador-card">
+                    <div class="indicador-icone">♙</div>
+                    <div>
+                        <span class="indicador-label">Resultados encontrados</span>
+                        <strong class="indicador-valor"
+                                th:text="${contratos != null ? #lists.size(contratos) : '—'}">—</strong>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Filtros -->
+            <section class="filtros-container">
+
+                <div class="secao-titulo">
+                    <div>
+                        <h2>Filtros</h2>
+                        <p>Selecione os critérios para localizar contratos.</p>
+                    </div>
+
+                    <span class="filtro-icone">⚙</span>
+                </div>
+
+                <form class="filtros-formulario"
+                      th:action="@{/contrato}"
+                      method="get">
+
+                    <div class="campo">
+                        <label for="empresa">Empresa</label>
+
+                        <input
+                            type="search"
+                            id="empresa"
+                            name="empresa"
+                            th:value="${param.empresa}"
+                            placeholder="Pesquisar empresa..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="estagiario">Estagiário</label>
+
+                        <input
+                            type="search"
+                            id="estagiario"
+                            name="estagiario"
+                            th:value="${param.estagiario}"
+                            placeholder="Pesquisar estagiário..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="area">Área de atuação</label>
+
+                        <input
+                            type="search"
+                            id="area"
+                            name="area"
+                            th:value="${param.area}"
+                            placeholder="Pesquisar área..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="funcao">Função</label>
+
+                        <input
+                            type="search"
+                            id="funcao"
+                            name="funcao"
+                            th:value="${param.funcao}"
+                            placeholder="Pesquisar função..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="cargaHoraria">Carga horária</label>
+
+                        <select id="cargaHoraria" name="cargaHoraria">
+                            <option value="">Todas</option>
+                            <option value="20">20 horas</option>
+                            <option value="30">30 horas</option>
+                            <option value="40">40 horas</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="bancoHoras">Banco de horas</label>
+
+                        <select id="bancoHoras" name="bancoHoras">
+                            <option value="">Todos</option>
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="estagioArea">Estágio na área?</label>
+
+                        <select id="estagioArea" name="estagioArea">
+                            <option value="">Todos</option>
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="cpfSupervisor">CPF do supervisor</label>
+
+                        <input
+                            type="search"
+                            id="cpfSupervisor"
+                            name="cpfSupervisor"
+                            th:value="${param.cpfSupervisor}"
+                            placeholder="Pesquisar CPF..."
+                        >
+                    </div>
+
+                    <div class="filtros-acoes">
+
+                        <button type="submit" class="botao botao-principal">
+                            <span>⌕</span>
+                            Aplicar filtros
+                        </button>
+
+                        <a th:href="@{/contrato}" class="botao botao-secundario">
+                            Limpar filtros
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+            <!-- Tabela -->
+            <section class="tabela-container">
+
+                <div class="secao-titulo tabela-cabecalho">
+                    <div>
+                        <h2>Lista de contratos</h2>
+                        <p>Contratos correspondentes aos filtros selecionados.</p>
+                    </div>
+
+                    <span class="contador-registros">
+                        Registros:
+                        <span th:text="${contratos != null ? #lists.size(contratos) : 0}">0</span>
+                    </span>
+                </div>
+
+                <div class="tabela-scroll">
+
+                    <table class="tabela-contratos">
+
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Estagiário</th>
+                                <th>Área</th>
+                                <th>Função</th>
+                                <th>Horário</th>
+                                <th>Carga horária</th>
+                                <th>Banco de horas</th>
+                                <th>Estágio na área?</th>
+                                <th class="coluna-acoes">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <!-- Contratos cadastrados -->
+                            <tr th:each="contrato : ${contratos}">
+
+                                <td>
+                                    <div class="identidade-contrato">
+                                        <div class="avatar">
+                                            <span th:text="${contrato.empresa != null ? #strings.substring(contrato.empresa.nome, 0, 1) : 'E'}">E</span>
+                                        </div>
+
+                                        <div>
+                                            <strong th:text="${contrato.empresa != null ? contrato.empresa.nome : 'Não informado'}">
+                                                Empresa
+                                            </strong>
+                                            <span>Empresa contratante</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td th:text="${contrato.estagiario != null ? contrato.estagiario.nome : 'Não informado'}">
+                                    Estagiário
+                                </td>
+
+                                <td th:text="${contrato.area}">Tecnologia</td>
+
+                                <td th:text="${contrato.funcao}">Desenvolvedor</td>
+
+                                <td>
+                                    <span th:text="${contrato.inicio != null ? #temporals.format(contrato.inicio, 'HH:mm') : '--:--'}">
+                                        08:00
+                                    </span>
+                                    -
+                                    <span th:text="${contrato.termino != null ? #temporals.format(contrato.termino, 'HH:mm') : '--:--'}">
+                                        14:00
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span th:text="${contrato.cargaHoraria + ' horas'}">
+                                        30 horas
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span th:class="${contrato.bancoHoras ? 'status status-positivo' : 'status status-negativo'}"
+                                          th:text="${contrato.bancoHoras ? 'Sim' : 'Não'}">
+                                        Não
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span th:class="${contrato.estagioArea ? 'status status-positivo' : 'status status-negativo'}"
+                                          th:text="${contrato.estagioArea ? 'Sim' : 'Não'}">
+                                        Sim
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <div class="acoes">
+
+                                        <a th:href="@{/contrato/visualizar/{id}(id=${contrato.idContrato})}"
+                                           class="acao acao-visualizar"
+                                           aria-label="Visualizar contrato"
+                                           title="Visualizar">◉</a>
+
+                                        <a th:href="@{/contrato/editar/{id}(id=${contrato.idContrato})}"
+                                           class="acao acao-editar"
+                                           aria-label="Editar contrato"
+                                           title="Editar">✎</a>
+
+                                        <form th:action="@{/contrato/excluir/{id}(id=${contrato.idContrato})}"
+                                              method="post"
+                                              style="display: inline;"
+                                              onsubmit="return confirm('Deseja realmente excluir este contrato?');">
+
+                                            <button type="submit"
+                                                    class="acao acao-excluir"
+                                                    aria-label="Excluir contrato"
+                                                    title="Excluir">×</button>
+
+                                        </form>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <!-- Quando não houver contratos -->
+                            <tr th:if="${contratos == null or #lists.isEmpty(contratos)}">
+                                <td colspan="9" class="sem-registros">
+                                    Nenhum contrato encontrado.
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="tabela-rodape">
+                    <span>Listagem de contratos cadastrados no sistema.</span>
+                </div>
+
+            </section>
+
+            <div class="dashboard-voltar">
+                <a th:href="@{/}" class="link-voltar">← Voltar ao início</a>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

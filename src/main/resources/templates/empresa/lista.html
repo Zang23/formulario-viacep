@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Empresas</title>
+
+    <link rel="stylesheet" th:href="@{/css/empresa-lista.css}">
+</head>
+
+<body>
+
+    <header th:replace="~{fragmentos/header :: header('/empresa')}"></header>
+
+    <main class="pagina-dashboard">
+
+        <section class="dashboard-container">
+
+            <!-- Cabeçalho -->
+            <div class="dashboard-header">
+                <div>
+                    <span class="dashboard-legenda">GERENCIAMENTO</span>
+                    <h1>Empresas</h1>
+                    <p class="dashboard-subtitulo">
+                        Consulte, filtre e gerencie as empresas cadastradas.
+                    </p>
+                </div>
+
+                <a th:href="@{/empresa/formulario}" class="botao botao-principal">
+                    <span class="botao-icone">+</span>
+                    Nova empresa
+                </a>
+            </div>
+
+            <!-- Indicadores -->
+            <div class="indicadores">
+
+                <article class="indicador-card">
+                    <div class="indicador-icone">▣</div>
+                    <div>
+                        <span class="indicador-label">Total de empresas</span>
+                        <strong class="indicador-valor"
+                                th:text="${totalEmpresas != null ? totalEmpresas : '—'}">—</strong>
+                    </div>
+                </article>
+
+                <article class="indicador-card">
+                    <div class="indicador-icone">▤</div>
+                    <div>
+                        <span class="indicador-label">Resultados encontrados</span>
+                        <strong class="indicador-valor"
+                                th:text="${empresas != null ? #lists.size(empresas) : '—'}">—</strong>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Filtros -->
+            <section class="filtros-container">
+
+                <div class="secao-titulo">
+                    <div>
+                        <h2>Filtros</h2>
+                        <p>Selecione os critérios para localizar empresas.</p>
+                    </div>
+
+                    <span class="filtro-icone">⚙</span>
+                </div>
+
+                <form class="filtros-formulario"
+                      th:action="@{/empresa}"
+                      method="get">
+
+                    <div class="campo">
+                        <label for="nome">Nome da empresa</label>
+                        <input
+                            type="search"
+                            id="nome"
+                            name="nome"
+                            th:value="${param.nome}"
+                            placeholder="Pesquisar por nome..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="cnpj">CNPJ</label>
+                        <input
+                            type="text"
+                            id="cnpj"
+                            name="cnpj"
+                            th:value="${param.cnpj}"
+                            placeholder="Pesquisar CNPJ..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="cidade">Cidade</label>
+                        <input
+                            type="text"
+                            id="cidade"
+                            name="cidade"
+                            th:value="${param.cidade}"
+                            placeholder="Pesquisar cidade..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="estado">Estado</label>
+                        <input
+                            type="text"
+                            id="estado"
+                            name="estado"
+                            th:value="${param.estado}"
+                            placeholder="UF..."
+                            maxlength="2"
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input
+                            type="search"
+                            id="email"
+                            name="email"
+                            th:value="${param.email}"
+                            placeholder="Pesquisar e-mail..."
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefone">Telefone</label>
+                        <input
+                            type="text"
+                            id="telefone"
+                            name="telefone"
+                            th:value="${param.telefone}"
+                            placeholder="Pesquisar telefone..."
+                        >
+                    </div>
+
+                    <div class="filtros-acoes">
+
+                        <button type="submit" class="botao botao-principal">
+                            <span>⌕</span>
+                            Aplicar filtros
+                        </button>
+
+                        <a th:href="@{/empresa}" class="botao botao-secundario">
+                            Limpar filtros
+                        </a>
+
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Tabela -->
+            <section class="tabela-container">
+
+                <div class="secao-titulo tabela-cabecalho">
+                    <div>
+                        <h2>Lista de empresas</h2>
+                        <p>Empresas correspondentes aos filtros selecionados.</p>
+                    </div>
+
+                    <span class="contador-registros">
+                        Registros:
+                        <span th:text="${empresas != null ? #lists.size(empresas) : 0}">0</span>
+                    </span>
+                </div>
+
+                <div class="tabela-scroll">
+
+                    <table class="tabela-empresas">
+
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>CNPJ</th>
+                                <th>E-mail</th>
+                                <th>Telefone</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th class="coluna-acoes">Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <!-- Empresas cadastradas -->
+                            <tr th:each="empresa : ${empresas}">
+
+                                <td>
+                                    <div class="identidade-empresa">
+
+                                        <div class="avatar">
+                                            <span th:text="${#strings.substring(empresa.nome, 0, 1)}">E</span>
+                                        </div>
+
+                                        <div>
+                                            <strong th:text="${empresa.nome}">Nome da empresa</strong>
+                                            <span>Empresa cadastrada</span>
+                                        </div>
+
+                                    </div>
+                                </td>
+
+                                <td th:text="${empresa.cnpj}">00.000.000/0001-00</td>
+
+                                <td th:text="${empresa.email}">empresa@email.com</td>
+
+                                <td th:text="${empresa.telefone}">(11) 00000-0000</td>
+
+                                <td th:text="${empresa.cidade}">São Paulo</td>
+
+                                <td th:text="${empresa.estado}">SP</td>
+
+                                <td>
+                                    <div class="acoes">
+
+                                        <a th:href="@{/empresa/visualizar/{id}(id=${empresa.id})}"
+                                           class="acao acao-visualizar"
+                                           aria-label="Visualizar empresa"
+                                           title="Visualizar">◉</a>
+
+                                        <a th:href="@{/empresa/editar/{id}(id=${empresa.id})}"
+                                           class="acao acao-editar"
+                                           aria-label="Editar empresa"
+                                           title="Editar">✎</a>
+
+                                        <form th:action="@{/empresa/excluir/{id}(id=${empresa.id})}"
+                                              method="post"
+                                              style="display: inline;"
+                                              onsubmit="return confirm('Deseja realmente excluir esta empresa?');">
+
+                                            <button type="submit"
+                                                    class="acao acao-excluir"
+                                                    aria-label="Excluir empresa"
+                                                    title="Excluir">×</button>
+
+                                        </form>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <!-- Quando não houver empresas -->
+                            <tr th:if="${empresas == null or #lists.isEmpty(empresas)}">
+                                <td colspan="7" class="sem-registros">
+                                    Nenhuma empresa encontrada.
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="tabela-rodape">
+                    <span>Listagem de empresas cadastradas no sistema.</span>
+                </div>
+
+            </section>
+
+            <div class="dashboard-voltar">
+                <a th:href="@{/}" class="link-voltar">← Voltar ao início</a>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

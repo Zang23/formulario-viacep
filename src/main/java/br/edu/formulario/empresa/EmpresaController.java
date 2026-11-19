@@ -30,6 +30,12 @@ public class EmpresaController {
         model.addAttribute("dados", DadosCadastroEmpresa.vazio());
         return "/empresa/formulario";
     }
+    
+    
+    @GetMapping("/dashboard")
+    public String listaEmpresa() {
+    	return "empresa/lista";
+    }
 
     @GetMapping("/formulario/{cnpj}")
     public String carregarFormulario(@PathVariable("cnpj") String cnpj,
