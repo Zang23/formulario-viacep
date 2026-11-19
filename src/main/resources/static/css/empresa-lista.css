@@ -1,0 +1,65 @@
+
+/* Importa o layout visual da listagem de estagiários */
+@import url("./estagiario-lista.css");
+
+/* Identidade da empresa */
+
+.identidade-empresa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.identidade-empresa strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #f5f5f5;
+    font-size: 0.85rem;
+}
+
+.identidade-empresa span {
+    display: block;
+    color: #929292;
+    font-size: 0.73rem;
+}
+
+/* Tabela */
+
+.tabela-empresas {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.tabela-empresas thead {
+    background: #292929;
+}
+
+.tabela-empresas th {
+    padding: 16px 18px;
+    color: #b8b8b8;
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.tabela-empresas td {
+    padding: 16px 18px;
+    border-top: 1px solid #343434;
+    color: #dedede;
+    font-size: 0.84rem;
+}
+
+.tabela-empresas tbody tr:hover {
+    background: #242424;
+}
+
+/* Estado vazio */
+
+.sem-registros {
+    padding: 35px !important;
+    color: #929292 !important;
+    text-align: center;
+}

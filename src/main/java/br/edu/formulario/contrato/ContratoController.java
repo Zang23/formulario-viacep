@@ -16,17 +16,29 @@ import br.edu.formulario.empresa.EmpresaRepository;
 import br.edu.formulario.contrato.DadosCadastroContrato;
 
 @Controller
-@RequestMapping("/contrato/formulario")
+@RequestMapping("/contrato")
 public class ContratoController {
 
     @Autowired
     private ContratoService contratoService;
 
-    @GetMapping
+    @GetMapping("/formulario")
     public String novoFormulario(Model model) {
         model.addAttribute("dados", DadosCadastroContrato.vazio());
         return "contrato/formulario";
     }
+    
+    @GetMapping("/dashboard")
+    public String listaContrato() {
+    	return "contrato/lista";
+    }
+    
+//    @GetMapping("/dashboard")
+//    public String listaEstagiario(){
+//        return "estagiario/lista";
+//    }
+    
+    
 
     @GetMapping("/{id}")
     public String carregarFormulario(
