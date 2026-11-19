@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository 
+@Repository
 @Transactional
 public interface EmpresaRepository extends JpaRepository<Empresa, String> {
     //verifica se o cnpj existe
@@ -19,9 +19,12 @@ public interface EmpresaRepository extends JpaRepository<Empresa, String> {
     @Query("SELECT e FROM Empresa e WHERE e.email = :email")
     Optional<Empresa> findByEmail(@Param("email") String email);
 
+    //busca por cidade
+    @Query("SELECT e FROM Empresa e WHERE e.endereco.localidade = :localidade")
+    List<Empresa> findByCidade(@Param("localidade") String cidade);
 
-    //busca por razão social
-    @Query("SELECT e FROM Empresa e WHERE e.razaoSocial = :razaoSocial")
-    List<Empresa> findByRazaoSocial(@Param("razaoSocial") String razaoSocial);
+    //busca por area de atuação
+    @Query("SELECT e FROM Empresa e WHERE e.segmentoMercado = :area")
+    List<Empresa> findByArea(@Param("area") String area);
 
 }

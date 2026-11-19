@@ -1,43 +1,44 @@
-package br.edu.formulario.supervisor;
+package br.edu.formulario.contato;
 
-import java.util.List;
-
-import br.edu.formulario.contrato.Contrato;
-
+import br.edu.formulario.empresa.Empresa;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "supervisor")
+@Table(name = "contato")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Supervisor {
+public class Contato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+    private String telefone;
     private String cargo;
+    private String email;
 
-    @OneToMany(mappedBy = "supervisor")
-    private List<Contrato> contratos;
+    @ManyToOne
+    @JoinColumn(name = "empresacnpjpj")
+    private Empresa empresa;
 
-    public Supervisor(DadosCadastroSupervisor dados) {
-        this.id = dados.id();
+    public Contato(DadosCadastroContato dados, Empresa empresa) {
         this.nome = dados.nome();
+        this.telefone = dados.telefone() == null ? null : dados.telefone().replaceAll("\\D", "");
         this.cargo = dados.cargo();
+        this.email = dados.email();
+        this.empresa = empresa;
     }
 }

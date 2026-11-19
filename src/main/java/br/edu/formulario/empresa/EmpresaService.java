@@ -27,8 +27,12 @@ public class EmpresaService {
         empresa.atualizarInformacoes(dados);;
     }
 
-    public List<Empresa> buscarPorRazaoSocial(String razaoSocial) {
-        return empresaRepository.findByRazaoSocial(razaoSocial);
+    public List<Empresa> buscarPorCidade(String cidade) {
+        return empresaRepository.findByCidade(cidade);
+    }
+
+    public List<Empresa> buscarPorAreaAtuacao(String area) {
+        return empresaRepository.findByArea(area);
     }  
 
     public boolean verificarCnpjExistente(String cnpj) {
