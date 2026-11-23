@@ -56,7 +56,9 @@ public class Estagiario{
         this.curso = dados.curso();
         this.genero = dados.genero();
         this.etnia = dados.etnia();
-        this.rendaFamiliar = dados.rendaFamiliar();
+        this.rendaFamiliar = dados.rendaFamiliar() != null
+                ? dados.rendaFamiliar()
+                : 0.0;
         this.pcd = dados.pcd();
         this.trabalhaNaArea = dados.trabalhaNaArea();
 
@@ -110,7 +112,7 @@ public class Estagiario{
         if (dados.rendaFamiliar() > 0) {
             this.rendaFamiliar = dados.rendaFamiliar();
         }
-        
+
         this.pcd = dados.pcd();
         this.trabalhaNaArea = dados.trabalhaNaArea();
     }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -5,90 +6,194 @@
 
 <body>
 
-	<header th:replace="~{fragmentos/header :: header('/empresa/formulario')}"></header>
+    <!-- Toast de erro -->
+    <div th:if="${errorMessage}"
+         class="toast toast-erro"
+         role="alert">
 
-	<div class="divBackground">
+        <span class="toast-icone">!</span>
 
-		<div class="IForm container">
+        <div class="toast-conteudo">
+            <strong>Erro</strong>
+            <p th:text="${errorMessage}"></p>
+        </div>
 
-			<form th:action="@{/empresa/salvar}" th:object="${dados}" method="post" class="formulario">
+        <button type="button"
+                class="toast-fechar"
+                aria-label="Fechar aviso">&times;</button>
 
-				<div class="carousel">
+        <div class="toast-progresso"></div>
+    </div>
 
-					<div class="carousel-track" id="carouselTrack">
+    <!-- Toast de sucesso -->
+    <div th:if="${message}"
+         class="toast toast-sucesso"
+         role="status">
 
-						<section class="etapa">
+        <span class="toast-icone">&#10003;</span>
 
-							<h2>Dados da empresa</h2>
+        <div class="toast-conteudo">
+            <strong>Sucesso!</strong>
+            <p th:text="${message}"></p>
+        </div>
 
-							<label class="IForm label">Insira o CNPJ:</label>
-							<input type="text" th:field="*{cnpj}" class="IForm input text" required>
+        <button type="button"
+                class="toast-fechar"
+                aria-label="Fechar aviso">&times;</button>
 
-							<label class="IForm label">Insira o nome:</label>
-							<input type="text" th:field="*{nome}" class="IForm input text">
+        <div class="toast-progresso"></div>
+    </div>
 
-							<label class="IForm label">Insira a razão social:</label>
-							<input type="text" th:field="*{razaoSocial}" class="IForm input text">
+    <header th:replace="~{fragmentos/header :: header('/empresa/formulario')}"></header>
 
-							<label class="IForm label">Insira o segmento de mercado:</label>
-							<input type="text" th:field="*{segmentoMercado}" class="IForm input text">
+    <div class="divBackground">
 
-							<label class="IForm label">Insira o telefone:</label>
-							<input type="text" th:field="*{telefone}" class="IForm input text">
+        <div class="IForm container">
 
-							<label class="IForm label">Insira o email:</label>
-							<input type="email" th:field="*{email}" class="IForm input text">
+            <form th:action="@{/empresa/salvar}"
+                  th:object="${dados}"
+                  method="post"
+                  class="formulario">
 
-							<label class="IForm label">Insira o site:</label>
-							<input type="url" th:field="*{site}" class="IForm input text">
+                <div class="carousel">
 
-							<label class="IForm label">Insira o linkedin:</label>
-							<input type="url" th:field="*{linkedin}" class="IForm input text">
+                    <div class="carousel-track" id="carouselTrack">
 
-							<h4>Endereço</h4>
+                        <!-- ETAPA 1: DADOS DA EMPRESA -->
+                        <section class="etapa">
 
-							<label class="IForm label">Insira a cidade:</label>
-							<input type="text" th:field="*{localidade}" class="IForm input text">
+                            <h2>Dados da empresa</h2>
 
-							<label class="IForm label">Insira o CEP:</label>
-							<input type="text" th:field="*{cep}" class="IForm input text">
+                            <label class="IForm label">Insira o CNPJ:</label>
+                            <input type="text"
+                                   th:field="*{cnpj}"
+                                   class="IForm input text"
+                                   required>
 
-							<label class="IForm label">Insira o nome da rua:</label>
-							<input type="text" th:field="*{logradouro}" class="IForm input text">
+                            <label class="IForm label">Insira o nome:</label>
+                            <input type="text"
+                                   th:field="*{nome}"
+                                   class="IForm input text">
 
-							<label class="IForm label">Insira o número da rua:</label>
-							<input type="text" th:field="*{numPorta}" class="IForm input text">
+                            <label class="IForm label">Insira a razão social:</label>
+                            <input type="text"
+                                   th:field="*{razaoSocial}"
+                                   class="IForm input text">
 
-							<label class="IForm label">Insira o bairro:</label>
-							<input type="text" th:field="*{bairro}" class="IForm input text">
+                            <label class="IForm label">Insira o segmento de mercado:</label>
+                            <input type="text"
+                                   th:field="*{segmentoMercado}"
+                                   class="IForm input text">
 
-							<label class="IForm label">Insira o UF:</label>
-							<input type="text" th:field="*{uf}" class="IForm input text">
+                            <label class="IForm label">Insira o telefone:</label>
+                            <input type="text"
+                                   th:field="*{telefone}"
+                                   class="IForm input text">
 
-							<div class="botoes">
+                            <label class="IForm label">Insira o email:</label>
+                            <input type="email"
+                                   th:field="*{email}"
+                                   class="IForm input text">
 
-								<button type="submit" class="IForm input finalizaForm">
-									Finalizar
-								</button>
+                            <label class="IForm label">Insira o site:</label>
+                            <input type="url"
+                                   th:field="*{site}"
+                                   class="IForm input text">
 
-							</div>
+                            <label class="IForm label">Insira o LinkedIn:</label>
+                            <input type="url"
+                                   th:field="*{linkedin}"
+                                   class="IForm input text">
 
-						</section>
+                            <div class="botoes">
+                                <button type="button"
+                                        class="IForm input proximo">
+                                    Próximo
+                                </button>
+                            </div>
 
-					</div>
+                        </section>
 
-				</div>
+                        <!-- ETAPA 2: ENDEREÇO -->
+                        <section class="etapa">
 
-			</form>
+                            <h2>Endereço da empresa</h2>
 
-		</div>
+                            <label class="IForm label">Insira o CEP:</label>
 
-	</div>
+                            <div class="DivOpcoes">
 
+                                <input type="text"
+                                       th:field="*{cep}"
+                                       class="IForm input text"
+                                       id="cep">
 
-	<script th:src="@{/js/toast.js}" ></script>
+                                <button type="button"
+                                        id="buscarCep"
+                                        class="IForm input">
+                                    Buscar
+                                </button>
 
+                            </div>
+
+                            <label class="IForm label">Insira a cidade:</label>
+                            <input type="text"
+                                   th:field="*{localidade}"
+                                   class="IForm input text"
+                                   id="localidade">
+
+                            <label class="IForm label">Insira o logradouro:</label>
+                            <input type="text"
+                                   th:field="*{logradouro}"
+                                   class="IForm input text"
+                                   id="logradouro">
+
+                            <label class="IForm label">Insira o número da rua:</label>
+                            <input type="text"
+                                   th:field="*{numPorta}"
+                                   class="IForm input text">
+
+                            <label class="IForm label">Insira o bairro:</label>
+                            <input type="text"
+                                   th:field="*{bairro}"
+                                   class="IForm input text"
+                                   id="bairro">
+
+                            <label class="IForm label">Insira o UF:</label>
+                            <input type="text"
+                                   th:field="*{uf}"
+                                   class="IForm input text"
+                                   id="uf">
+
+                            <div class="botoes">
+
+                                <button type="button"
+                                        class="IForm input voltar">
+                                    Voltar
+                                </button>
+
+                                <button type="submit"
+                                        class="IForm input finalizaForm">
+                                    Finalizar
+                                </button>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script th:src="@{/js/toast.js}"></script>
+    <script th:src="@{/js/formulario-estagiario.js}"></script>
+    <script th:src="@{/js/formulario-empresa.js}"></script>
 
 </body>
-
 </html>

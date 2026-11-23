@@ -60,8 +60,20 @@
 							<label class="IForm label">Insira o nome:</label>
 							<input type="text" th:field="*{nome}" class="IForm input text">
 
-							<label class="IForm label">Insira a escolaridade:</label>
-							<input type="text" th:field="*{escolaridade}" class="IForm input text">
+							<label class="IForm label">Selecione a escolaridade:</label>
+
+     							<select th:field="*{escolaridade}" class="IForm input option" required>
+                                    <option value="" disabled>Selecione uma opção</option>
+
+                                    <option value="Ensino fundamental completo">Ensino fundamental completo</option>
+                                    <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+
+                                    <option value="Ensino superior completo">Ensino superior completo</option>
+                                    <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+
+                                    <option value="Ensino técnico completo">Ensino técnico completo</option>
+                                    <option value="Ensino técnico incompleto">Ensino técnico incompleto</option>
+    							</select>
 
 							<label class="IForm label">Insira o telefone:</label>
 							<input type="text" th:field="*{telefone}" class="IForm input text">
@@ -72,15 +84,18 @@
 							<label class="IForm label">Selecione semestre, curso e período:</label>
 
 							<div class="DivOpcoes">
-								<select th:field="*{semestre}" class="IForm input option">
-									<option value="1" disabled>Selecione uma opção</option>
-									<option value="1">1º</option>
-									<option value="2">2º</option>
-									<option value="3">3º</option>
-									<option value="4">4º</option>
-									<option value="5">5º</option>
-									<option value="6">6º</option>
-								</select>
+    							<select th:field="*{semestre}" class="IForm input option" required>
+
+                                    <option value="" disabled>Selecione uma opção</option>
+
+                                    <option value="1">1º</option>
+                                    <option value="2">2º</option>
+                                    <option value="3">3º</option>
+                                    <option value="4">4º</option>
+                                    <option value="5">5º</option>
+                                    <option value="6">6º</option>
+
+    							</select>
 
 								<select th:field="*{curso}" class="IForm input option">
 									<option value="Comercio exterior" disabled>Selecione uma opção</option>
@@ -121,7 +136,13 @@
 							</select>
 
 							<label class="IForm label">Insira a renda familiar:</label>
-							<input type="text" th:field="*{rendaFamiliar}" class="IForm input text">
+
+							<input type="number"
+                               th:field="*{rendaFamiliar}"
+                               class="IForm input text"
+                               placeholder="Ex.: 2500.00"
+                               min="0"
+                               step="0.01">
 
 							<label class="IForm label">
 								É PCD (Pessoa com deficiência)?:

@@ -1,0 +1,191 @@
+/* =========================
+   ÁREA E CONTAINER DO FORMULÁRIO
+   Use class="IForm form-container" no HTML.
+========================= */
+
+.divBackground {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 104px;
+    padding-bottom: 104px;
+}
+
+.form-container {
+    background-color: #232323;
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.IForm.form-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 20px 10px;
+    height: auto;
+    align-self: flex-start;
+    transition: height 0.4s ease;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.IForm form {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    box-sizing: border-box;
+    height: auto;
+    transition: height 0.4s ease;
+}
+
+/* =========================
+   CARROSSEL E ETAPAS
+========================= */
+
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: auto;
+    transition: height 0.4s ease;
+}
+
+.carousel-track {
+    display: flex;
+    width: 300%;
+    margin: 0;
+    padding: 0;
+    align-items: flex-start;
+    transition: transform 0.4s ease;
+    will-change: transform;
+}
+
+.etapa {
+    width: 33.333333%;
+    min-width: 33.333333%;
+    flex: 0 0 33.333333%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.etapa h2 {
+    margin: 0 20px 10px;
+    color: #fff;
+}
+
+/* =========================
+   CAMPOS
+========================= */
+
+.IForm .label {
+    margin: 0 20px;
+    color: #ffffff;
+}
+
+.IForm .input {
+    padding: 8px;
+    background-color: #151515;
+    border: 1px solid #737373;
+    border-radius: 4px;
+    margin: 0 5px;
+    color: #ffffff;
+    outline: none;
+}
+
+.IForm .input:hover {
+    background-color: #303030;
+}
+
+.IForm .input:focus {
+    background-color: #202020 !important;
+    border-color: #3539e5;
+    box-shadow: 0 0 0 3px rgba(53, 229, 53, 0.12);
+}
+
+.IForm .checkbox:hover {
+    cursor: pointer;
+}
+
+.IForm .checkbox {
+    color: #151515;
+    background-color: transparent;
+}
+
+/* =========================
+   SELECTS / OPÇÕES
+========================= */
+
+.DivOpcoes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+.option {
+    flex: 1;
+    min-width: 0;
+}
+
+/* =========================
+   BOTÕES DE NAVEGAÇÃO
+========================= */
+
+.botoes {
+    display: flex;
+    gap: 10px;
+    margin: 30px 20px 10px;
+    justify-content: space-between;
+}
+
+.FNavButton {
+    border: none;
+    background: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.FNavButton:hover {
+    color: #3539e5;
+    text-decoration: underline;
+}
+
+.finalizaForm {
+    cursor: pointer;
+}
+
+/* =========================
+   SUPERVISOR
+========================= */
+
+.supervisor {
+    width: 100px;
+    margin: 5px;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 600px) {
+    .divBackground {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .IForm.form-container {
+        max-width: 400px;
+    }
+}

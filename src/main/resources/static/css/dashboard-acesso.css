@@ -1,0 +1,90 @@
+/* Dashboard inicial com os cards de acesso */
+
+.dashboard-acesso-container {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 40px;
+    background: #232323;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.dashboard-acesso-container h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.dashboard-acesso-subtitulo {
+    margin: 12px 0 35px;
+    color: #bdbdbd;
+    font-size: 1rem;
+}
+
+/* Cards de acesso */
+
+.dashboard-opcoes {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    flex: 1;
+    min-width: 220px;
+    max-width: 260px;
+    background: #151515;
+    border: 1px solid #3a3a3a;
+    border-radius: 14px;
+    padding: 30px 20px;
+    text-decoration: none;
+    color: #fff;
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    border-color: #3539e5;
+    background: #202020;
+    box-shadow: 0 10px 30px rgba(53, 57, 229, 0.18);
+}
+
+.dashboard-card .icone {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.dashboard-card h2 {
+    margin: 0 0 10px;
+    font-size: 1.3rem;
+}
+
+.dashboard-card p {
+    margin: 0;
+    color: #bdbdbd;
+    line-height: 1.5;
+    font-size: .95rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-acesso-container {
+        padding: 30px 20px;
+    }
+
+    .dashboard-opcoes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard-card {
+        max-width: 100%;
+        width: 100%;
+    }
+}
