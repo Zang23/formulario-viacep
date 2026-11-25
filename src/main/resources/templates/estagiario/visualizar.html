@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard de Estagiários</title>
+
+<!-- Mantenha o fragmento de head utilizado nas outras páginas, se houver -->
+<link rel="stylesheet" th:href="@{/css/estagiario-lista.css}">
+<link rel="stylesheet" th:href="@{/css/navbar.css}">
+<link rel="stylesheet" th:href="@{/css/ver.css}">
+</head>
+<body>
+
+    <header th:replace="~{fragmentos/header :: header('/estagiario')}"></header>
+
+    <main class="pagina-dashboard">
+
+        <section class="dashboard-container">
+
+            <div class="dashboard-header">
+                <div>
+                    <span class="dashboard-legenda">GERENCIAMENTO</span>
+                    <h1>Visualizar estagiário</h1>
+                    <p class="dashboard-subtitulo">
+                        Consulte todas as informações cadastradas do estagiário.
+                    </p>
+                </div>
+
+                <a th:href="@{/estagiario/editar/{id}(id=${dados.ra})}"
+                   class="botao botao-principal">
+                    Editar estagiário
+                </a>
+            </div>
+
+            <!-- DADOS PESSOAIS -->
+
+            <section class="filtros-container">
+
+                <h2 class="secao-titulo">Dados pessoais</h2>
+
+                <div class="filtros-formulario">
+
+                    <div class="campo">
+                        <label>RA</label>
+                        <p th:text="${dados.ra}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Nome completo</label>
+                        <p th:text="${dados.nome}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Escolaridade</label>
+                        <p th:text="${dados.escolaridade}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Telefone</label>
+                        <p th:text="${dados.telefone}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>E-mail</label>
+                        <p th:text="${dados.email}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Semestre</label>
+                        <p th:text="${dados.semestre != null ? dados.semestre + 'º semestre' : '-'}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Curso</label>
+                        <p th:text="${dados.curso}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Período</label>
+                        <p th:text="${dados.periodo}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Gênero</label>
+                        <p th:text="${dados.genero == 'M' ? 'Masculino' : (dados.genero == 'F' ? 'Feminino' : 'Outro')}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Etnia</label>
+                        <p th:text="${dados.etnia}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Renda familiar</label>
+                        <p th:text="${dados.rendaFamiliar != null ? 'R$ ' + #numbers.formatDecimal(dados.rendaFamiliar, 1, 'POINT', 2, 'COMMA') : '-'}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Pessoa com deficiência (PCD)</label>
+                        <p th:text="${dados.pcd ? 'Sim' : 'Não'}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Trabalha na área?</label>
+                        <p th:text="${dados.trabalhaNaArea ? 'Sim' : 'Não'}"></p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ENDEREÇO -->
+
+            <section class="filtros-container">
+
+                <h2 class="secao-titulo">Endereço</h2>
+
+                <div class="filtros-formulario">
+
+                    <div class="campo">
+                        <label>CEP</label>
+                        <p th:text="${dados.cep}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Localidade</label>
+                        <p th:text="${dados.localidade}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Logradouro</label>
+                        <p th:text="${dados.logradouro}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Número</label>
+                        <p th:text="${dados.numPorta}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Bairro</label>
+                        <p th:text="${dados.bairro}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>UF</label>
+                        <p th:text="${dados.uf}"></p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- DADOS ESCOLARES -->
+
+            <section class="filtros-container">
+
+                <h2 class="secao-titulo">Dados escolares</h2>
+
+                <div class="filtros-formulario">
+
+                    <div class="campo">
+                        <label>Nome da instituição</label>
+                        <p th:text="${dados.escolaNome}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Distância da escola</label>
+                        <p th:text="${dados.escolaDistancia}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Ensino técnico?</label>
+                        <p th:text="${dados.ensinoTecnico ? 'Sim' : 'Não'}"></p>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="dashboard-voltar">
+                <a th:href="@{/estagiario}" class="botao botao-secundario link-voltar">
+                    Voltar
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+</body>
+</html>
+```

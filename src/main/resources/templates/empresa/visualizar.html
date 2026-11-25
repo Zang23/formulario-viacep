@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar empresa</title>
+
+    <link rel="stylesheet" th:href="@{/css/estagiario-lista.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/ver.css}">
+</head>
+
+<body>
+
+    <header th:replace="~{fragmentos/header :: header('/empresa')}"></header>
+
+    <main class="pagina-dashboard">
+
+        <section class="dashboard-container">
+
+            <div class="dashboard-header">
+                <div>
+                    <span class="dashboard-legenda">GERENCIAMENTO</span>
+                    <h1>Visualizar empresa</h1>
+                    <p class="dashboard-subtitulo">
+                        Consulte todas as informações cadastradas da empresa.
+                    </p>
+                </div>
+
+                <a th:href="@{/empresa/editar/{id}(id=${dados.cnpj})}"
+                   class="botao botao-principal">
+                    Editar empresa
+                </a>
+            </div>
+
+            <!-- DADOS DA EMPRESA -->
+            <section class="filtros-container">
+
+                <h2 class="secao-titulo">Dados da empresa</h2>
+
+                <div class="filtros-formulario">
+
+                    <div class="campo">
+                        <label>CNPJ</label>
+                        <p th:text="${dados.cnpj}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Nome</label>
+                        <p th:text="${dados.nome}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Razão social</label>
+                        <p th:text="${dados.razaoSocial}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Segmento de mercado</label>
+                        <p th:text="${dados.segmentoMercado}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Telefone</label>
+                        <p th:text="${dados.telefone}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>E-mail</label>
+                        <p th:text="${dados.email}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Site</label>
+                        <p th:text="${dados.site}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>LinkedIn</label>
+                        <p th:text="${dados.linkedin}"></p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ENDEREÇO -->
+            <section class="filtros-container">
+
+                <h2 class="secao-titulo">Endereço da empresa</h2>
+
+                <div class="filtros-formulario">
+
+                    <div class="campo">
+                        <label>CEP</label>
+                        <p th:text="${dados.cep}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Cidade</label>
+                        <p th:text="${dados.localidade}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Logradouro</label>
+                        <p th:text="${dados.logradouro}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Número</label>
+                        <p th:text="${dados.numPorta}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Bairro</label>
+                        <p th:text="${dados.bairro}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>UF</label>
+                        <p th:text="${dados.uf}"></p>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="dashboard-voltar">
+                <a th:href="@{/empresa/dashboard}" class="botao botao-secundario link-voltar">
+                    Voltar
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

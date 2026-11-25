@@ -51,7 +51,7 @@ public class Empresa {
         this.cnpj = dados.cnpj();
         this.nome = dados.nome();
         this.razaoSocial = dados.razaoSocial();
-        this.segmentoMercado = dados.SegmentoMercado();
+        this.segmentoMercado = dados.segmentoMercado();
         this.email = dados.email();
         this.telefone = dados.telefone() == null ? null : dados.telefone().replaceAll("\\D", "");
         this.departamento = dados.departamento();

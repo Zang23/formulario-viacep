@@ -4,126 +4,118 @@
 <head th:replace="~{fragmentos/head :: head('Formulário Contrato')}"></head>
 
 <body>
-    <!-- Toast de erro -->
-    <div th:if="${errorMessage}"
-         class="toast toast-erro"
-         role="alert">
+	<!-- Toast de erro -->
+	<div th:if="${errorMessage}" class="toast toast-erro" role="alert">
 
-        <span class="toast-icone">!</span>
+		<span class="toast-icone">!</span>
 
-        <div class="toast-conteudo">
-            <strong>Erro</strong>
-            <p th:text="${errorMessage}"></p>
-        </div>
+		<div class="toast-conteudo">
+			<strong>Erro</strong>
+			<p th:text="${errorMessage}"></p>
+		</div>
 
-        <button type="button"
-                class="toast-fechar"
-                aria-label="Fechar aviso">&times;</button>
+		<button type="button" class="toast-fechar" aria-label="Fechar aviso">&times;</button>
 
-        <div class="toast-progresso"></div>
-    </div>
+		<div class="toast-progresso"></div>
+	</div>
 
-    <!-- Toast de sucesso -->
-    <div th:if="${message}"
-         class="toast toast-sucesso"
-         role="status">
+	<!-- Toast de sucesso -->
+	<div th:if="${message}" class="toast toast-sucesso" role="status">
 
-        <span class="toast-icone">&#10003;</span>
+		<span class="toast-icone">&#10003;</span>
 
-        <div class="toast-conteudo">
-            <strong>Sucesso!</strong>
-            <p th:text="${message}"></p>
-        </div>
+		<div class="toast-conteudo">
+			<strong>Sucesso!</strong>
+			<p th:text="${message}"></p>
+		</div>
 
-        <button type="button"
-                class="toast-fechar"
-                aria-label="Fechar aviso">&times;</button>
+		<button type="button" class="toast-fechar" aria-label="Fechar aviso">&times;</button>
 
-        <div class="toast-progresso"></div>
-    </div>
+		<div class="toast-progresso"></div>
+	</div>
 
-    <header th:replace="~{fragmentos/header :: header('contrato/formulario')}"></header>
+	<header th:replace="~{fragmentos/header :: header('contrato/formulario')}"></header>
 
-    <div class="divBackground">
+	<div class="divBackground">
 
-        <div class="IForm container">
+		<div class="IForm container">
 
 
 
 			<form th:action="@{/contrato/formulario/salvar}" th:object="${dados}" method="post" class="formulario">
 
-			    <div class="carousel">
+				<div class="carousel">
 
-			        <div class="carousel-track" id="carouselTrack">
+					<div class="carousel-track" id="carouselTrack">
 
-			            <section class="etapa">
+						<section class="etapa">
 
-			                <h2>Dados do contrato</h2>
+							<h2>Dados do contrato</h2>
+							<input type="hidden" th:field="*{idContrato}" class="IForm input text">
+							<label class="IForm label">Insira o CNPJ da empresa</label>
+							<input type="text" th:field="*{empresaCnpj}" class="IForm input text">
 
-			                <label class="IForm label">Insira o CNPJ da empresa</label>
-			                <input type="text" th:field="*{empresaCnpj}" class="IForm input text">
+							<label class="IForm label">Insira o RA do estagiário</label>
+							<input type="text" th:field="*{estagiarioId}" class="IForm input text">
 
-			                <label class="IForm label">Insira o RA do estagiário</label>
-			                <input type="text" th:field="*{estagiarioId}" class="IForm input text">
+							<label class="IForm label">Horário de entrada:</label>
+							<input type="time" th:field="*{inicio}" class="IForm input text">
 
-			                <label class="IForm label">Horário de entrada:</label>
-			                <input type="time" th:field="*{inicio}" class="IForm input text">
+							<label class="IForm label">Horário de saída:</label>
+							<input type="time" th:field="*{termino}" class="IForm input text">
 
-			                <label class="IForm label">Horário de saída:</label>
-			                <input type="time" th:field="*{termino}" class="IForm input text">
+							<label class="IForm label">Carga horária:</label>
+							<input type="text" th:field="*{cargaHoraria}" class="IForm input text">
 
-			                <label class="IForm label">Carga horária:</label>
-			                <input type="text" th:field="*{cargaHoraria}" class="IForm input text">
-
-			                <label class="IForm label">
+							<label class="IForm label">
 								Essa vaga contem banco de horas?
 								<input type="checkbox" th:field="*{bancoHoras}" class="IForm input checkbox">
 							</label>
 
-			                <label class="IForm label">Insira a area do estágio</label>
-			                <input type="text" th:field="*{area}" class="IForm input text">
+							<label class="IForm label">Insira a area do estágio</label>
+							<input type="text" th:field="*{area}" class="IForm input text">
 
-			                <label class="IForm label">Insira a função do estagiário</label>
-			                <input type="text" th:field="*{funcao}" class="IForm input text">
+							<label class="IForm label">Insira a função do estagiário</label>
+							<input type="text" th:field="*{funcao}" class="IForm input text">
 
 
-			                <label class="IForm label">
-			                    Descreva o tipo de trabalho que o estagiário irá desempenhar na empresa
-			                </label>
+							<label class="IForm label">
+								Descreva o tipo de trabalho que o estagiário irá desempenhar na empresa
+							</label>
 
 							<textarea th:field="*{descricao}" class="IForm input text" rows="4" cols="50"></textarea>
 
 							<label class="IForm label">
 								Esse estágio é condizente com o curso do estagiário?
-								<input type="checkbox"  th:field="*{estagioArea}" class="IForm input checkbox">
+								<input type="checkbox" th:field="*{estagioArea}" class="IForm input checkbox">
 							</label>
 
-			                <label class="IForm label">Insira o CPF do supervisor</label>
+							<label class="IForm label">Insira o CPF do supervisor</label>
 
-			                <input type="text"  th:field="*{cpfSupervisor}" class="IForm input text">
+							<input type="text" th:field="*{cpfSupervisor}" class="IForm input text">
 
-			                <div class="botoes">
+							<div class="botoes">
 
-			                    <button type="submit" class="IForm input finalizaForm">
-			                        Finalizar
-			                    </button>
+								<button type="submit" class="IForm input finalizaForm">
+									Finalizar
+								</button>
 
-			                </div>
+							</div>
 
-			            </section>
+						</section>
 
-			        </div>
+					</div>
 
-			    </div>
+				</div>
 
 			</form>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 
 
-    <script th:src="@{/js/toast.js}"></script>
+	<script th:src="@{/js/toast.js}"></script>
 
 
 </body>

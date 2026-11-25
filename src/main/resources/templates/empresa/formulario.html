@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -10,18 +9,14 @@
     <div th:if="${errorMessage}"
          class="toast toast-erro"
          role="alert">
-
         <span class="toast-icone">!</span>
-
         <div class="toast-conteudo">
             <strong>Erro</strong>
             <p th:text="${errorMessage}"></p>
         </div>
-
         <button type="button"
                 class="toast-fechar"
                 aria-label="Fechar aviso">&times;</button>
-
         <div class="toast-progresso"></div>
     </div>
 
@@ -29,34 +24,28 @@
     <div th:if="${message}"
          class="toast toast-sucesso"
          role="status">
-
         <span class="toast-icone">&#10003;</span>
-
         <div class="toast-conteudo">
             <strong>Sucesso!</strong>
             <p th:text="${message}"></p>
         </div>
-
         <button type="button"
                 class="toast-fechar"
                 aria-label="Fechar aviso">&times;</button>
-
         <div class="toast-progresso"></div>
     </div>
 
     <header th:replace="~{fragmentos/header :: header('/empresa/formulario')}"></header>
 
     <div class="divBackground">
-
         <div class="IForm container">
 
-            <form th:action="@{/empresa/salvar}"
+            <form th:action="@{/empresa/formulario/salvar}"
                   th:object="${dados}"
                   method="post"
                   class="formulario">
 
                 <div class="carousel">
-
                     <div class="carousel-track" id="carouselTrack">
 
                         <!-- ETAPA 1: DADOS DA EMPRESA -->
@@ -69,41 +58,70 @@
                                    th:field="*{cnpj}"
                                    class="IForm input text"
                                    required>
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('cnpj')}"
+                                  th:errors="*{cnpj}"></span>
 
                             <label class="IForm label">Insira o nome:</label>
                             <input type="text"
                                    th:field="*{nome}"
                                    class="IForm input text">
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('nome')}"
+                                  th:errors="*{nome}"></span>
 
                             <label class="IForm label">Insira a razão social:</label>
                             <input type="text"
                                    th:field="*{razaoSocial}"
                                    class="IForm input text">
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('razaoSocial')}"
+                                  th:errors="*{razaoSocial}"></span>
 
                             <label class="IForm label">Insira o segmento de mercado:</label>
                             <input type="text"
                                    th:field="*{segmentoMercado}"
                                    class="IForm input text">
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('segmentoMercado')}"
+                                  th:errors="*{segmentoMercado}"></span>
 
                             <label class="IForm label">Insira o telefone:</label>
                             <input type="text"
                                    th:field="*{telefone}"
                                    class="IForm input text">
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('telefone')}"
+                                  th:errors="*{telefone}"></span>
 
                             <label class="IForm label">Insira o email:</label>
                             <input type="email"
                                    th:field="*{email}"
                                    class="IForm input text">
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('email')}"
+                                  th:errors="*{email}"></span>
 
                             <label class="IForm label">Insira o site:</label>
                             <input type="url"
                                    th:field="*{site}"
                                    class="IForm input text">
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('site')}"
+                                  th:errors="*{site}"></span>
 
                             <label class="IForm label">Insira o LinkedIn:</label>
                             <input type="url"
                                    th:field="*{linkedin}"
                                    class="IForm input text">
+
+                            <label class="IForm label">Insira o departamento:</label>
+                            <input type="text"
+                                   th:field="*{departamento}"
+                                   class="IForm input text">
+                            <span class="erro-validacao"
+                                  th:if="${#fields.hasErrors('departamento')}"
+                                  th:errors="*{departamento}"></span>
 
                             <div class="botoes">
                                 <button type="button"
@@ -120,20 +138,16 @@
                             <h2>Endereço da empresa</h2>
 
                             <label class="IForm label">Insira o CEP:</label>
-
                             <div class="DivOpcoes">
-
                                 <input type="text"
                                        th:field="*{cep}"
                                        class="IForm input text"
                                        id="cep">
-
                                 <button type="button"
                                         id="buscarCep"
                                         class="IForm input">
                                     Buscar
                                 </button>
-
                             </div>
 
                             <label class="IForm label">Insira a cidade:</label>
@@ -166,7 +180,6 @@
                                    id="uf">
 
                             <div class="botoes">
-
                                 <button type="button"
                                         class="IForm input voltar">
                                     Voltar
@@ -176,19 +189,15 @@
                                         class="IForm input finalizaForm">
                                     Finalizar
                                 </button>
-
                             </div>
 
                         </section>
 
                     </div>
-
                 </div>
 
             </form>
-
         </div>
-
     </div>
 
     <script th:src="@{/js/toast.js}"></script>

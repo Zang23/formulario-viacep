@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar contrato</title>
+
+    <link rel="stylesheet" th:href="@{/css/estagiario-lista.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/ver.css}">
+</head>
+
+<body>
+
+    <header th:replace="~{fragmentos/header :: header('/contrato')}"></header>
+
+    <main class="pagina-dashboard">
+
+        <section class="dashboard-container">
+
+            <div class="dashboard-header">
+                <div>
+                    <span class="dashboard-legenda">GERENCIAMENTO</span>
+                    <h1>Visualizar contrato</h1>
+                    <p class="dashboard-subtitulo">
+                        Consulte todas as informações cadastradas do contrato.
+                    </p>
+                </div>
+
+                <a th:href="@{/contrato/editar/{id}(id=${dados.idContrato})}"
+                   class="botao botao-principal">
+                    Editar contrato
+                </a>
+            </div>
+
+            <!-- DADOS DO CONTRATO -->
+            <section class="filtros-container">
+
+                <h2 class="secao-titulo">Dados do contrato</h2>
+
+                <div class="filtros-formulario">
+
+                    <div class="campo">
+                        <label>CNPJ da empresa</label>
+                        <p th:text="${dados.empresa.cnpj}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>RA do estagiário</label>
+                        <p th:text="${dados.estagiario.ra}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Horário de entrada</label>
+                        <p th:text="${dados.inicio}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Horário de saída</label>
+                        <p th:text="${dados.termino}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Carga horária</label>
+                        <p th:text="${dados.cargaHoraria}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Banco de horas</label>
+                        <p th:text="${dados.bancoHoras ? 'Sim' : 'Não'}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Área do estágio</label>
+                        <p th:text="${dados.area}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Função do estagiário</label>
+                        <p th:text="${dados.funcao}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Descrição das atividades</label>
+                        <p th:text="${dados.descricao}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>Estágio condizente com o curso?</label>
+                        <p th:text="${dados.estagioArea ? 'Sim' : 'Não'}"></p>
+                    </div>
+
+                    <div class="campo">
+                        <label>CPF do supervisor</label>
+                        <p th:text="${dados.cpfSupervisor}"></p>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="dashboard-voltar">
+                <a th:href="@{/contrato/dashboard}" class="botao botao-secundario link-voltar">
+                    Voltar
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

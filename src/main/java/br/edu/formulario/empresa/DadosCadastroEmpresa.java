@@ -22,7 +22,7 @@ public record DadosCadastroEmpresa(
     String razaoSocial,
 
     @NotBlank(message = "O segmento de mercado é obrigatório")
-    String SegmentoMercado,
+    String segmentoMercado,
 
     @NotBlank(message = "O e-mail é obrigatório")
     @Email(message = "Informe um e-mail válido")
