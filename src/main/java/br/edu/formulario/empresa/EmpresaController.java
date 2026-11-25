@@ -39,6 +39,12 @@ public class EmpresaController {
             Model model) {
 
         if (result.hasErrors()) {
+        	 result.getFieldErrors().forEach(erro -> {
+        	        System.err.println(
+        	            "Campo: " + erro.getField()
+        	            + " | Erro: " + erro.getDefaultMessage()
+        	        );
+        	    });
             return "empresa/formulario";
         }
 
@@ -70,6 +76,52 @@ public class EmpresaController {
         model.addAttribute("totalEmpresas", empresas.size());
 
         return "empresa/lista";
+    }
+    
+    @GetMapping("/visualizar/{cnpj}")
+    public String visualizarEmpresa(
+            @PathVariable("cnpj") String cnpj,
+            HttpSession session,
+            RedirectAttributes redirectAttributes,
+            Model model) {
+
+        try {
+
+            Empresa empresa = empresaService.findByCnpj(cnpj);
+
+            DadosCadastroEmpresa dados = new DadosCadastroEmpresa(
+                    empresa.getCnpj(),
+                    empresa.getNome(),
+                    empresa.getRazaoSocial(),
+                    empresa.getSegmentoMercado(),
+                    empresa.getEmail(),
+                    empresa.getTelefone(),
+                    empresa.getDepartamento(),
+                    empresa.getLinkedin(),
+                    empresa.getSite(),
+
+                    // Endereço
+                    empresa.getEndereco().getCep(),
+                    empresa.getEndereco().getLogradouro(),
+                    empresa.getEndereco().getBairro(),
+                    empresa.getEndereco().getNumPorta(),
+                    empresa.getEndereco().getUf(),
+                    empresa.getEndereco().getLocalidade(),
+                    empresa.getEndereco().getComplemento()
+            );
+
+            model.addAttribute("dados", dados);
+
+            return "empresa/visualizar";
+
+        } catch (Exception e) {
+
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "Erro ao carregar o formulário: " + e.getMessage());
+
+            return "redirect:/empresa/dashboard";
+        }
     }
 
 
@@ -176,27 +228,4 @@ public class EmpresaController {
         return "redirect:/empresa/dashboard";
     }
 
-    @GetMapping("/visualizar/{cnpj}")
-    public String visualizarEmpresa(
-            @PathVariable("cnpj") String cnpj,
-            RedirectAttributes redirectAttributes,
-            Model model) {
-
-        try {
-
-            Empresa empresa = empresaService.findByCnpj(cnpj);
-
-            model.addAttribute("empresa", empresa);
-
-            return "empresa/visualizar";
-
-        } catch (Exception e) {
-
-            redirectAttributes.addFlashAttribute(
-                    "errorMessage",
-                    "Erro ao carregar empresa: " + e.getMessage());
-
-            return "redirect:/empresa/dashboard";
-        }
-    }
 }

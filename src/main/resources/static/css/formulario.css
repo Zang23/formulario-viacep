@@ -12,7 +12,13 @@
     padding-top: 104px;
     padding-bottom: 104px;
 }
-
+.erro-validacao {
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    display: block;
+}
 .form-container {
     background-color: #232323;
     border-radius: 15px;

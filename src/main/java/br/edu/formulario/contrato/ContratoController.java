@@ -124,6 +124,32 @@ public class ContratoController {
 
         return "contrato/lista";
     }
+    
+    @GetMapping("/visualizar/{id}")
+    public String visualizarContrato(
+            @PathVariable("id") Long id,
+            HttpSession session,
+            RedirectAttributes redirectAttributes,
+            Model model) {
+
+        try {
+
+            Contrato contrato = contratoService.findById(id);
+
+            model.addAttribute("dados", contrato);
+
+            return "contrato/visualizar";
+
+        } catch (Exception e) {
+
+            redirectAttributes.addFlashAttribute(
+                "errorMessage",
+                "Erro ao carregar o contrato: " + e.getMessage()
+            );
+
+            return "redirect:/contrato";
+        }
+    }
 
     // Carregar contrato para edição
     @GetMapping("/editar/{id}")
@@ -136,8 +162,22 @@ public class ContratoController {
         try {
 
             Contrato contrato = contratoService.findById(id);
-
-            model.addAttribute("dados", contrato);
+            
+            DadosCadastroContrato dadosContrato = new DadosCadastroContrato(
+            	    contrato.getIdContrato(),
+            	    contrato.getEmpresa().getCnpj(),
+            	    contrato.getCpfSupervisor(),
+            	    contrato.getEstagiario().getRa(),
+            	    contrato.getInicio(),
+            	    contrato.getTermino(),
+            	    contrato.getCargaHoraria(),
+            	    contrato.getArea(),
+            	    contrato.getFuncao(),
+            	    contrato.isBancoHoras(),
+            	    contrato.getDescricao(),
+            	    contrato.isEstagioArea()
+            	);
+            model.addAttribute("dados", dadosContrato);
 
             return "contrato/formulario";
 
@@ -153,7 +193,7 @@ public class ContratoController {
     }
 
     // Salvar novo contrato
-    @PostMapping("/salvar")
+    @PostMapping("/formulario/salvar")
     public String salvarContrato(
             @Valid @ModelAttribute("dados") DadosCadastroContrato dados,
             BindingResult result,
@@ -257,29 +297,5 @@ public class ContratoController {
         return "redirect:/contrato";
     }
 
-    // Visualizar contrato
-    @GetMapping("/visualizar/{id}")
-    public String visualizarContrato(
-            @PathVariable("id") Long id,
-            RedirectAttributes redirectAttributes,
-            Model model) {
-
-        try {
-
-            Contrato contrato = contratoService.findById(id);
-
-            model.addAttribute("contrato", contrato);
-
-            return "contrato/visualizar";
-
-        } catch (Exception e) {
-
-            redirectAttributes.addFlashAttribute(
-                "errorMessage",
-                "Erro ao carregar contrato: " + e.getMessage()
-            );
-
-            return "redirect:/contrato";
-        }
-    }
+    
 }

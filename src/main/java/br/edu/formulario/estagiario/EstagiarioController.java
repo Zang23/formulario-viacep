@@ -60,6 +60,59 @@ public class EstagiarioController {
 
         return "redirect:/estagiario/dashboard";
     }
+    
+    @GetMapping("/visualizar/{ra}")
+    public String visualizarEstagiario(
+            @PathVariable("ra") Long ra,
+            RedirectAttributes redirectAttributes,
+            Model model) {
+
+        try {
+            Estagiario estagiario = estagiarioService.findByRa(ra);
+
+            DadosCadastroEstagiario dados = new DadosCadastroEstagiario(
+                estagiario.getRa(),
+                estagiario.getNome(),
+                estagiario.getEscolaridade(),
+                estagiario.getTelefone(),
+                estagiario.getEmail(),
+                estagiario.getSemestre(),
+                estagiario.getPeriodo(),
+                estagiario.getCurso(),
+                estagiario.getGenero(),
+                estagiario.getEtnia(),
+                estagiario.getRendaFamiliar(),
+                estagiario.isPcd(),
+                estagiario.isTrabalhaNaArea(),
+
+                // Endereço
+                estagiario.getEndereco().getCep(),
+                estagiario.getEndereco().getLogradouro(),
+                estagiario.getEndereco().getBairro(),
+                estagiario.getEndereco().getNumPorta(),
+                estagiario.getEndereco().getUf(),
+                estagiario.getEndereco().getLocalidade(),
+                estagiario.getEndereco().getComplemento(),
+
+                // Escola
+                estagiario.getEscola().getNome(),
+                estagiario.getEscola().getDistancia(),
+                estagiario.getEscola().isEnsinoTecnico()
+            );
+
+            model.addAttribute("dados", dados);
+
+            return "estagiario/visualizar";
+
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute(
+                "errorMessage",
+                "Erro ao carregar o formulário: " + e.getMessage()
+            );
+
+            return "redirect:/estagiario/dashboard";
+        }
+    }
 
     @GetMapping("/editar/{ra}")
     public String carregarFormulario(
