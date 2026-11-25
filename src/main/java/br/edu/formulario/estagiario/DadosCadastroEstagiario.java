@@ -1,26 +1,43 @@
+
 package br.edu.formulario.estagiario;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroEstagiario(
-    @NotNull(message = "Informe o RA")
+
+    @NotNull(message = "O RA é obrigatório")
     Long ra,
-    @NotBlank(message = "Informe o nome")
+
+    @NotBlank(message = "O nome é obrigatório")
     String nome,
+
+    @NotBlank(message = "A escolaridade é obrigatória")
     String escolaridade,
+
     String telefone,
     String email,
-    int semestre,
+
+    @NotNull(message = "O semestre é obrigatório")
+    @Min(value = 1, message = "Selecione um semestre válido")
+    Integer semestre,
+
+    @NotBlank(message = "O período é obrigatório")
     String periodo,
+
+    @NotBlank(message = "O curso é obrigatório")
     String curso,
+
     String genero,
     String etnia,
-    double rendaFamiliar,
+
+    Double rendaFamiliar,
+
     boolean pcd,
     boolean trabalhaNaArea,
 
-    // endereco
+    // Endereço
     String cep,
     String logradouro,
     String bairro,
@@ -29,15 +46,19 @@ public record DadosCadastroEstagiario(
     String localidade,
     String complemento,
 
-    // escola
+    // Escola
     String escolaNome,
     Integer escolaDistancia,
     boolean ensinoTecnico
 ) {
-    // Formulário em branco (no lugar do construtor vazio)
+
     public static DadosCadastroEstagiario vazio() {
         return new DadosCadastroEstagiario(
-            null, "", "", "", "", 1, "", "", "", "", 0.0, false, false,
-            "", "", "", "", "", "", "", "", null, false);
+            null, "", "", "", "",
+            null, "", "", "", "",
+            null, false, false,
+            "", "", "", "", "", "", "",
+            "", null, false
+        );
     }
 }

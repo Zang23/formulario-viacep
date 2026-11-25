@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmpresaService {
-    @Autowired 
+    @Autowired
     private EmpresaRepository empresaRepository;
 
     public List<Empresa> listarEmpresas() {
@@ -20,7 +20,7 @@ public class EmpresaService {
         Empresa empresa = new Empresa(dados);
         return empresaRepository.save(empresa);
     }
-    
+
     @Transactional
     public void atualizarEmpresa(DadosAtualizacaoEmpresa dados) {
         Empresa empresa = empresaRepository.getReferenceById(dados.cnpj());
@@ -33,7 +33,7 @@ public class EmpresaService {
 
     public List<Empresa> buscarPorAreaAtuacao(String area) {
         return empresaRepository.findByArea(area);
-    }  
+    }
 
     public boolean verificarCnpjExistente(String cnpj) {
         return empresaRepository.existsByCnpj(cnpj);
