@@ -40,17 +40,19 @@ public class EmpresaController {
             RedirectAttributes redirectAttributes,
             Model model) {
 
-            if (result.hasErrors()) {
+                if (result.hasErrors()) {
 
-                result.getFieldErrors().forEach(erro -> {
-                    System.err.println(
-                        "Campo: " + erro.getField()
-                        + " | Erro: " + erro.getDefaultMessage()
-                    );
-                });
+                    model.addAttribute("editando", false);
 
-                return "empresa/formulario";
-            }
+                    result.getFieldErrors().forEach(erro -> {
+                        System.err.println(
+                            "Campo: " + erro.getField()
+                            + " | Erro: " + erro.getDefaultMessage()
+                        );
+                    });
+
+                    return "empresa/formulario";
+                }
 
         try {
             empresaService.cadastrarEmpresa(dados);

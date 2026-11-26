@@ -1,35 +1,49 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Navegação entre etapas
-    const etapas = document.querySelectorAll(".etapa");
-    let etapaAtual = 0;
+  // Navegação entre etapas
+  const etapas = document.querySelectorAll(".etapa");
 
-    function mostrarEtapa() {
-        etapas.forEach((etapa, index) => {
-            etapa.style.display = index === etapaAtual ? "flex" : "none";
-        });
-    }
+  const primeiroCampoInvalido = document.querySelector(
+      ".campo-invalido-formularios"
+  );
 
-    document.querySelectorAll(".proximo").forEach(botao => {
-        botao.addEventListener("click", () => {
-            if (etapaAtual < etapas.length - 1) {
-                etapaAtual++;
-                mostrarEtapa();
-            }
-        });
-    });
+  let etapaAtual = 0;
 
-    document.querySelectorAll(".voltar").forEach(botao => {
-        botao.addEventListener("click", () => {
-            if (etapaAtual > 0) {
-                etapaAtual--;
-                mostrarEtapa();
-            }
-        });
-    });
+  // Identifica a etapa que contém o primeiro campo inválido
+  if (primeiroCampoInvalido) {
+      const etapaComErro = primeiroCampoInvalido.closest(".etapa");
 
-    mostrarEtapa();
+      if (etapaComErro) {
+          etapaAtual = Array.from(etapas).indexOf(etapaComErro);
+      }
+  }
+
+  function mostrarEtapa() {
+      etapas.forEach((etapa, index) => {
+          etapa.style.display = index === etapaAtual ? "flex" : "none";
+      });
+  }
+
+  document.querySelectorAll(".proximo").forEach(botao => {
+      botao.addEventListener("click", () => {
+          if (etapaAtual < etapas.length - 1) {
+              etapaAtual++;
+              mostrarEtapa();
+          }
+      });
+  });
+
+  document.querySelectorAll(".voltar").forEach(botao => {
+      botao.addEventListener("click", () => {
+          if (etapaAtual > 0) {
+              etapaAtual--;
+              mostrarEtapa();
+          }
+      });
+  });
+
+  mostrarEtapa();
 
     // Consulta de CEP
     const botaoBuscarCep = document.getElementById("buscarCep");

@@ -54,85 +54,150 @@
 						<section class="etapa">
 							<h2>Dados do estagiário</h2>
 
-							<label class="IForm label">Insira o ra:</label>
-							<input type="text" th:field="*{ra}" class="IForm input text">
+							<label class="IForm label">Insira o RA:</label>
+
+							<input type="text"
+                               th:field="*{ra}"
+                               class="IForm input text"
+                               th:classappend="${#fields.hasErrors('ra')} ? 'campo-invalido-formularios' : ''">
+
+							<span class="erro-validacao-formularios"
+                              th:if="${#fields.hasErrors('ra')}"
+                              th:errors="*{ra}">
+							</span>
 
 							<label class="IForm label">Insira o nome:</label>
-							<input type="text" th:field="*{nome}" class="IForm input text">
+
+							<input type="text"
+                               th:field="*{nome}"
+                               class="IForm input text"
+                               th:classappend="${#fields.hasErrors('nome')} ? 'campo-invalido-formularios' : ''">
+
+							<span class="erro-validacao-formularios"
+                              th:if="${#fields.hasErrors('nome')}"
+                              th:errors="*{nome}">
+							</span>
 
 							<label class="IForm label">Selecione a escolaridade:</label>
 
-     							<select th:field="*{escolaridade}" class="IForm input option" required>
-                                    <option value="" disabled>Selecione uma opção</option>
+							<select th:field="*{escolaridade}"
+                                class="IForm input option"
+                                th:classappend="${#fields.hasErrors('escolaridade')} ? 'campo-invalido-formularios' : ''">
 
-                                    <option value="Ensino fundamental completo">Ensino fundamental completo</option>
-                                    <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+                                <option value="" disabled>Selecione uma opção</option>
+                                <option value="Ensino fundamental completo">Ensino fundamental completo</option>
+                                <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+                                <option value="Ensino superior completo">Ensino superior completo</option>
+                                <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+                                <option value="Ensino técnico completo">Ensino técnico completo</option>
+                                <option value="Ensino técnico incompleto">Ensino técnico incompleto</option>
+							</select>
 
-                                    <option value="Ensino superior completo">Ensino superior completo</option>
-                                    <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+							<span class="erro-validacao-formularios"
+                                th:if="${#fields.hasErrors('escolaridade')}"
+                                th:errors="*{escolaridade}">
+							</span>
 
-                                    <option value="Ensino técnico completo">Ensino técnico completo</option>
-                                    <option value="Ensino técnico incompleto">Ensino técnico incompleto</option>
-    							</select>
 
 							<label class="IForm label">Insira o telefone:</label>
-							<input type="text" th:field="*{telefone}" class="IForm input text">
+
+							<input type="text"
+                               th:field="*{telefone}"
+                               class="IForm input text"
+                               th:classappend="${#fields.hasErrors('telefone')} ? 'campo-invalido-formularios' : ''">
+
+							<span class="erro-validacao-formularios"
+                                th:if="${#fields.hasErrors('telefone')}"
+                                th:errors="*{telefone}">
+							</span>
 
 							<label class="IForm label">Insira o email:</label>
-							<input type="email" th:field="*{email}" class="IForm input text">
+
+							<input type="email"
+                               th:field="*{email}"
+                               class="IForm input text"
+                               th:classappend="${#fields.hasErrors('email')} ? 'campo-invalido-formularios' : ''">
+
+							<span class="erro-validacao-formularios"
+                              th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}">
+							</span>
 
 							<label class="IForm label">Selecione semestre, curso e período:</label>
 
 							<div class="DivOpcoes">
-    							<select th:field="*{semestre}" class="IForm input option" required>
+
+                                <select th:field="*{semestre}"
+                                    class="IForm input option"
+                                    th:classappend="${#fields.hasErrors('semestre')} ? 'campo-invalido-formularios' : ''">
 
                                     <option value="" disabled>Selecione uma opção</option>
-
                                     <option value="1">1º</option>
                                     <option value="2">2º</option>
                                     <option value="3">3º</option>
                                     <option value="4">4º</option>
                                     <option value="5">5º</option>
                                     <option value="6">6º</option>
+                                </select>
 
-    							</select>
+                                <select th:field="*{curso}"
+                                    class="IForm input option"
+                                    th:classappend="${#fields.hasErrors('curso')} ? 'campo-invalido-formularios' : ''">
 
-								<select th:field="*{curso}" class="IForm input option">
-									<option value="Comercio exterior" disabled>Selecione uma opção</option>
-									<option value="Comercio exterior">Comércio exterior</option>
-									<option value="Análise e desenvolvimento de sistemas">Análise e desenvolvimento de
-										sistemas</option>
-									<option value="Desenvolvimento de software multiplataforma">Desenvolvimento de
-										software multiplataforma</option>
-									<option value="Recursos humanos">Recursos humanos</option>
-									<option value="Polímeros">Polímeros</option>
-								</select>
+                                    <option value="" disabled>Selecione uma opção</option>
+                                    <option value="Comercio exterior">Comércio exterior</option>
+                                    <option value="Análise e desenvolvimento de sistemas">Análise e desenvolvimento de sistemas</option>
+                                    <option value="Desenvolvimento de software multiplataforma">Desenvolvimento de software multiplataforma</option>
+                                    <option value="Recursos humanos">Recursos humanos</option>
+                                    <option value="Polímeros">Polímeros</option>
+                                </select>
 
-								<select th:field="*{periodo}" class="IForm input option">
-									<option value="Matutino" disabled>Selecione uma opção</option>
-									<option value="Matutino">Matutino</option>
-									<option value="Vespertino">Vespertino</option>
-									<option value="Noturno">Noturno</option>
-								</select>
+                                <select th:field="*{periodo}"
+                                    class="IForm input option"
+                                    th:classappend="${#fields.hasErrors('periodo')} ? 'campo-invalido-formularios' : ''">
+
+                                    <option value="" disabled>Selecione uma opção</option>
+                                    <option value="Matutino">Matutino</option>
+                                    <option value="Vespertino">Vespertino</option>
+                                    <option value="Noturno">Noturno</option>
+                                </select>
+
 							</div>
 
-							<label class="IForm label">Selecione o genero:</label>
+							<span class="erro-validacao-formularios"
+                              th:if="${#fields.hasErrors('semestre')}"
+                              th:errors="*{semestre}">
+							</span>
+
+							<span class="erro-validacao-formularios"
+                              th:if="${#fields.hasErrors('curso')}"
+                              th:errors="*{curso}">
+							</span>
+
+							<span class="erro-validacao-formularios"
+                              th:if="${#fields.hasErrors('periodo')}"
+                              th:errors="*{periodo}">
+							</span>
+
+							<label class="IForm label">Selecione o gênero:</label>
+
 							<select th:field="*{genero}" class="IForm input option">
-								<option value="F" disabled>Selecione uma opção</option>
-								<option value="F">Feminino</option>
-								<option value="M">Masculino</option>
-								<option value="O">Outro</option>
+                                <option value="" disabled>Selecione uma opção</option>
+                                <option value="F">Feminino</option>
+                                <option value="M">Masculino</option>
+                                <option value="O">Outro</option>
 							</select>
 
 							<label class="IForm label">Selecione a etnia:</label>
+
 							<select th:field="*{etnia}" class="IForm input option">
-								<option value="Asiatico" disabled>Selecione uma opção</option>
-								<option value="Asiatico">Asiatico</option>
-								<option value="Branco">Branco</option>
-								<option value="Indigena">Índigena</option>
-								<option value="Pardo">Pardo</option>
-								<option value="Negro">Negro</option>
-								<option value="Outro">Outro</option>
+                                <option value="" disabled>Selecione uma opção</option>
+                                <option value="Asiatico">Asiático</option>
+                                <option value="Branco">Branco</option>
+                                <option value="Indigena">Indígena</option>
+                                <option value="Pardo">Pardo</option>
+                                <option value="Negro">Negro</option>
+                                <option value="Outro">Outro</option>
 							</select>
 
 							<label class="IForm label">Insira a renda familiar:</label>

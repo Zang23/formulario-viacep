@@ -53,88 +53,128 @@
 
                             <h2>Dados da empresa</h2>
 
+                            <!-- CNPJ -->
                             <label class="IForm label">Insira o CNPJ:</label>
 
                             <input type="text"
                                    th:field="*{cnpj}"
                                    class="IForm input text"
-                                   th:classappend="${#fields.hasErrors('cnpj')} ? ' campo-invalido-formularios' : ''"
-                                   required>
+                                   th:classappend="${#fields.hasErrors('cnpj')} ? ' campo-invalido-formularios' : ''">
 
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('cnpj')}"
                                   th:errors="*{cnpj}">
                             </span>
 
+
+                            <!-- Nome -->
                             <label class="IForm label">Insira o nome:</label>
+
                             <input type="text"
                                    th:field="*{nome}"
-                                   class="IForm input text">
+                                   class="IForm input text"
+                                   th:classappend="${#fields.hasErrors('nome')} ? ' campo-invalido-formularios' : ''">
+
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('nome')}"
-                                  th:errors="*{nome}"></span>
+                                  th:errors="*{nome}">
+                            </span>
 
+
+                            <!-- Razão social -->
                             <label class="IForm label">Insira a razão social:</label>
+
                             <input type="text"
                                    th:field="*{razaoSocial}"
-                                   class="IForm input text">
+                                   class="IForm input text"
+                                   th:classappend="${#fields.hasErrors('razaoSocial')} ? ' campo-invalido-formularios' : ''">
+
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('razaoSocial')}"
-                                  th:errors="*{razaoSocial}"></span>
+                                  th:errors="*{razaoSocial}">
+                            </span>
 
+
+                            <!-- Segmento de mercado -->
                             <label class="IForm label">Insira o segmento de mercado:</label>
+
                             <input type="text"
                                    th:field="*{segmentoMercado}"
-                                   class="IForm input text">
+                                   class="IForm input text"
+                                   th:classappend="${#fields.hasErrors('segmentoMercado')} ? ' campo-invalido-formularios' : ''">
+
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('segmentoMercado')}"
-                                  th:errors="*{segmentoMercado}"></span>
+                                  th:errors="*{segmentoMercado}">
+                            </span>
 
+
+                            <!-- Telefone -->
                             <label class="IForm label">Insira o telefone:</label>
 
                             <input type="text"
                                    th:field="*{telefone}"
                                    class="IForm input text"
-                                   th:classappend="${#fields.hasErrors('telefone')} ? ' campo-invalido-formularios' : ''"
-                                   required>
+                                   th:classappend="${#fields.hasErrors('telefone')} ? ' campo-invalido-formularios' : ''">
 
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('telefone')}"
                                   th:errors="*{telefone}">
                             </span>
 
+
+                            <!-- E-mail -->
                             <label class="IForm label">Insira o email:</label>
+
                             <input type="email"
                                    th:field="*{email}"
-                                   class="IForm input text">
+                                   class="IForm input text"
+                                   th:classappend="${#fields.hasErrors('email')} ? ' campo-invalido-formularios' : ''">
+
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('email')}"
-                                  th:errors="*{email}"></span>
+                                  th:errors="*{email}">
+                            </span>
 
+
+                            <!-- Site -->
                             <label class="IForm label">Insira o site:</label>
-                            <input type="url"
+
+                            <input type="text"
                                    th:field="*{site}"
-                                   class="IForm input text">
+                                   class="IForm input text"
+                                   th:classappend="${#fields.hasErrors('site')} ? ' campo-invalido-formularios' : ''">
+
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('site')}"
-                                  th:errors="*{site}"></span>
+                                  th:errors="*{site}">
+                            </span>
 
+
+                            <!-- LinkedIn -->
                             <label class="IForm label">Insira o LinkedIn:</label>
-                            <input type="url"
+
+                            <input type="text"
                                    th:field="*{linkedin}"
                                    class="IForm input text">
 
+
+                            <!-- Departamento -->
                             <label class="IForm label">Insira o departamento:</label>
+
                             <input type="text"
                                    th:field="*{departamento}"
-                                   class="IForm input text">
+                                   class="IForm input text"
+                                   th:classappend="${#fields.hasErrors('departamento')} ? ' campo-invalido-formularios' : ''">
+
                             <span class="erro-validacao-formularios"
                                   th:if="${#fields.hasErrors('departamento')}"
-                                  th:errors="*{departamento}"></span>
+                                  th:errors="*{departamento}">
+                            </span>
+
 
                             <div class="botoes">
-                                <button type="button"
-                                        class="IForm input proximo">
+                                <button type="button" class="IForm input proximo">
                                     Próximo
                                 </button>
                             </div>

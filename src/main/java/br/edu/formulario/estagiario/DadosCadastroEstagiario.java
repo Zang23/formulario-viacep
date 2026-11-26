@@ -4,6 +4,8 @@ package br.edu.formulario.estagiario;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+
 
 public record DadosCadastroEstagiario(
 
@@ -16,7 +18,11 @@ public record DadosCadastroEstagiario(
     @NotBlank(message = "A escolaridade é obrigatória")
     String escolaridade,
 
+    @NotBlank(message = "O telefone é obrigatorio")
     String telefone,
+
+    @NotBlank(message = "O email é obrigatorio")
+    @Email(message = "Informe um email valido")
     String email,
 
     @NotNull(message = "O semestre é obrigatório")

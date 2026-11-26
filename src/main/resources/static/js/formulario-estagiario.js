@@ -1,5 +1,17 @@
 const etapas = document.querySelectorAll(".etapa");
+
+// Procura um campo inválido e identifica em qual etapa ele está.
+const primeiroCampoInvalido = document.querySelector(".campo-invalido-formularios");
+
 let etapaAtual = 0;
+
+if (primeiroCampoInvalido) {
+    const etapaComErro = primeiroCampoInvalido.closest(".etapa");
+
+    if (etapaComErro) {
+        etapaAtual = Array.from(etapas).indexOf(etapaComErro);
+    }
+}
 
 function mostrarEtapa() {
     etapas.forEach((etapa, index) => {
@@ -27,6 +39,7 @@ document.querySelectorAll(".voltar").forEach(botao => {
 
 mostrarEtapa();
 
+// Consulta de CEP
 document.getElementById("buscarCep")
     .addEventListener("click", async function () {
 
