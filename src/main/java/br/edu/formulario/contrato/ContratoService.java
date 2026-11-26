@@ -32,6 +32,18 @@ public class ContratoService {
                 .orElseThrow(() -> new IllegalArgumentException("Contrato não encontrado com o ID: " + id));
     }
 
+
+    public List<Contrato> buscarComFiltros(DadosFiltroContrato filtros) {
+        return contratoRepository.findAll(
+            ContratoSpecification.comFiltros(filtros)
+        );
+    }
+
+    public long contarContratos() {
+        return contratoRepository.count();
+    }
+
+
     @Transactional
     public Contrato cadastrarContrato(DadosCadastroContrato dados) {
         Empresa empresa = empresaRepository.findById(dados.empresaCnpj())

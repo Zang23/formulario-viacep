@@ -12,13 +12,24 @@
     padding-top: 104px;
     padding-bottom: 104px;
 }
-.erro-validacao {
-    color: #ff4d4d;
-    font-size: 0.85rem;
-    margin-top: 4px;
-    margin-bottom: 8px;
+
+.erro-validacao-formularios {
     display: block;
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
+
+.campo-invalido-formularios {
+    border: 1px solid #dc3545 !important;
+    outline: none;
+}
+
+.campo-invalido-formularios:focus {
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.15);
+}
+
 .form-container {
     background-color: #232323;
     border-radius: 15px;

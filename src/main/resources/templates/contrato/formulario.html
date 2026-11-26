@@ -58,11 +58,11 @@
 							<label class="IForm label">Insira o RA do estagiário</label>
 							<input type="text" th:field="*{estagiarioId}" class="IForm input text">
 
-							<label class="IForm label">Horário de entrada:</label>
-							<input type="time" th:field="*{inicio}" class="IForm input text">
+							<label class="IForm label" for="dataInicio" >Data de inicio:</label>
+							<input type="date" th:field="*{dataInicio}" id="dataInicio"  class="IForm input text">
 
-							<label class="IForm label">Horário de saída:</label>
-							<input type="time" th:field="*{termino}" class="IForm input text">
+							<label class="IForm label" for="dataTermino">Data de termino:</label>
+							<input type="date" th:field="*{dataTermino}" id="dataTermino"  class="IForm input text">
 
 							<label class="IForm label">Carga horária:</label>
 							<input type="text" th:field="*{cargaHoraria}" class="IForm input text">
@@ -73,7 +73,16 @@
 							</label>
 
 							<label class="IForm label">Insira a area do estágio</label>
-							<input type="text" th:field="*{area}" class="IForm input text">
+							<select id="area" th:field="*{area}" class="IForm input text">
+                                <option value="">Selecione uma área</option>
+                                <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+                                <option value="Administração">Administração</option>
+                                <option value="Recursos Humanos">Recursos Humanos</option>
+                                <option value="Financeiro">Financeiro</option>
+                                <option value="Comercial">Comercial</option>
+                                <option value="Logística">Logística</option>
+                                <option value="Produção">Produção</option>
+							</select>
 
 							<label class="IForm label">Insira a função do estagiário</label>
 							<input type="text" th:field="*{funcao}" class="IForm input text">

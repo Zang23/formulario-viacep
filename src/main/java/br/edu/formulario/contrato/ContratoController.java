@@ -2,8 +2,6 @@
 package br.edu.formulario.contrato;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,95 +33,25 @@ public class ContratoController {
     }
 
     // Listagem de contratos e filtros
+
     @GetMapping({"", "/", "/dashboard"})
     public String listaContrato(
-            @RequestParam(required = false) String empresa,
-            @RequestParam(required = false) String estagiario,
-            @RequestParam(required = false) String area,
-            @RequestParam(required = false) String funcao,
-            @RequestParam(required = false) Integer cargaHoraria,
-            @RequestParam(required = false) Boolean bancoHoras,
-            @RequestParam(required = false) Boolean estagioArea,
-            @RequestParam(required = false) String cpfSupervisor,
+            @ModelAttribute("filtros") DadosFiltroContrato filtros,
             Model model) {
 
-        List<Contrato> todosContratos = contratoService.listarContratos();
-
-        Stream<Contrato> resultado = todosContratos.stream();
-
-        if (empresa != null && !empresa.isBlank()) {
-            String filtro = empresa.toLowerCase(Locale.ROOT);
-
-            resultado = resultado.filter(c ->
-                c.getEmpresa() != null &&
-                c.getEmpresa().getNome() != null &&
-                c.getEmpresa().getNome().toLowerCase(Locale.ROOT).contains(filtro)
-            );
-        }
-
-        if (estagiario != null && !estagiario.isBlank()) {
-            String filtro = estagiario.toLowerCase(Locale.ROOT);
-
-            resultado = resultado.filter(c ->
-                c.getEstagiario() != null &&
-                c.getEstagiario().getNome() != null &&
-                c.getEstagiario().getNome().toLowerCase(Locale.ROOT).contains(filtro)
-            );
-        }
-
-        if (area != null && !area.isBlank()) {
-            String filtro = area.toLowerCase(Locale.ROOT);
-
-            resultado = resultado.filter(c ->
-                c.getArea() != null &&
-                c.getArea().toLowerCase(Locale.ROOT).contains(filtro)
-            );
-        }
-
-        if (funcao != null && !funcao.isBlank()) {
-            String filtro = funcao.toLowerCase(Locale.ROOT);
-
-            resultado = resultado.filter(c ->
-                c.getFuncao() != null &&
-                c.getFuncao().toLowerCase(Locale.ROOT).contains(filtro)
-            );
-        }
-
-        if (cargaHoraria != null) {
-            resultado = resultado.filter(c ->
-                c.getCargaHoraria() == cargaHoraria
-            );
-        }
-
-        if (bancoHoras != null) {
-            resultado = resultado.filter(c ->
-                c.isBancoHoras() == bancoHoras
-            );
-        }
-
-        if (estagioArea != null) {
-            resultado = resultado.filter(c ->
-                c.isEstagioArea() == estagioArea
-            );
-        }
-
-        if (cpfSupervisor != null && !cpfSupervisor.isBlank()) {
-            String filtro = cpfSupervisor.replaceAll("\\D", "");
-
-            resultado = resultado.filter(c ->
-                c.getCpfSupervisor() != null &&
-                c.getCpfSupervisor().replaceAll("\\D", "").contains(filtro)
-            );
-        }
-
-        List<Contrato> contratos = resultado.toList();
+        List<Contrato> contratos =
+            contratoService.buscarComFiltros(filtros);
 
         model.addAttribute("contratos", contratos);
-        model.addAttribute("totalContratos", todosContratos.size());
+        model.addAttribute(
+            "totalContratos",
+            contratoService.contarContratos()
+        );
 
         return "contrato/lista";
     }
-    
+
+
     @GetMapping("/visualizar/{id}")
     public String visualizarContrato(
             @PathVariable("id") Long id,
@@ -162,14 +89,14 @@ public class ContratoController {
         try {
 
             Contrato contrato = contratoService.findById(id);
-            
+
             DadosCadastroContrato dadosContrato = new DadosCadastroContrato(
             	    contrato.getIdContrato(),
             	    contrato.getEmpresa().getCnpj(),
             	    contrato.getCpfSupervisor(),
             	    contrato.getEstagiario().getRa(),
-            	    contrato.getInicio(),
-            	    contrato.getTermino(),
+            	    contrato.getDataInicio(),
+            	    contrato.getDataTermino(),
             	    contrato.getCargaHoraria(),
             	    contrato.getArea(),
             	    contrato.getFuncao(),
@@ -272,6 +199,7 @@ public class ContratoController {
 
     // Excluir contrato
     @PostMapping("/excluir/{id}")
+
     @Transactional
     public String deletarContrato(
             @PathVariable("id") Long id,
@@ -297,5 +225,5 @@ public class ContratoController {
         return "redirect:/contrato";
     }
 
-    
+
 }

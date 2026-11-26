@@ -73,18 +73,31 @@ public class Empresa {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
+
+        if (dados.razaoSocial() != null) {
+            this.razaoSocial = dados.razaoSocial();
+        }
+
+        if (dados.segmentoMercado() != null) {
+            this.segmentoMercado = dados.segmentoMercado();
+        }
+
         if (dados.email() != null) {
             this.email = dados.email();
         }
+
         if (dados.telefone() != null) {
             this.telefone = dados.telefone();
         }
+
         if (dados.departamento() != null) {
             this.departamento = dados.departamento();
         }
+
         if (dados.linkedin() != null) {
             this.linkedin = dados.linkedin();
         }
+
         if (dados.site() != null) {
             this.site = dados.site();
         }

@@ -72,6 +72,7 @@
 
                 <form class="filtros-formulario"
                       th:action="@{/contrato}"
+                      th:object="${filtros}"
                       method="get">
 
                     <div class="campo">
@@ -81,7 +82,7 @@
                             type="search"
                             id="empresa"
                             name="empresa"
-                            th:value="${param.empresa}"
+                            th:field="*{empresa}"
                             placeholder="Pesquisar empresa..."
                         >
                     </div>
@@ -93,7 +94,7 @@
                             type="search"
                             id="estagiario"
                             name="estagiario"
-                            th:value="${param.estagiario}"
+                            th:field="*{estagiario}"
                             placeholder="Pesquisar estagiário..."
                         >
                     </div>
@@ -105,7 +106,7 @@
                             type="search"
                             id="area"
                             name="area"
-                            th:value="${param.area}"
+                            th:field="*{area}"
                             placeholder="Pesquisar área..."
                         >
                     </div>
@@ -117,7 +118,7 @@
                             type="search"
                             id="funcao"
                             name="funcao"
-                            th:value="${param.funcao}"
+                            th:field="*{funcao}"
                             placeholder="Pesquisar função..."
                         >
                     </div>
@@ -125,7 +126,7 @@
                     <div class="campo">
                         <label for="cargaHoraria">Carga horária</label>
 
-                        <select id="cargaHoraria" name="cargaHoraria">
+                        <select id="cargaHoraria" th:field="*{cargaHoraria}">
                             <option value="">Todas</option>
                             <option value="20">20 horas</option>
                             <option value="30">30 horas</option>
@@ -136,7 +137,7 @@
                     <div class="campo">
                         <label for="bancoHoras">Banco de horas</label>
 
-                        <select id="bancoHoras" name="bancoHoras">
+                        <select id="bancoHoras" th:field="*{bancoHoras}">
                             <option value="">Todos</option>
                             <option value="true">Sim</option>
                             <option value="false">Não</option>
@@ -146,7 +147,7 @@
                     <div class="campo">
                         <label for="estagioArea">Estágio na área?</label>
 
-                        <select id="estagioArea" name="estagioArea">
+                        <select id="estagioArea" th:field="*{estagioArea}">
                             <option value="">Todos</option>
                             <option value="true">Sim</option>
                             <option value="false">Não</option>
@@ -160,7 +161,7 @@
                             type="search"
                             id="cpfSupervisor"
                             name="cpfSupervisor"
-                            th:value="${param.cpfSupervisor}"
+                            th:field="*{cpfSupervisor}"
                             placeholder="Pesquisar CPF..."
                         >
                     </div>
@@ -207,7 +208,7 @@
                                 <th>Estagiário</th>
                                 <th>Área</th>
                                 <th>Função</th>
-                                <th>Horário</th>
+                                <th>Data</th>
                                 <th>Carga horária</th>
                                 <th>Banco de horas</th>
                                 <th>Estágio na área?</th>
@@ -244,12 +245,12 @@
                                 <td th:text="${contrato.funcao}">Desenvolvedor</td>
 
                                 <td>
-                                    <span th:text="${contrato.inicio != null ? #temporals.format(contrato.inicio, 'HH:mm') : '--:--'}">
-                                        08:00
+                                    <span th:text="${contrato.dataInicio != null ? #temporals.format(contrato.dataInicio, 'dd/MM/yyyy') : '--/--/----'}">
+                                        01/01/2026
                                     </span>
                                     -
-                                    <span th:text="${contrato.termino != null ? #temporals.format(contrato.termino, 'HH:mm') : '--:--'}">
-                                        14:00
+                                    <span th:text="${contrato.dataTermino != null ? #temporals.format(contrato.dataTermino, 'dd/MM/yyyy') : '--/--/----'}">
+                                        31/12/2026
                                     </span>
                                 </td>
 

@@ -53,76 +53,101 @@
 				</article>
 			</div>
 
+
 			<!-- Filtros -->
 			<section class="filtros-container">
 
-				<div class="secao-titulo">
-					<div>
-						<h2>Filtros</h2>
-						<p>Selecione os critérios para localizar estagiários.</p>
-					</div>
-					<span class="filtro-icone">⚙</span>
-				</div>
+                <div class="secao-titulo">
+                    <div>
+                        <h2>Filtros</h2>
+                        <p>Selecione os critérios para localizar estagiários.</p>
+                    </div>
+                    <span class="filtro-icone">⚙</span>
+                </div>
 
-				<form class="filtros-formulario" th:action="@{/estagiario}"
-					method="get">
+                <form class="filtros-formulario"
+                      th:action="@{/estagiario/dashboard}"
+                      th:object="${filtros}"
+                      method="get">
 
-					<div class="campo campo-nome">
-						<label for="nome">Nome do estagiário</label> <input type="search"
-							id="nome" name="nome" placeholder="Pesquisar por nome...">
-					</div>
+                    <div class="campo campo-nome">
+                        <label for="nome">Nome do estagiário</label>
+                        <input type="search"
+                               id="nome"
+                               th:field="*{nome}"
+                               placeholder="Pesquisar por nome...">
+                    </div>
 
-					<div class="campo">
-						<label for="genero">Sexo</label> <select id="genero" name="genero">
-							<option value="">Todos</option>
-							<option value="F">Feminino</option>
-							<option value="M">Masculino</option>
-						</select>
-					</div>
+                    <div class="campo">
+                        <label for="genero">Sexo</label>
+                        <select id="genero" th:field="*{genero}">
+                            <option value="">Todos</option>
+                            <option value="F">Feminino</option>
+                            <option value="M">Masculino</option>
+                        </select>
+                    </div>
 
-					<div class="campo">
-						<label for="area">Área de atuação</label> <select id="area"
-							name="area">
-							<option value="">Todas</option>
-							<option value="TI">Tecnologia da Informação</option>
-							<option value="RH">Recursos Humanos</option>
-							<option value="ADM">Administração</option>
-							<option value="FIN">Financeiro</option>
-						</select>
-					</div>
+                    <div class="campo">
+                        <label for="area">Área de atuação</label>
 
-					<div class="campo">
-						<label for="empresa">Empresa</label> <select id="empresa"
-							name="empresa">
-							<option value="">Todas</option>
-						</select>
-					</div>
+                        <select id="area" th:field="*{area}">
+                            <option value="">Todas as areas</option>
+                            <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+                            <option value="Administração">Administração</option>
+                            <option value="Recursos Humanos">Recursos Humanos</option>
+                            <option value="Financeiro">Financeiro</option>
+                            <option value="Comercial">Comercial</option>
+                            <option value="Logística">Logística</option>
+                            <option value="Produção">Produção</option>
+                        </select>
+                    </div>
 
-					<div class="campo">
-						<label for="situacao">Situação do estágio</label> <select
-							id="situacao" name="situacao">
-							<option value="">Todas</option>
-							<option value="ATIVO">Ativo</option>
-							<option value="ENCERRADO">Encerrado</option>
-							<option value="PENDENTE">Pendente</option>
-						</select>
-					</div>
+                    <div class="campo">
+                        <label for="empresa">Empresa</label>
 
-					<div class="campo">
-						<label for="cidade">Cidade</label> <input type="text" id="cidade"
-							name="cidade" placeholder="Pesquisar cidade...">
-					</div>
+                        <select id="empresa" th:field="*{empresa}">
+                            <option value="">Todas</option>
 
-					<div class="filtros-acoes">
-						<button type="submit" class="botao botao-principal">
-							<span>⌕</span> Aplicar filtros
-						</button>
+                            <option th:each="empresa : ${empresas}"
+                                    th:value="${empresa.cnpj}"
+                                    th:text="${empresa.nome}">
+                            </option>
+                        </select>
+                    </div>
 
-						<a th:href="@{/estagiario}" class="botao botao-secundario">
-							Limpar filtros </a>
-					</div>
+                    <div class="campo">
+                        <label for="situacao">Situação do estágio</label>
 
-				</form>
+                        <select id="situacao" th:field="*{situacao}" class="IForm input text">
+                            <option value="">Todas</option>
+                            <option value="ATIVO">Ativo</option>
+                            <option value="PENDENTE">Pendente</option>
+                            <option value="ENCERRADO">Encerrado</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="cidade">Cidade</label>
+                        <input type="text"
+                               id="cidade"
+                               th:field="*{cidade}"
+                               placeholder="Pesquisar cidade...">
+                    </div>
+
+                    <div class="filtros-acoes">
+
+                        <button type="submit" class="botao botao-principal">
+                            <span>⌕</span> Aplicar filtros
+                        </button>
+
+                        <a th:href="@{/estagiario/dashboard}"
+                           class="botao botao-secundario">
+                            Limpar filtros
+                        </a>
+
+                    </div>
+
+                </form>
 			</section>
 
 			<!-- Tabela -->
@@ -218,7 +243,6 @@
 				</div>
 
 				<div class="tabela-rodape">
-					<span>Exibindo dados fictícios para demonstração visual.</span>
 				</div>
 
 			</section>

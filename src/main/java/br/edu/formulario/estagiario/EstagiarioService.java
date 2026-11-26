@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EstagiarioService {
 
-    @Autowired 
+    @Autowired
     private EstagiarioRepository estagiarioRepository;
 
     public List<Estagiario> listarEstagiarios() {
@@ -39,5 +39,11 @@ public class EstagiarioService {
     @Transactional
     public void deletarEstagiario(Long ra) {
         estagiarioRepository.deleteById(ra);
+    }
+
+    public List<Estagiario> buscarComFiltros(DadosFiltroEstagiario filtros) {
+        return estagiarioRepository.findAll(
+            EstagiarioSpecification.comFiltros(filtros)
+        );
     }
 }

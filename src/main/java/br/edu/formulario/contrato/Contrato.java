@@ -1,6 +1,6 @@
 package br.edu.formulario.contrato;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 import br.edu.formulario.empresa.Empresa;
 import br.edu.formulario.estagiario.Estagiario;
@@ -36,8 +36,8 @@ public class Contrato {
     @JoinColumn(name = "estagiariora")
     private Estagiario estagiario;
 
-    private LocalTime inicio;
-    private LocalTime termino;
+    private LocalDate dataInicio;
+    private LocalDate dataTermino;
     private int cargaHoraria;
     private String area;
     private String funcao;
@@ -48,8 +48,8 @@ public class Contrato {
 
 	public Contrato(DadosCadastroContrato dados) {
         this.idContrato = dados.idContrato();
-        this.inicio = dados.inicio();
-        this.termino = dados.termino();
+        this.dataInicio = dados.dataInicio();
+        this.dataTermino = dados.dataTermino();
         this.cargaHoraria = dados.cargaHoraria();
         this.area = dados.area();
         this.funcao = dados.funcao();
@@ -60,11 +60,11 @@ public class Contrato {
     }
 
     public void atualizarInformacoes(DadosAtualizacaoContrato dados) {
-        if (dados.inicio() != null) {
-            this.inicio = dados.inicio();
+        if (dados.dataInicio() != null) {
+            this.dataInicio = dados.dataInicio();
         }
-        if (dados.termino() != null) {
-            this.termino = dados.termino();
+        if (dados.dataTermino() != null) {
+            this.dataTermino = dados.dataTermino();
         }
         if (dados.cargaHoraria() != 0) {
             this.cargaHoraria = dados.cargaHoraria();

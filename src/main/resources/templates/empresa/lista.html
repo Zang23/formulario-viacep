@@ -13,7 +13,7 @@
 
 <body>
 
-    <header th:replace="~{fragmentos/header :: header('/empresa')}"></header>
+    <header th:replace="~{fragmentos/header :: header('/empresa/dashboard')}"></header>
 
     <main class="pagina-dashboard">
 
@@ -57,6 +57,7 @@
 
             </div>
 
+
             <!-- Filtros -->
             <section class="filtros-container">
 
@@ -70,78 +71,40 @@
                 </div>
 
                 <form class="filtros-formulario"
-                      th:action="@{/empresa}"
+                      th:action="@{/empresa/dashboard}"
+                      th:object="${filtros}"
                       method="get">
 
                     <div class="campo campo-nome">
                         <label for="nome">Nome da empresa</label>
-                        <input
-                            type="search"
-                            id="nome"
-                            name="nome"
-                            th:value="${param.nome}"
-                            placeholder="Pesquisar por nome...">
+                        <input type="search"
+                               id="nome"
+                               th:field="*{nome}"
+                               placeholder="Pesquisar por nome...">
                     </div>
 
                     <div class="campo">
                         <label for="cnpj">CNPJ</label>
-                        <input
-                            type="text"
-                            id="cnpj"
-                            name="cnpj"
-                            th:value="${param.cnpj}"
-                            placeholder="Pesquisar CNPJ...">
+                        <input type="text"
+                               id="cnpj"
+                               th:field="*{cnpj}"
+                               placeholder="Pesquisar CNPJ...">
                     </div>
 
                     <div class="campo">
                         <label for="segmentoMercado">Segmento de mercado</label>
-                        <input
-                            type="text"
-                            id="segmentoMercado"
-                            name="segmentoMercado"
-                            th:value="${param.segmentoMercado}"
-                            placeholder="Pesquisar segmento...">
+                        <input type="text"
+                               id="segmentoMercado"
+                               th:field="*{segmentoMercado}"
+                               placeholder="Pesquisar segmento...">
                     </div>
 
                     <div class="campo">
                         <label for="cidade">Cidade</label>
-                        <input
-                            type="text"
-                            id="cidade"
-                            name="cidade"
-                            th:value="${param.cidade}"
-                            placeholder="Pesquisar cidade...">
-                    </div>
-
-                    <div class="campo">
-                        <label for="estado">Estado</label>
-                        <input
-                            type="text"
-                            id="estado"
-                            name="estado"
-                            th:value="${param.estado}"
-                            placeholder="UF..."
-                            maxlength="2">
-                    </div>
-
-                    <div class="campo">
-                        <label for="email">E-mail</label>
-                        <input
-                            type="search"
-                            id="email"
-                            name="email"
-                            th:value="${param.email}"
-                            placeholder="Pesquisar e-mail...">
-                    </div>
-
-                    <div class="campo">
-                        <label for="telefone">Telefone</label>
-                        <input
-                            type="text"
-                            id="telefone"
-                            name="telefone"
-                            th:value="${param.telefone}"
-                            placeholder="Pesquisar telefone...">
+                        <input type="text"
+                               id="cidade"
+                               th:field="*{cidade}"
+                               placeholder="Pesquisar cidade...">
                     </div>
 
                     <div class="filtros-acoes">
@@ -150,7 +113,7 @@
                             <span>⌕</span> Aplicar filtros
                         </button>
 
-                        <a th:href="@{/empresa}"
+                        <a th:href="@{/empresa/dashboard}"
                            class="botao botao-secundario">
                             Limpar filtros
                         </a>
@@ -159,6 +122,7 @@
 
                 </form>
             </section>
+
 
             <!-- Tabela -->
             <section class="tabela-container">

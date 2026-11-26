@@ -1,18 +1,30 @@
+
 package br.edu.formulario.empresa;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EmpresaService {
+
     @Autowired
     private EmpresaRepository empresaRepository;
 
+
+
+    public List<Empresa> buscarComFiltros(DadosFiltroEmpresa filtros) {
+        return empresaRepository.findAll(
+            EmpresaSpecification.comFiltros(filtros),
+            Sort.by(Sort.Direction.ASC, "nome")
+        );
+    }
+
     public List<Empresa> listarEmpresas() {
-        return empresaRepository.findAll();
+        return empresaRepository.findAllByOrderByNomeAsc();
     }
 
     @Transactional
@@ -24,7 +36,7 @@ public class EmpresaService {
     @Transactional
     public void atualizarEmpresa(DadosAtualizacaoEmpresa dados) {
         Empresa empresa = empresaRepository.getReferenceById(dados.cnpj());
-        empresa.atualizarInformacoes(dados);;
+        empresa.atualizarInformacoes(dados);
     }
 
     public List<Empresa> buscarPorCidade(String cidade) {
@@ -41,12 +53,13 @@ public class EmpresaService {
 
     public Empresa findByCnpj(String cnpj) {
         return empresaRepository.findById(cnpj)
-                .orElseThrow(() -> new RuntimeException("Empresa não encontrada com o CNPJ: " + cnpj));
+                .orElseThrow(() -> new RuntimeException(
+                    "Empresa não encontrada com o CNPJ: " + cnpj
+                ));
     }
 
     @Transactional
     public void deletarEmpresa(String cnpj) {
         empresaRepository.deleteById(cnpj);
     }
-
 }

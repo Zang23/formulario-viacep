@@ -1,6 +1,6 @@
 package br.edu.formulario.contrato;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoContrato(
@@ -9,8 +9,8 @@ public record DadosAtualizacaoContrato(
     String empresaCnpj,
     String supervisorCpf,
     Long estagiarioId,
-    LocalTime inicio,
-    LocalTime termino,
+    LocalDate dataInicio,
+    LocalDate dataTermino,
     int cargaHoraria,
     String area,
     String funcao) {

@@ -28,6 +28,8 @@ public class EmpresaController {
     @GetMapping("/formulario")
     public String novaEmpresa(Model model) {
         model.addAttribute("dados", DadosCadastroEmpresa.vazio());
+        model.addAttribute("editando", false);
+
         return "empresa/formulario";
     }
 
@@ -38,15 +40,17 @@ public class EmpresaController {
             RedirectAttributes redirectAttributes,
             Model model) {
 
-        if (result.hasErrors()) {
-        	 result.getFieldErrors().forEach(erro -> {
-        	        System.err.println(
-        	            "Campo: " + erro.getField()
-        	            + " | Erro: " + erro.getDefaultMessage()
-        	        );
-        	    });
-            return "empresa/formulario";
-        }
+            if (result.hasErrors()) {
+
+                result.getFieldErrors().forEach(erro -> {
+                    System.err.println(
+                        "Campo: " + erro.getField()
+                        + " | Erro: " + erro.getDefaultMessage()
+                    );
+                });
+
+                return "empresa/formulario";
+            }
 
         try {
             empresaService.cadastrarEmpresa(dados);
@@ -68,16 +72,18 @@ public class EmpresaController {
     }
 
     @GetMapping("/dashboard")
-    public String listaEmpresa(Model model) {
+    public String listaEmpresa(
+            @ModelAttribute("filtros") DadosFiltroEmpresa filtros,
+            Model model) {
 
-        List<Empresa> empresas = empresaService.listarEmpresas();
+        List<Empresa> empresas = empresaService.buscarComFiltros(filtros);
 
         model.addAttribute("empresas", empresas);
-        model.addAttribute("totalEmpresas", empresas.size());
+        model.addAttribute("totalEmpresas", empresaService.listarEmpresas().size());
 
         return "empresa/lista";
     }
-    
+
     @GetMapping("/visualizar/{cnpj}")
     public String visualizarEmpresa(
             @PathVariable("cnpj") String cnpj,
@@ -90,24 +96,22 @@ public class EmpresaController {
             Empresa empresa = empresaService.findByCnpj(cnpj);
 
             DadosCadastroEmpresa dados = new DadosCadastroEmpresa(
-                    empresa.getCnpj(),
-                    empresa.getNome(),
-                    empresa.getRazaoSocial(),
-                    empresa.getSegmentoMercado(),
-                    empresa.getEmail(),
-                    empresa.getTelefone(),
-                    empresa.getDepartamento(),
-                    empresa.getLinkedin(),
-                    empresa.getSite(),
-
-                    // Endereço
-                    empresa.getEndereco().getCep(),
-                    empresa.getEndereco().getLogradouro(),
-                    empresa.getEndereco().getBairro(),
-                    empresa.getEndereco().getNumPorta(),
-                    empresa.getEndereco().getUf(),
-                    empresa.getEndereco().getLocalidade(),
-                    empresa.getEndereco().getComplemento()
+                empresa.getCnpj(),
+                empresa.getNome(),
+                empresa.getRazaoSocial(),
+                empresa.getSegmentoMercado(),
+                empresa.getEmail(),
+                empresa.getSite(),
+                empresa.getTelefone(),
+                empresa.getDepartamento(),
+                empresa.getLinkedin(),
+                empresa.getEndereco().getCep(),
+                empresa.getEndereco().getLogradouro(),
+                empresa.getEndereco().getBairro(),
+                empresa.getEndereco().getNumPorta(),
+                empresa.getEndereco().getUf(),
+                empresa.getEndereco().getLocalidade(),
+                empresa.getEndereco().getComplemento()
             );
 
             model.addAttribute("dados", dados);
@@ -137,27 +141,26 @@ public class EmpresaController {
             Empresa empresa = empresaService.findByCnpj(cnpj);
 
             DadosCadastroEmpresa dados = new DadosCadastroEmpresa(
-                    empresa.getCnpj(),
-                    empresa.getNome(),
-                    empresa.getRazaoSocial(),
-                    empresa.getSegmentoMercado(),
-                    empresa.getEmail(),
-                    empresa.getTelefone(),
-                    empresa.getDepartamento(),
-                    empresa.getLinkedin(),
-                    empresa.getSite(),
-
-                    // Endereço
-                    empresa.getEndereco().getCep(),
-                    empresa.getEndereco().getLogradouro(),
-                    empresa.getEndereco().getBairro(),
-                    empresa.getEndereco().getNumPorta(),
-                    empresa.getEndereco().getUf(),
-                    empresa.getEndereco().getLocalidade(),
-                    empresa.getEndereco().getComplemento()
+                empresa.getCnpj(),
+                empresa.getNome(),
+                empresa.getRazaoSocial(),
+                empresa.getSegmentoMercado(),
+                empresa.getEmail(),
+                empresa.getSite(),
+                empresa.getTelefone(),
+                empresa.getDepartamento(),
+                empresa.getLinkedin(),
+                empresa.getEndereco().getCep(),
+                empresa.getEndereco().getLogradouro(),
+                empresa.getEndereco().getBairro(),
+                empresa.getEndereco().getNumPorta(),
+                empresa.getEndereco().getUf(),
+                empresa.getEndereco().getLocalidade(),
+                empresa.getEndereco().getComplemento()
             );
 
             model.addAttribute("dados", dados);
+            model.addAttribute("editando", true);
 
             return "empresa/formulario";
 
@@ -173,19 +176,17 @@ public class EmpresaController {
 
     @PostMapping("/atualizar")
     public String atualizarEmpresa(
-            @Valid @ModelAttribute DadosAtualizacaoEmpresa dados,
+            @Valid @ModelAttribute("dados") DadosAtualizacaoEmpresa dados,
             BindingResult result,
             RedirectAttributes redirectAttributes,
             Model model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("errorMessage",
-                    "Verifique os campos preenchidos.");
+            model.addAttribute("editando", true);
             return "empresa/formulario";
         }
 
         try {
-
             empresaService.atualizarEmpresa(dados);
 
             redirectAttributes.addFlashAttribute(
@@ -196,11 +197,12 @@ public class EmpresaController {
 
         } catch (Exception e) {
 
-            redirectAttributes.addFlashAttribute(
+            model.addAttribute("editando", true);
+            model.addAttribute(
                     "errorMessage",
                     "Erro ao atualizar empresa: " + e.getMessage());
 
-            return "redirect:/empresa/editar/" + dados.cnpj();
+            return "empresa/formulario";
         }
     }
 

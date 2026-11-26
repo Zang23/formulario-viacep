@@ -1,11 +1,15 @@
 package br.edu.formulario.estagiario;
 
+import java.util.List;
+
+import br.edu.formulario.contrato.Contrato;
 import br.edu.formulario.endereco.Endereco;
 import br.edu.formulario.escola.Escola;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -36,6 +40,9 @@ public class Estagiario{
     private double rendaFamiliar;
     private boolean pcd;
     private boolean trabalhaNaArea;
+
+    @OneToMany(mappedBy = "estagiario")
+    private List<Contrato> contratos;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")

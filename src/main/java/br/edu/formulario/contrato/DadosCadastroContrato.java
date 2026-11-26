@@ -1,6 +1,6 @@
 package br.edu.formulario.contrato;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroContrato (
@@ -12,9 +12,9 @@ public record DadosCadastroContrato (
     @NotNull(message = "O ID do estágiario é obrigatório")
     Long estagiarioId,
     @NotNull(message = "O horario de inicio é obrigatório")
-    LocalTime inicio,
+    LocalDate dataInicio,
     @NotNull(message = "O horario de término é obrigatório")
-    LocalTime termino,
+    LocalDate dataTermino,
     int cargaHoraria,
     String area,
     String funcao,

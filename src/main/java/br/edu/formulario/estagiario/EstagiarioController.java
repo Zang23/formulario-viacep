@@ -3,6 +3,9 @@ package br.edu.formulario.estagiario;
 
 import java.util.List;
 
+import br.edu.formulario.empresa.Empresa;
+import br.edu.formulario.empresa.EmpresaService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,9 @@ public class EstagiarioController {
     @Autowired
     private EstagiarioService estagiarioService;
 
+    @Autowired
+    private EmpresaService empresaService;
+
     @GetMapping("/formulario")
     public String novoEstagiario(Model model) {
         model.addAttribute("dados", DadosCadastroEstagiario.vazio());
@@ -30,11 +36,15 @@ public class EstagiarioController {
     }
 
     @GetMapping("/dashboard")
-    public String listaEstagiario(Model model) {
-        List<Estagiario> estagiarios = estagiarioService.listarEstagiarios();
+    public String listaEstagiario(@ModelAttribute("filtros") DadosFiltroEstagiario filtros, Model model) {
+
+        List<Estagiario> estagiarios = estagiarioService.buscarComFiltros(filtros);
+
+        List<Empresa> empresas = empresaService.listarEmpresas();
 
         model.addAttribute("estagiarios", estagiarios);
         model.addAttribute("totalEstagiarios", estagiarios.size());
+        model.addAttribute("empresas", empresas);
 
         return "estagiario/lista";
     }
@@ -60,7 +70,7 @@ public class EstagiarioController {
 
         return "redirect:/estagiario/dashboard";
     }
-    
+
     @GetMapping("/visualizar/{ra}")
     public String visualizarEstagiario(
             @PathVariable("ra") Long ra,
